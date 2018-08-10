@@ -9,7 +9,7 @@ router.get('/supplier', function (req, res) {
         if (err) {
             res.status(500).json({message: err.message})
         } else {
-            res.json(options)
+            res.json({data:options})
         }
     });
 });

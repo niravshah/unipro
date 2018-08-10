@@ -17,7 +17,7 @@
         <div v-if="field.field_name">
           <div v-if="field.type==='v-select'" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
-            <v-select v-model="item[field.field_name]" :options="options[field.field_name]"></v-select>
+            <v-select v-model="item[field.field_name]" label="supplier_name" :options="selOptions[field.field_name]"></v-select>
           </div>
           <div v-else="" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
@@ -45,7 +45,8 @@
     </div>
 
     <pre>{{item}}</pre>
-    <pre>{{options}}</pre>
+    <pre>{{fields}}</pre>
+    <pre>{{selOptions}}</pre>
   </div>
 </template>
 <script>
@@ -62,8 +63,7 @@
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
         fields: [],
-        options: {},
-        supplier: ['foo', 'bar', 'baz']
+        selOptions: {supplier: []}
       }
     },
     mounted: function () {
@@ -74,26 +74,14 @@
       this.getVDef();
     },
     methods: {
-      getVDef: function () {
-        var _this = this;
-        Service.getVDef().then(resp => {
-          _this.fields = resp.data;
-          _this.getSelectOptions();
-        }).catch(err => {
-          console.log(err)
-        });
+      getVDef: async function () {
+        var resp = await Service.getVDef();
+        this.fields = resp.data;
+        this.getSelectOptions();
       },
-      getSelectOptions: function () {
-        var _this = this;
-        this.fields.forEach(function (field) {
-          if (field.type === 'v-select') {
-            Service.selectOptions(field.field_name).then(resp => {
-              _this.options[field.field_name] = resp.data
-            }).catch(err => {
-              console.log(err)
-            })
-          }
-        })
+      getSelectOptions: async function () {
+        const resp = await Service.selectOptions('supplier');
+        this.selOptions.supplier = JSON.parse(JSON.stringify(resp.data.data));
       },
       saveForm: function () {
         this.$validator.validateAll().then(result => {
