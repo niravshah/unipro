@@ -20,7 +20,6 @@
                 Cancel
               </button>
             </div>
-
             <div class="row u-mt-small">
               <div class="col-md-3">
                 <div class="c-field u-mb-small">
@@ -29,24 +28,31 @@
                 </div>
               </div>
             </div>
-
             <div class="row u-mt-small">
-
               <div v-for="field in fields" :class="field.col">
                 <div v-if="field.field_name" class="c-field u-mb-small">
                   <label class="c-field__label">{{field.title}}</label>
-                  <p v-if="!edit">{{item[field.field_name]}}</p>
-                  <input v-if="edit" class="c-input" id="field.field_name" type="text" placeholder="GLN"
-                         v-model="upd[field.field_name]">
-                  <small v-show="errors.has('field.field_name')" class="c-field__message u-color-success">
-                    <i class="fa fa-times-circle"></i>{{ errors.first('field.field_name') }}
-                  </small>
+                  <div v-if="!edit">
+                    <p v-if="field.type==='v-select'">{{getSelValue(field.field_name, item)}}</p>
+                    <p v-else="">{{item[field.field_name]}}</p>
+                  </div>
+                  <div v-if="edit">
+                    <div v-if="field.type==='v-select'">
+                      <v-select v-model="upd[field.field_name]"
+                                :label="field.label"
+                                :options="selOptions[field.field_name]"></v-select>
+                    </div>
+                    <div v-else="">
+                      <input class="c-input" id="field.field_name" type="text" placeholder="GLN"
+                             v-model="upd[field.field_name]">
+                      <small v-show="errors.has('field.field_name')" class="c-field__message u-color-success">
+                        <i class="fa fa-times-circle"></i>{{ errors.first('field.field_name') }}
+                      </small>
+                    </div>
+                  </div>
                 </div>
               </div>
-
             </div>
-
-
           </v-tab>
         </vue-tabs>
       </div>
@@ -66,7 +72,8 @@
         edit: false,
         error: false,
         upd: {},
-        fields: []
+        fields: [],
+        selOptions: {supplier_ref: []}
       }
     },
     mounted: function () {
@@ -80,11 +87,33 @@
     methods: {
       getVDef: async function () {
         const response = await Service.getVDef();
-        this.fields = response.data
+        this.fields = response.data;
+        this.getSelectOptions();
+      },
+      getSelectOptions: async function () {
+        var _this = this;
+        this.fields.forEach(function (field) {
+          if (field.type === 'v-select') {
+            Service.selectOptions(field.field_name).then(resp => {
+              _this.selOptions[field.field_name] = resp.data.data;
+            });
+          }
+        });
       },
       editForm: function (item) {
         this.edit = true;
         this.upd = JSON.parse(JSON.stringify(item));
+      },
+      getSelValue: function (field, item) {
+        var val = '';
+        if (item[field] != null) {
+          Object.keys(item[field]).forEach(function (key) {
+            if (key.indexOf('name') > 0) {
+              val = item[field][key]
+            }
+          });
+        }
+        return val;
       },
       deleteForm: async function (item) {
         Service.delete(item.goods_id).then(resp => {

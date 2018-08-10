@@ -90,11 +90,11 @@ var schemas = {
         },
         {
             label: 'Supplier',
-            field: 'supplier.supplier_name',
+            field: 'supplier_ref.supplier_name',
             type: 'String',
             excelUpload: false,
             summaryScreen: true,
-            mDef: {type: Schema.Types.ObjectId, ref: 'Supplier', field_name: 'supplier'}
+            mDef: {type: Schema.Types.ObjectId, ref: 'Supplier', field_name: 'supplier_ref'}
         }
     ],
     location_schema: [
@@ -260,7 +260,7 @@ var schemas = {
         }
     ],
     goods_schema_vdef: [
-        {field_name: 'supplier_name', title: 'Supplier', type: 'v-select', rules: 'required', col: 'col-md-8'},
+        {field_name: 'supplier_ref', title: 'Supplier', type: 'v-select', rules: 'required', col: 'col-md-8',label:'supplier_name'},
         {col: 'col-md-4'},
         {field_name: 'gs1_gtin', title: 'GS1 GTIN', type: 'input', rules: 'required', col: 'col-md-4'},
         {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
@@ -283,7 +283,6 @@ var schemas = {
                 fnames.push(ele.field);
             }
         });
-
         return fnames
     },
     getMongooseSchema: function (schema) {
@@ -297,21 +296,9 @@ var schemas = {
 
         var list = _.filter(schema, function (items) {
             return items.summaryScreen
-        })
-
-        return list
-    },
-    getVeeValidateSchems: function (schema) {
-        var mSchema = [];
-        _.each(schema, function (ele) {
-            if (ele.vDef) {
-                mSchema.push(ele.vDef)
-            }
         });
-        return mSchema;
+        return list
     }
-
-
 };
 
 module.exports = schemas;

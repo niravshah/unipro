@@ -16,7 +16,7 @@
           <div v-if="field.type==='v-select'" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
             <v-select v-model="item[field.field_name]"
-                      :label="field.field_name"
+                      :label="field.label"
                       :options="selOptions[field.field_name]"></v-select>
           </div>
           <div v-else="" class="c-field u-mb-small">
@@ -60,7 +60,7 @@
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
         fields: [],
-        selOptions: {supplier_name: []}
+        selOptions: {supplier_ref: []}
       }
     },
     mounted: function () {
