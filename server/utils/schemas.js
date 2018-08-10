@@ -1,6 +1,102 @@
 var _ = require('underscore');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var schemas = {
+
+    supplier_schema: [
+        {
+            label: 'Supplier Id',
+            field: 'supplier_id',
+            type: 'Number',
+            summaryScreen: true,
+            excelUpload: false,
+            mDef: {type: 'Number', field_name: 'supplier_id'}
+        },
+        {
+            label: 'Supplier Name',
+            field: 'supplier_name',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: true, field_name: 'supplier_name'}
+        },
+        {
+            label: 'GS1 GSRN',
+            field: 'gs1_gsrn',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'gs1_gsrn'}
+        },
+        {
+            label: 'Contact Person',
+            field: 'contact_person',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'contact_person'}
+        },
+        {
+            label: 'Contact Number',
+            field: 'contact_number',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'contact_number'}
+        },
+        {
+            label: 'Address',
+            field: 'address',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'address'}
+        },
+        {
+            label: 'Additional Details',
+            field: 'additional_details',
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'additional_details'}
+        }
+
+    ],
+    goods_schema: [
+        {
+            label: 'Goods Id',
+            field: 'goods_id',
+            type: 'Number',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: 'Number', field_name: 'goods_id'}
+        },
+        {
+            label: 'GS1 GTIN',
+            field: 'gs1_gtin',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: 'String', required: false, field_name: 'gs1_gtin'}
+        },
+        {
+            label: 'Description',
+            field: 'description',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: 'String', required: false, field_name: 'description'}
+        },
+        {
+            label: 'Quantity',
+            field: 'quantity',
+            type: 'Number',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: 'Number', field_name: 'quantity'}
+        },
+        {
+            label: 'Supplier',
+            field: 'supplier.supplier_name',
+            type: 'String',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: Schema.Types.ObjectId, ref: 'Supplier', field_name: 'supplier'}
+        }
+    ],
     location_schema: [
         {
             label: 'Location Id',
@@ -8,63 +104,63 @@ var schemas = {
             type: 'Number',
             excelUpload: false,
             summaryScreen: true,
-            mDef: {type: 'Number'}
+            mDef: {type: 'Number', field_name: 'location_id'}
         },
         {
             label: 'GS1 GLN',
             field: 'gs1_gln',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'gs1_gln'}
         },
         {
             label: 'Description',
             field: 'description',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'description'}
         },
         {
             label: 'Building',
             field: 'building',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'building'}
         },
         {
             label: 'Floor',
             field: 'floor',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'floor'}
         },
         {
             label: 'Store',
             field: 'store',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'store'}
         },
         {
             label: 'Shelf',
             field: 'shelf',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'shelf'}
         },
         {
             label: 'Postcode',
             field: 'postcode',
             excelUpload: true,
             summaryScreen: true,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'postcode'}
         },
         {
             label: 'Details',
             field: 'details',
             excelUpload: true,
             summaryScreen: false,
-            mDef: {type: 'String', required: false}
+            mDef: {type: 'String', required: false, field_name: 'details'}
         }
 
     ],
@@ -163,110 +259,9 @@ var schemas = {
             required: false,
         }
     ],
-    supplier_schema: [
-        {
-            label: 'Supplier Id',
-            field: 'supplier_id',
-            type: 'Number',
-            summaryScreen: true,
-            excelUpload: false,
-            mDef: {type: 'Number'}
-        },
-        {
-            label: 'Supplier Name',
-            field: 'supplier_name',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: true}
-        },
-        {
-            label: 'GS1 GSRN',
-            field: 'gs1_gsrn',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Contact Person',
-            field: 'contact_person',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Contact Number',
-            field: 'contact_number',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Address',
-            field: 'address',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Additional Details',
-            field: 'additional_details',
-            summaryScreen: true,
-            excelUpload: true,
-            mDef: {type: 'String', required: false}
-        }
-
-    ],
-    goods_schema: [
-        {
-            label: 'Goods Id',
-            field: 'goods_id',
-            type: 'Number',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'Number'}
-        },
-        {
-            label: 'GS1 GTIN',
-            field: 'gs1_gtin',
-            excelUpload: true,
-            summaryScreen: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Description',
-            field: 'description',
-            excelUpload: true,
-            summaryScreen: true,
-            mDef: {type: 'String', required: false}
-        },
-        {
-            label: 'Quantity',
-            field: 'quantity',
-            type: 'Number',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'Number'}
-        },
-        {
-            label: 'Supplier',
-            field: 'supplier',
-            type: 'String',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'String'}
-        },
-        {
-            label: 'GS1 GSRN',
-            field: 'gs1_gsrn',
-            type: 'String',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'String'}
-        }
-    ],
     goods_schema_vdef: [
-        {field_name: 'supplier_name', title: 'Supplier', type: 'v-select', rules: 'required', col: 'col-md-6'},
-        {col: 'col-md-6'},
+        {field_name: 'supplier_name', title: 'Supplier', type: 'v-select', rules: 'required', col: 'col-md-8'},
+        {col: 'col-md-4'},
         {field_name: 'gs1_gtin', title: 'GS1 GTIN', type: 'input', rules: 'required', col: 'col-md-4'},
         {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
         {col: 'col-md-2'},
@@ -294,7 +289,7 @@ var schemas = {
     getMongooseSchema: function (schema) {
         var mSchema = {};
         _.each(schema, function (ele) {
-            mSchema[ele.field] = ele.mDef
+            mSchema[ele.mDef.field_name] = ele.mDef
         });
         return mSchema;
     },

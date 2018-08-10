@@ -7,7 +7,7 @@ var GoodsModel = require('../models/goods');
 
 router.get('/', function (req, res) {
     var TM = factory.getTenantModel(GoodsModel, req.subdomains[0]);
-    TM.find({}).exec(function (err, locations) {
+    TM.find({}).populate({path: 'supplier', select: 'supplier_name -_id'}).exec(function (err, locations) {
         if (err) {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         } else {
@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
     nTM.gs1_gtin = req.body.data.gs1_gtin;
     nTM.description = req.body.data.description;
     nTM.quantity = req.body.data.quantity;
-    nTM.supplier = req.body.data.supplier;
+    nTM.supplier = req.body.data.supplier_name._id;
     nTM.gs1_gsrn = req.body.data.gs1_gsrn;
 
     nTM.save(function (err, location) {

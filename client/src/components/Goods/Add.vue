@@ -15,7 +15,8 @@
         <div v-if="field.field_name">
           <div v-if="field.type==='v-select'" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
-            <v-select v-model="item[field.field_name]" :label="field.field_name"
+            <v-select v-model="item[field.field_name]"
+                      :label="field.field_name"
                       :options="selOptions[field.field_name]"></v-select>
           </div>
           <div v-else="" class="c-field u-mb-small">
@@ -41,6 +42,7 @@
         </div>
       </div>
     </div>
+    <pre>{{item}}</pre>
     <pre>{{selOptions}}</pre>
   </div>
 </template>
