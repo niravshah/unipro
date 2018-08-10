@@ -13,6 +13,15 @@
     </div>
 
     <div class="row u-mb-small">
+
+      <div class="col-md-6  u-mb-medium">
+        <label class="c-field__label">Supplier</label>
+        <v-select v-model="item.supplier" :options="suppOptions"></v-select>
+      </div>
+
+    </div>
+
+    <div class="row u-mb-small">
       <div v-for="field in fields" :class="field.col">
         <div v-if="field.field_name" class="c-field u-mb-small">
           <label class="c-field__label">{{field.title}}</label>
@@ -52,7 +61,8 @@
         item: {},
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
-        fields: []
+        fields: [],
+        suppOptions: ['foo', 'bar', 'baz']
       }
     },
     mounted: function () {
