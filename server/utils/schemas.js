@@ -265,7 +265,7 @@ var schemas = {
         }
     ],
     goods_schema_vdef: [
-        {field_name: 'supplier', title: 'Supplier', type: "v-select", rules: 'required', col: 'col-md-6'},
+        {field_name: 'supplier_name', title: 'Supplier', type: 'v-select', rules: 'required', col: 'col-md-6'},
         {col: 'col-md-6'},
         {field_name: 'gs1_gtin', title: 'GS1 GTIN', type: 'input', rules: 'required', col: 'col-md-4'},
         {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},

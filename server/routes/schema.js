@@ -15,7 +15,6 @@ router.get('/location/mdef', function (req, res) {
     res.json(schemas.getMongooseSchema(schemas.location_schema));
 });
 
-
 router.get('/goods', function (req, res) {
     res.json(schemas.getSummarySchema(schemas.goods_schema));
 });
@@ -51,4 +50,5 @@ router.get('/suppliers/headers', function (req, res) {
 router.get('/suppliers/v-def', function (req, res) {
     res.json(schemas.supplier_schema_vdef);
 });
+
 module.exports = router;

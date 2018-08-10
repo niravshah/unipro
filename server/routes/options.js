@@ -3,7 +3,7 @@ var router = express.Router();
 var factory = require('../utils/factory');
 var SM = require('../models/supplier');
 
-router.get('/supplier', function (req, res) {
+router.get('/supplier_name', function (req, res) {
     var SMTM = factory.getTenantModel(SM, req.subdomains[0]);
     SMTM.find({}).select('supplier_id supplier_name gs1_gsrn').exec(function (err, options) {
         if (err) {

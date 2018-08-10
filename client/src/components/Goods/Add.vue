@@ -3,7 +3,6 @@
     <div v-if="loader.loading" class="loading">
       <bounce-loader :loading="loader.loading" :color="loader.color" :size="loader.size"></bounce-loader>
     </div>
-
     <div v-if="errorMessage" class="row u-mb-medium">
       <div class="col-md-8">
         <div class="well error-well">
@@ -11,13 +10,13 @@
         </div>
       </div>
     </div>
-
     <div class="row u-mb-small">
       <div v-for="field in fields" :class="field.col">
         <div v-if="field.field_name">
           <div v-if="field.type==='v-select'" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
-            <v-select v-model="item[field.field_name]" label="supplier_name" :options="selOptions[field.field_name]"></v-select>
+            <v-select v-model="item[field.field_name]" :label="field.field_name"
+                      :options="selOptions[field.field_name]"></v-select>
           </div>
           <div v-else="" class="c-field u-mb-small">
             <label class="c-field__label">{{field.title}}</label>
@@ -30,7 +29,6 @@
         </div>
       </div>
     </div>
-
     <div class="row u-mb-small">
       <div class="col-md-8">
         <div align="right" class="u-mt-medium">
@@ -43,9 +41,6 @@
         </div>
       </div>
     </div>
-
-    <pre>{{item}}</pre>
-    <pre>{{fields}}</pre>
     <pre>{{selOptions}}</pre>
   </div>
 </template>
@@ -63,7 +58,7 @@
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
         fields: [],
-        selOptions: {supplier: []}
+        selOptions: {supplier_name: []}
       }
     },
     mounted: function () {
@@ -80,8 +75,14 @@
         this.getSelectOptions();
       },
       getSelectOptions: async function () {
-        const resp = await Service.selectOptions('supplier');
-        this.selOptions.supplier = JSON.parse(JSON.stringify(resp.data.data));
+        var _this = this;
+        this.fields.forEach(function (field) {
+          if (field.type === 'v-select') {
+            Service.selectOptions(field.field_name).then(resp => {
+              _this.selOptions[field.field_name] = resp.data.data;
+            });
+          }
+        });
       },
       saveForm: function () {
         this.$validator.validateAll().then(result => {
