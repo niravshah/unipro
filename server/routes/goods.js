@@ -32,7 +32,6 @@ router.get('/details', function (req, res) {
     });
 });
 
-
 router.post('/', function (req, res) {
     var TM = factory.getTenantModel(GoodsModel, req.subdomains[0]);
     var nTM = new TM();

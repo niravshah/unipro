@@ -32,7 +32,6 @@ router.get('/goods/v-def', function (req, res) {
     res.json(schemas.goods_schema_vdef);
 });
 
-
 router.get('/stock', function (req, res) {
     res.json(schemas.getSummarySchema(schemas.stock_schema));
 });

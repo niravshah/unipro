@@ -18,6 +18,7 @@ var location = require('./routes/location');
 var goods = require('./routes/goods');
 var stock = require('./routes/stock');
 var supplier = require('./routes/supplier');
+var options = require('./routes/options');
 
 var mongoose = require('mongoose');
 
@@ -29,9 +30,9 @@ console.log("Connecting to MongoDB URL: " + url);
 
 mongoose.connect(url, {useNewUrlParser: true})
     .then(() => {
-        console.log('mongo connection successful');})
+        console.log('mongo connection successful');
+    })
     .catch((err) => console.error(err));
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,6 +58,7 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/api/auth', auth);
+app.use('/api/options', options);
 app.use('/api/upload', upload);
 app.use('/api/schema', schema);
 app.use('/api/locations', location);

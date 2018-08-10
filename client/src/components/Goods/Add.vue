@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid u-p-large">
+  <div class="container-fluid u-pb-large u-pl-large">
     <div v-if="loader.loading" class="loading">
       <bounce-loader :loading="loader.loading" :color="loader.color" :size="loader.size"></bounce-loader>
     </div>
@@ -13,23 +13,20 @@
     </div>
 
     <div class="row u-mb-small">
-
-      <div class="col-md-6  u-mb-medium">
-        <label class="c-field__label">Supplier</label>
-        <v-select v-model="item.supplier" :options="suppOptions"></v-select>
-      </div>
-
-    </div>
-
-    <div class="row u-mb-small">
       <div v-for="field in fields" :class="field.col">
-        <div v-if="field.field_name" class="c-field u-mb-small">
-          <label class="c-field__label">{{field.title}}</label>
-          <input class="c-input" :name="field.field_name" :type="field.type"
-                 v-model="item[field.field_name]" v-validate="field.rules">
-          <small v-show="errors.has(field.field_name)" class="c-field__message u-color-danger">
-            <i class="fa fa-times-circle"></i>{{ errors.first(field.field_name) }}
-          </small>
+        <div v-if="field.field_name">
+          <div v-if="field.type==='v-select'" class="c-field u-mb-small">
+            <label class="c-field__label">{{field.title}}</label>
+            <v-select v-model="item[field.field_name]" :options="options[field.field_name]"></v-select>
+          </div>
+          <div v-else="" class="c-field u-mb-small">
+            <label class="c-field__label">{{field.title}}</label>
+            <input class="c-input" :name="field.field_name" :type="field.type"
+                   v-model="item[field.field_name]" v-validate="field.rules">
+            <small v-show="errors.has(field.field_name)" class="c-field__message u-color-danger">
+              <i class="fa fa-times-circle"></i>{{ errors.first(field.field_name) }}
+            </small>
+          </div>
         </div>
       </div>
     </div>
@@ -46,6 +43,9 @@
         </div>
       </div>
     </div>
+
+    <pre>{{item}}</pre>
+    <pre>{{options}}</pre>
   </div>
 </template>
 <script>
@@ -62,7 +62,8 @@
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
         fields: [],
-        suppOptions: ['foo', 'bar', 'baz']
+        options: {},
+        supplier: ['foo', 'bar', 'baz']
       }
     },
     mounted: function () {
@@ -73,9 +74,26 @@
       this.getVDef();
     },
     methods: {
-      getVDef: async function () {
-        const response = await Service.getVDef();
-        this.fields = response.data
+      getVDef: function () {
+        var _this = this;
+        Service.getVDef().then(resp => {
+          _this.fields = resp.data;
+          _this.getSelectOptions();
+        }).catch(err => {
+          console.log(err)
+        });
+      },
+      getSelectOptions: function () {
+        var _this = this;
+        this.fields.forEach(function (field) {
+          if (field.type === 'v-select') {
+            Service.selectOptions(field.field_name).then(resp => {
+              _this.options[field.field_name] = resp.data
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+        })
       },
       saveForm: function () {
         this.$validator.validateAll().then(result => {
@@ -89,7 +107,7 @@
               this.$router.push({name: 'Goods'})
             }).catch(ex => {
               this.loader.loading = false;
-              ToastedService.showError(ex.message, 4000)
+              ToastedService.showError(ex.message, 4000);
               if (ex.response.data) {
                 this.errorMessage = ex.response.data.message;
               }
