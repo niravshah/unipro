@@ -112,6 +112,53 @@ var schemas = {
         {col: 'col-md-8'},
         {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-6'}
     ],
+
+    goods_schema: [
+        {
+            label: 'Goods Id',
+            field: 'goods_id',
+            type: 'Number',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: 'Number', field_name: 'goods_id'}
+        },
+        {
+            label: 'GS1 GTIN',
+            field: 'catalogue_ref.description',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: Schema.Types.ObjectId, ref: 'Catalogue', field_name: 'catalogue_ref'}
+        },
+        {
+            label: 'Quantity',
+            field: 'quantity',
+            type: 'Number',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: 'Number', field_name: 'quantity'}
+        },
+        {
+            label: 'Description',
+            field: 'description',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: 'String', required: false, field_name: 'description'}
+        }
+    ],
+    goods_schema_vdef: [
+        {
+            field_name: 'catalogue_ref',
+            title: 'GTIN',
+            type: 'v-select',
+            rules: 'required',
+            col: 'col-md-6',
+            label: 'description'
+        },
+        {col: 'col-md-4'},
+        {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
+        {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-4'}
+
+    ],
     location_schema: [
         {
             label: 'Location Id',
@@ -178,61 +225,6 @@ var schemas = {
             mDef: {type: 'String', required: false, field_name: 'details'}
         }
 
-    ],
-    goods_schema: [
-        {
-            label: 'Goods Id',
-            field: 'goods_id',
-            type: 'Number',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'Number', field_name: 'goods_id'}
-        },
-        {
-            label: 'GS1 GTIN',
-            field: 'gs1_gtin',
-            excelUpload: true,
-            summaryScreen: true,
-            mDef: {type: 'String', required: false, field_name: 'gs1_gtin'}
-        },
-        {
-            label: 'Description',
-            field: 'description',
-            excelUpload: true,
-            summaryScreen: true,
-            mDef: {type: 'String', required: false, field_name: 'description'}
-        },
-        {
-            label: 'Quantity',
-            field: 'quantity',
-            type: 'Number',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: 'Number', field_name: 'quantity'}
-        },
-        {
-            label: 'Supplier',
-            field: 'supplier_ref.supplier_name',
-            type: 'String',
-            excelUpload: false,
-            summaryScreen: true,
-            mDef: {type: Schema.Types.ObjectId, ref: 'Supplier', field_name: 'supplier_ref'}
-        }
-    ],
-    goods_schema_vdef: [
-        {
-            field_name: 'supplier_ref',
-            title: 'Supplier',
-            type: 'v-select',
-            rules: 'required',
-            col: 'col-md-8',
-            label: 'supplier_name'
-        },
-        {col: 'col-md-4'},
-        {field_name: 'gs1_gtin', title: 'GS1 GTIN', type: 'input', rules: 'required', col: 'col-md-4'},
-        {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
-        {col: 'col-md-2'},
-        {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-8'}
     ],
     stock_schema: [
         {

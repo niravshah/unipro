@@ -58,7 +58,7 @@
         errorMessage: '',
         loader: {size: '60px', color: '#5dc596', loading: false},
         fields: [],
-        selOptions: {supplier_ref: []}
+        selOptions: {catalogue_ref: []}
       }
     },
     mounted: function () {
