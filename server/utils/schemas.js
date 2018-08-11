@@ -112,7 +112,6 @@ var schemas = {
         {col: 'col-md-8'},
         {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-6'}
     ],
-
     goods_schema: [
         {
             label: 'Goods Id',
@@ -272,7 +271,6 @@ var schemas = {
             mDef: {type: 'Number', field_name: 'quantity'}
         }
     ],
-
     stock_schema_vdef: [
         {
             field_name: 'catalogue_ref',
@@ -293,6 +291,68 @@ var schemas = {
         {col: 'col-md-4'},
         {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
         {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-4'}
+    ],
+    user_schema: [
+        {
+            label: 'User Id',
+            field: 'user_id',
+            type: 'Number',
+            required: true,
+            summaryScreen: true,
+            excelUpload: false,
+            mDef: {type: 'Number', field_name: 'user_id'}
+        },
+        {
+            label: 'Name',
+            field: 'name',
+            type: 'String',
+            required: false,
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: false, field_name: 'name'}
+        },
+        {
+            label: 'Email',
+            field: 'email',
+            type: 'String',
+            required: false,
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: true, field_name: 'email'}
+        },
+        {
+            label: 'Password',
+            field: 'password',
+            type: 'String',
+            required: false,
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'String', required: true, field_name: 'password'}
+        },
+        {
+            label: 'Admin',
+            field: 'admin',
+            type: 'Boolean',
+            required: false,
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'Boolean', required: false, field_name: 'admin', default: false}
+        },
+        {
+            label: 'Active',
+            field: 'active',
+            type: 'Boolean',
+            required: false,
+            summaryScreen: true,
+            excelUpload: true,
+            mDef: {type: 'Boolean', required: false, field_name: 'active', default: true}
+        }
+    ],
+    user_schema_vdef: [
+        {field_name: 'name', title: 'Name', type: 'input', rules: 'required', col: 'col-md-4'},
+        {field_name: 'email', title: 'Email', type: 'input', rules: 'required', col: 'col-md-4'},
+        {col: 'col-md-4'},
+        {field_name: 'password', title: 'Password', type: 'input', rules: 'required', col: 'col-md-4'}
     ],
 
     getExcelUploadHeaders: function (schema) {

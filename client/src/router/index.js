@@ -30,6 +30,8 @@ import CatalogueSummary from "@/components/Catalogue/Summary";
 import CatalogueDetails from "@/components/Catalogue/Details";
 import AddCatalogue from "@/components/Catalogue/Add";
 
+import Users from "@/components/Users/Summary";
+import UsersAdd from "@/components/Users/Add";
 
 Vue.use(Router);
 
@@ -147,6 +149,18 @@ const router = new Router({
             path: 'catalogue/details',
             name: 'CatalogueDetails',
             component: CatalogueDetails,
+            meta: {requiresAuth: true, mini: true},
+          },
+          {
+            path: 'users',
+            name: 'Users',
+            component: Users,
+            meta: {requiresAuth: true, mini: true}
+          },
+          {
+            path: 'users/add',
+            name: 'AddUser',
+            component: UsersAdd,
             meta: {requiresAuth: true, mini: true},
           },
           {
