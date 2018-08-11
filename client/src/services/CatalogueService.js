@@ -15,5 +15,12 @@ export default {
   },
   selectOptions(field_name){
     return Api().get('api/options/' + field_name)
+  },
+  getByIds(ids)
+  {
+    return Api().get('api/catalogue/details?ids=' + ids.toString())
+  },
+  update(id, data){
+    return Api().post('api/catalogue/' + id, {data: data})
   }
 }
