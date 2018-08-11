@@ -24,7 +24,8 @@ var users = require('./routes/users');
 
 var mongoose = require('mongoose');
 
-var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
+//var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
+var url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
 if (process.env.NODE_ENV == "dev") {
     url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
 }
