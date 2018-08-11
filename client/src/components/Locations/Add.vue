@@ -110,9 +110,10 @@
             LocationService.addLocation(this.item).then(resp => {
               this.loader.loading = false;
               ToastedService.showInfo("Location Successfully Added", 4000)
+              this.$router.push({name:'Locations'})
             }).catch(ex => {
               this.loader.loading = false;
-              ToastedService.showError(ex.message, 4000)
+              ToastedService.showError(ex.message, 4000);
               if (ex.response.data) {
                 this.errorMessage = ex.response.data.message;
               }

@@ -41,7 +41,17 @@ router.post('/', function (req, res) {
             if (location) {
                 res.status(500).json({message: msgs.object_already_existis(req.body.gs1_gln)})
             } else {
-                factory.createLocation(tenant, req.body.gs1_gln, req.body.description, req.body.shelf, req.body.store, function (err, location) {
+
+
+                var nTM = new LocationTenantModel();
+                nTM.gs1_gln = req.body.gs1_gln;
+                nTM.description = req.body.description;
+                nTM.building = req.body.building;
+                nTM.floor = req.body.floor;
+                nTM.shelf = req.body.shelf;
+                nTM.store = req.body.store;
+                nTM.postcode = req.body.postcode;
+                nTM.save(function (err, location) {
                     if (err) {
                         res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
                     } else {
@@ -84,7 +94,6 @@ router.post('/:id', function (req, res) {
 router.post('/upload', function (req, res) {
     res.json(req.body)
 });
-
 
 
 module.exports = router;
