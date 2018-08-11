@@ -44,9 +44,9 @@
           </router-link>
         </li>
         <li class="c-sidebar__item">
-          <router-link class="c-sidebar__link" :to="{name:'Orders'}">
+          <router-link class="c-sidebar__link" :to="{name:'Catalogue'}">
             <span class="c-sidebar__icon u-mr-xsmall">
-              <i class="fa fa-file-invoice"></i></span>Manage Purchase Orders
+              <i class="fa fa-file-invoice"></i></span>Manage Catalogue
           </router-link>
         </li>
 

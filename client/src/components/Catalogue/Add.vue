@@ -10,6 +10,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="row u-mb-small">
       <div v-for="field in fields" :class="field.col">
         <div v-if="field.field_name">
@@ -30,6 +32,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="row u-mb-small">
       <div class="col-md-8">
         <div align="right" class="u-mt-medium">
@@ -46,11 +50,11 @@
 </template>
 <script>
   import BounceLoader from "../../../node_modules/vue-spinner/src/BounceLoader";
-  import Service from "../../services/GoodsService";
+  import Service from "../../services/CatalogueService";
   import ToastedService from "../../services/ToastedService";
 
   export default {
-    name: 'AddGoods',
+    name: 'AddCatalogue',
     components: {BounceLoader},
     data: function () {
       return {
@@ -63,14 +67,14 @@
     },
     mounted: function () {
       this.$store.commit('sidebar', this.$route.meta.mini);
-      this.$store.commit('heading', "Receive Goods");
+      this.$store.commit('heading', "Add Catalogue Item");
     },
     created: function () {
       this.getVDef();
     },
     methods: {
       getVDef: async function () {
-        var resp = await Service.getVDef();
+        var resp = await Service.vdef();
         this.fields = resp.data;
         this.getSelectOptions();
       },
@@ -92,8 +96,8 @@
             this.loader.loading = true;
             Service.add(this.item).then(resp => {
               this.loader.loading = false;
-              ToastedService.showInfo("Good Receipt Successful", 4000)
-              this.$router.push({name: 'Goods'})
+              ToastedService.showInfo("Item Added", 4000);
+              this.$router.push({name: 'Catalogue'})
             }).catch(ex => {
               this.loader.loading = false;
               ToastedService.showError(ex.message, 4000);

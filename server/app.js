@@ -19,6 +19,7 @@ var goods = require('./routes/goods');
 var stock = require('./routes/stock');
 var supplier = require('./routes/supplier');
 var options = require('./routes/options');
+var catalogue = require('./routes/catalogue');
 
 var mongoose = require('mongoose');
 
@@ -65,6 +66,7 @@ app.use('/api/locations', location);
 app.use('/api/goods', goods);
 app.use('/api/stock', stock);
 app.use('/api/suppliers', supplier);
+app.use('/api/catalogue', catalogue);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

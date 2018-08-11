@@ -51,4 +51,12 @@ router.get('/suppliers/v-def', function (req, res) {
     res.json(schemas.supplier_schema_vdef);
 });
 
+router.get('/catalogue', function (req, res) {
+    res.json(schemas.getSummarySchema(schemas.catalogue_schema));
+});
+
+router.get('/catalogue/v-def', function (req, res) {
+    res.json(schemas.catalogue_schema_vdef);
+});
+
 module.exports = router;

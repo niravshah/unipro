@@ -21,9 +21,15 @@ import AddSupplier from "@/components/Suppliers/Add";
 import SupplierDetails from "@/components/Suppliers/Details";
 
 import OrderSummary from "@/components/Orders/Summary";
+
 import GoodsSummary from "@/components/Goods/Summary";
 import AddGoods from "@/components/Goods/Add";
 import GoodsDetails from "@/components/Goods/Details";
+
+import CatalogueSummary from "@/components/Catalogue/Summary";
+import CatalogueDetails from "@/components/Catalogue/Details";
+import AddCatalogue from "@/components/Catalogue/Add";
+
 
 Vue.use(Router);
 
@@ -126,11 +132,30 @@ const router = new Router({
             meta: {requiresAuth: true, mini: true},
           },
           {
+            path: 'catalogue',
+            name: 'Catalogue',
+            component: CatalogueSummary,
+            meta: {requiresAuth: true, mini: true}
+          },
+          {
+            path: 'catalogue/add',
+            name: 'AddCatalogue',
+            component: AddCatalogue,
+            meta: {requiresAuth: true, mini: true},
+          },
+          {
+            path: 'catalogue/details',
+            name: 'CatalogueDetails',
+            component: CatalogueDetails,
+            meta: {requiresAuth: true, mini: true},
+          },
+          {
             path: '',
             name: 'Dashboard',
             component: Dashboard,
             meta: {requiresAuth: true, mini: false}
-          }
+          },
+
         ]
       },
       {
