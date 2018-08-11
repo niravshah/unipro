@@ -35,6 +35,10 @@ router.get('/stock', function (req, res) {
     res.json(schemas.getSummarySchema(schemas.stock_schema));
 });
 
+router.get('/stock/v-def', function (req, res) {
+    res.json(schemas.stock_schema_vdef);
+});
+
 router.get('/stock/headers', function (req, res) {
     res.json({"headers": schemas.getExcelUploadHeaders(schemas.stock_schema)});
 });

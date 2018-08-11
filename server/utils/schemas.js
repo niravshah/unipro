@@ -238,12 +238,12 @@ var schemas = {
         },
         {
             label: 'GS1 GTIN',
-            field: 'gs1_gtin',
+            field: 'catalogue_ref',
             type: 'String',
             required: false,
             summaryScreen: true,
             excelUpload: true,
-            mDef: {type: 'String', required: false, field_name: 'gs1_gtin'}
+            mDef: {type: Schema.Types.ObjectId, required: true, ref: 'Catalogue', field_name: 'catalogue_ref'}
         },
         {
             label: 'Item Description',
@@ -256,11 +256,11 @@ var schemas = {
         },
         {
             label: 'GS1 GLN',
-            field: 'gs1_gln',
+            field: 'location_ref',
             required: false,
             summaryScreen: true,
             excelUpload: true,
-            mDef: {type: Schema.Types.ObjectId, ref: 'Location', field_name: 'location_ref'}
+            mDef: {type: Schema.Types.ObjectId, required: true, ref: 'Location', field_name: 'location_ref'}
         },
         {
             label: 'Quantity',
@@ -271,6 +271,28 @@ var schemas = {
             excelUpload: true,
             mDef: {type: 'Number', field_name: 'quantity'}
         }
+    ],
+
+    stock_schema_vdef: [
+        {
+            field_name: 'catalogue_ref',
+            title: 'GTIN',
+            type: 'v-select',
+            rules: 'required',
+            col: 'col-md-4',
+            label: 'description'
+        },
+        {
+            field_name: 'location_ref',
+            title: 'GLN',
+            type: 'v-select',
+            rules: 'required',
+            col: 'col-md-4',
+            label: 'description'
+        },
+        {col: 'col-md-4'},
+        {field_name: 'quantity', title: 'Quantity', type: 'input', rules: 'required', col: 'col-md-4'},
+        {field_name: 'description', title: 'Description', type: 'input', rules: '', col: 'col-md-4'}
     ],
 
     getExcelUploadHeaders: function (schema) {

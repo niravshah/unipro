@@ -7,6 +7,9 @@
             <div align="right" class="u-mt-medium">
               <button v-if="!edit" @click="editForm(item.stock_id)" class="c-btn c-btn--small">Edit {{item.stock_id}}
               </button>
+              <button v-if="!edit" @click="deleteForm(item)" class="c-btn c-btn--small">
+                Delete {{item.stock_id}}
+              </button>
               <button v-if="edit" @click="saveForm(item.stock_id)" class="c-btn c-btn--small c-btn--success">
                 Save {{item.stock_id}}
               </button>
@@ -49,7 +52,8 @@
 
 </template>
 <script>
-  import StockService from "@/services/StockService"
+  import Service from "@/services/StockService"
+  import ToastedService from "../../services/ToastedService";
   export default {
     name: 'StockDetails',
     data: function () {
@@ -69,7 +73,7 @@
       this.ids.forEach(id => {
         this.items.push({stock_id: id});
       });
-      StockService.getStockDetailsByIds(this.ids).then(resp => {
+      Service.getByIds(this.ids).then(resp => {
         this.items = resp.data
       }).catch(ex => {
         console.log(ex)
@@ -91,7 +95,19 @@
       tabChanged: function (parms) {
         console.log("tabChanged", parms);
         this.edit = false;
-      }
+      },
+      deleteForm: async function (item) {
+        Service.delete(item.stock_id).then(resp => {
+          ToastedService.showInfo("Delete Successful", 2000);
+          this.$router.push({name: 'Goods'})
+        }).catch(err => {
+          if (err.response) {
+            ToastedService.showError("Could not delete." + err.response.data.message, 2000)
+          } else {
+            ToastedService.showError("Could not delete." + err.message, 2000)
+          }
+        })
+      },
     }
   }
 
