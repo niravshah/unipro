@@ -22,6 +22,10 @@ import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import VueTabs from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
 
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+
 Vue.config.productionTip = false;
 
 Vue.use(VueJWT, {"keyName": "jwt"});
@@ -38,6 +42,7 @@ Vue.component('downloadExcel', JsonExcel);
 
 Vue.component('pulse-loader', PulseLoader);
 
+Vue.use(VueChartkick, {adapter: Chart})
 
 /* eslint-disable no-new */
 new Vue({
