@@ -52,7 +52,11 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
     if (req.subdomains[0]) {
         next();
-    } else {
+    } else if (typeof req.body.subdomain !== 'undefined') {
+        req.body.data = req.body;
+        next();
+    }
+    else {
         var err = new Error('No valid domains founds');
         err.status = 404;
         next(err)

@@ -6,7 +6,7 @@ var factory = require('../utils/factory');
 
 router.post('/login', function (req, res) {
 
-    var UserTM = factory.getTenantModel(User, req.subdomains[0]);
+    var UserTM = factory.getTenantModel(User, req.subdomains[0], req.body.data);
     UserTM.findOne({email: req.body.data.email}).exec(function (err, user) {
         if (err) {
             res.status(500).json({message: err.message})

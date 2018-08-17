@@ -6,6 +6,13 @@ module.exports = {
     getTenantModel: function (Model, tenant) {
         return Model.byTenant(tenant);
     },
+    getTenantModel: function (Model, tenant, data) {
+        if (tenant) {
+            return Model.byTenant(tenant);
+        } else {
+            return Model.byTenant(data.subdomain);
+        }
+    },
     createLocation: function (tenant, gs1_gln, description, store, shelf, callback) {
         var LocationTenantModel = LocationModel.byTenant(tenant);
         var newLocation = new LocationTenantModel();
