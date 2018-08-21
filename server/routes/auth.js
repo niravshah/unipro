@@ -15,7 +15,7 @@ router.post('/login', function (req, res) {
                 let token = jwt.sign({
                     data: {email: user.email, admin: user.admin, active: user.active}
                 }, process.env.JWT_SECRET, {
-                    expiresIn: 3600,
+                    expiresIn: "30d",
                     algorithm: 'HS256'
                 });
                 res.json({'token': token})

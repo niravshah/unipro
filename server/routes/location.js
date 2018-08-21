@@ -6,7 +6,7 @@ var LocationModel = require('../models/location');
 
 
 router.get('/', function (req, res) {
-    var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0]);
+    var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0], req.body.data);
     LocationTenantModel.find({}).exec(function (err, locations) {
         if (err) {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})

@@ -55,8 +55,15 @@ app.use(function (req, res, next) {
     } else if (typeof req.body.subdomain !== 'undefined') {
         req.body.data = req.body;
         next();
-    }
-    else {
+    } else if (typeof req.query.subdomain !== 'undefined') {
+        if(req.body.data){
+            req.body.data['subdomain'] =req.query.subdomain
+        }else{
+            req.body.data = {};
+            req.body.data['subdomain'] =req.query.subdomain
+        }
+        next();
+    } else {
         var err = new Error('No valid domains founds');
         err.status = 404;
         next(err)

@@ -3,6 +3,7 @@ var router = express.Router();
 var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
 var M = require('../models/stock');
+var LM = require('../models/location');
 
 
 router.get('/', function (req, res) {
@@ -12,6 +13,34 @@ router.get('/', function (req, res) {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         } else {
             res.json(locations)
+        }
+    })
+});
+
+router.get('/location/:id', function (req, res) {
+
+    var TM = factory.getTenantModel(M, req.subdomains[0], req.body.data);
+    var LMTM = factory.getTenantModel(LM, req.subdomains[0], req.body.data);
+
+    LMTM.findOne({location_id: req.params.id}).exec(function (err, location) {
+        if (err) {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        } else {
+            if (location) {
+                TM.find({location_ref: location}).populate("location_ref catalogue_ref").exec(function (err, items) {
+                    if (err) {
+                        res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+                    } else {
+                        if (items) {
+                            res.json(items)
+                        } else {
+                            res.status(500).json({message: msgs.unexpected_error_message})
+                        }
+                    }
+                })
+            } else {
+                res.status(500).json({message: msgs.unexpected_error_message})
+            }
         }
     })
 });
