@@ -6,12 +6,22 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
+.o-page__sidebar {
+  width: 200px;
+}
 
+.o-page__content {
+  margin-left: 200px;
+}
+
+.o-page__sidebar.is-minimized:hover {
+  width: 200px;
+}
 
 .c-sidebar {
   background-color: #FFFFFF;
-  -webkit-box-shadow: 2px 0 2px -2px #425563;
-  box-shadow: 2px 0 2px -1px #425563;
+  -webkit-box-shadow: 1px 0 1px -1px #005EB8;
+  box-shadow: 1px 0 1px -1px #005EB8;
 
 }
 
@@ -20,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .c-sidebar.is-minimized .c-sidebar__item {
-  border-bottom: 1px solid #003087;
+  border-bottom: 1px solid #78BE20;
 }
 
 .c-sidebar__link.is-active {
@@ -35,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .c-sidebar__brand {
-  border-bottom: 1px solid #003087;
+  border-bottom: 1px solid #78BE20;
   color: #005EB8;
 }
 
@@ -50,4 +60,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .c-navbar {
   background-color: #005EB8;
+}
+
+.c-navbar__title{
+  text-transform: uppercase;
 }
