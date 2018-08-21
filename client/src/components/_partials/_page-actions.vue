@@ -3,7 +3,7 @@
     <div align="right" class="col-md-12">
 
       <router-link :key="action.routerLink" v-for="action in pageActions" :to="{name:action.routerLink}"
-                   class="c-btn c-btn--small c-btn--success u-mr-small">
+                   class="c-btn c-btn--success u-mr-small">
         {{action.title}}
       </router-link>
 

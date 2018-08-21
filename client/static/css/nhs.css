@@ -1,0 +1,53 @@
+body{
+  background-color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+
+
+.c-sidebar {
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 2px 0 2px -2px #425563;
+  box-shadow: 2px 0 2px -1px #425563;
+
+}
+
+.c-sidebar__link {
+  color: #005EB8;
+}
+
+.c-sidebar.is-minimized .c-sidebar__item {
+  border-bottom: 1px solid #003087;
+}
+
+.c-sidebar__link.is-active {
+  background-color: #005EB8;
+  box-shadow: inset 3px 0 0 0 #78BE20;
+  color: #FFFFFF;
+}
+
+.c-sidebar__link:hover {
+  color: #78BE20;
+  text-decoration: none;
+}
+
+.c-sidebar__brand {
+  border-bottom: 1px solid #003087;
+  color: #005EB8;
+}
+
+.c-btn--success {
+  background: #78BE20;
+  border-color: #78BE20;
+}
+
+.c-btn {
+  border-radius: 0px;
+}
+
+.c-navbar {
+  background-color: #005EB8;
+}
