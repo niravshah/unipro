@@ -3,9 +3,12 @@ var router = express.Router();
 
 var jwt = require('express-jwt');
 
+
 router.get('/', function (req, res) {
     res.render('index', {})
 });
+
+
 
 router.get('/posts', function (req, res) {
     res.send(

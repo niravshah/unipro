@@ -22,6 +22,8 @@ var options = require('./routes/options');
 var catalogue = require('./routes/catalogue');
 var users = require('./routes/users');
 
+var sequelize = require('./routes/sequelize');
+
 var mongoose = require('mongoose');
 
 //var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
@@ -36,6 +38,13 @@ mongoose.connect(url, {useNewUrlParser: true})
         console.log('mongo connection successful');
     })
     .catch((err) => console.error(err));
+
+var Sequelize = require('./sqlize/models');
+Sequelize.sequelize.sync().then(function () {
+    console.log('Sequelize Sync Successful')
+}).catch(function (err) {
+    console.log('Sequelize Sync Error: ', err)
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,11 +65,11 @@ app.use(function (req, res, next) {
         req.body.data = req.body;
         next();
     } else if (typeof req.query.subdomain !== 'undefined') {
-        if(req.body.data){
-            req.body.data['subdomain'] =req.query.subdomain
-        }else{
+        if (req.body.data) {
+            req.body.data['subdomain'] = req.query.subdomain
+        } else {
             req.body.data = {};
-            req.body.data['subdomain'] =req.query.subdomain
+            req.body.data['subdomain'] = req.query.subdomain
         }
         next();
     } else {
@@ -81,6 +90,8 @@ app.use('/api/stock', stock);
 app.use('/api/suppliers', supplier);
 app.use('/api/catalogue', catalogue);
 app.use('/api/users', users);
+
+app.use('/api/sequelize', sequelize);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

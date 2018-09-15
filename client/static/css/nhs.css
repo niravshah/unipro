@@ -20,8 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .c-sidebar {
   background-color: #FFFFFF;
-  -webkit-box-shadow: 1px 0 1px -1px #005EB8;
-  box-shadow: 1px 0 1px -1px #005EB8;
+  -webkit-box-shadow: 1px 0 1px -1px #425563;
+  box-shadow: 1px 0 1px -1px #425563;
 
 }
 
@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .c-sidebar.is-minimized .c-sidebar__item {
-  border-bottom: 1px solid #78BE20;
+  border-bottom: 1px solid #E8EDEE;
 }
 
 .c-sidebar__link.is-active {
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .c-sidebar__brand {
-  border-bottom: 1px solid #78BE20;
+  border-bottom: 1px solid #E8EDEE;
   color: #005EB8;
 }
 
