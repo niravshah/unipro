@@ -7,22 +7,23 @@ var models = require('../sqlize/models');
 
 
 router.get('/', function (req, res) {
-/*
-    var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0], req.body.data);
-    LocationTenantModel.find({}).exec(function (err, locations) {
-        if (err) {
-            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
+    /*
+     var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0], req.body.data);
+     LocationTenantModel.find({}).exec(function (err, locations) {
+     if (err) {
+     res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+     } else {
+     res.json(locations)
+     }
+     });
+     */
+
+
+    models.Location.scope({method: ['tenant', req.body.data.tenant]}).findAll()
+        .then(function (locations) {
             res.json(locations)
-        }
-    });
-*/
-
-
-    models.Location.scope({method: ['tenant', req.body.data.tenant]}).find()
-        .then(function (err, locations) {
-            res.json([err, locations])})
-        .catch(err=>{
+        })
+        .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         })
 
