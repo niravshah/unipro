@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     var EClass = sequelize.define('EClass', {
         eclass: DataTypes.STRING,
         description: DataTypes.STRING,
-        tenant_id: DataTypes.INTEGER
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     }, {indexes: [{unique: true, fields: ['eclass']}]});
 
     EClass.associate = function (models) {

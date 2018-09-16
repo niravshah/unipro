@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     var Location = sequelize.define('Location', {
         location_id: DataTypes.BIGINT,
         description: DataTypes.STRING,
-        tenant_id:DataTypes.INTEGER,
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     }, {indexes: [{unique: true, fields: ['location_id']}]});
 
     Location.associate = function (models) {

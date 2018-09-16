@@ -10,13 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         unit_price: DataTypes.DECIMAL,
         nhs_supply_chain_code: DataTypes.STRING,
         bunzl_product_code: DataTypes.STRING,
+        unipro_code: DataTypes.STRING,
         group_id: DataTypes.INTEGER,
         tax_code: DataTypes.INTEGER,
         eclass: DataTypes.INTEGER,
         supplier_id: DataTypes.INTEGER,
         contract_id: DataTypes.INTEGER,
-        tenant_id: DataTypes.INTEGER
-    }, {indexes: [{unique: true, fields: ['product_code']}]});
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
+    }, {indexes: [{unique: true, fields: ['product_code','supplier_id','units_in_each']}]});
 
     Product.associate = function (models) {
         models.Product.belongsTo(models.ProductGroup, {

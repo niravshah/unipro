@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         supplier_id: DataTypes.BIGINT,
         supplier_name: DataTypes.STRING,
         payment_terms: DataTypes.STRING,
-        tenant_id: DataTypes.INTEGER
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     }, {indexes: [{unique: true, fields: ['supplier_id']}]});
 
     Supplier.associate = function (models) {

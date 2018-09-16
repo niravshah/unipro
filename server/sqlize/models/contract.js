@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         contract_id: DataTypes.STRING,
         start_date: DataTypes.DATEONLY,
         end_date: DataTypes.DATEONLY,
-        tenant_id: DataTypes.INTEGER
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     }, {indexes: [{unique: true, fields: ['contract_id']}]});
 
     Contract.associate = function (models) {

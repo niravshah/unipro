@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         current_level: DataTypes.INTEGER,
         min_level: DataTypes.INTEGER,
         max_level: DataTypes.INTEGER,
-        tenant_id: DataTypes.INTEGER,
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     });
 
     Inventory.associate = function (models) {

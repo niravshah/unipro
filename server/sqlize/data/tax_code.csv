@@ -1,4 +1,4 @@
-﻿tax_code,description
-NR,VAT Non reclaim 20%/17.5%/15% (dep. date) on Purchases
-RE,VAT Reclaim 20%/17.5%/15% (dep. date) Purchases
-ZE,Zero
+﻿tenant_id,tax_code,description
+1,NR,VAT Non reclaim 20%/17.5%/15% (dep. date) on Purchases
+1,RE,VAT Reclaim 20%/17.5%/15% (dep. date) Purchases
+1,ZE,Zero

@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
     var ProductGroup = sequelize.define('ProductGroup', {
         group_id: DataTypes.BIGINT,
         description: DataTypes.STRING,
-        tenant_id: DataTypes.INTEGER
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     }, {indexes: [{unique: true, fields: ['group_id']}]});
 
     ProductGroup.associate = function (models) {

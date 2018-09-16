@@ -1,54 +1,54 @@
-﻿supplier_id,supplier_name,payment_terms
-16899,Edwards Lifesciences,60 days
-11342,Medtronic,25 days
-28779,Abbott Laboratories Ltd,25 days
-11359,Merit Medical UK Limited,60 days
-10263,Boston Scientific Ltd,25 days
-11103,Johnson and Johnson Medical Ltd,60 days
-12017,St Jude Medical UK Ltd,60 days
-25606,Teleflex Medical,60 days
-34758,Medical Services Group,60 days
-25820,Vascular Perspectives Ltd,60 days
-28838,K&R Badges,60 days
-12140,Terumo UK,60 days
-35893,Office Depot,30 days
-42809,Abbott Medical UK Limited,60 days
-40995,Cardinal Health UK 432 Ltd,60 days
-18900,Maquet Limited,60 days
-43107,Shockwave Medical Inc,60 days
-38399,Insight Health Limited,60 days
-12046,Stryker (UK) Ltd,60 days
-39216,Acrostak-UK-Limited,60 days
-12165,3M United Kingdom PLC,60 days
-19628,Protecx Medical Ltd,60 days
-11146,Kimal PLC,30 days
-31241,GBUK Ltd,60 days
-37245,Imagex Medical Ltd,60 days
-38419,Lindsay Surgical Supplies Ltd,60 days
-36885,Volcano,60 days
-29656,DLS Medical,60 days
-12170,Toffeln Global LLP,30 days
-12293,Vygon (UK)Ltd,60 days
-31758,Bunzl Retail & Healthcare Supplies limited,25 days
-39665,Werfen Ltd,60 days
-27614,Unisurge International Ltd,30 days
-10176,Bayer Plc,25 days
-10496,Cook (UK) Ltd,25 days
-24713,Technomed Limited,60 days
-42943,Link Treasury Services Ltd,60 days
-15949,Dot Medical Ltd,60 days
-11981,Spacelabs Healthcare Ltd,30 days
-10100,APC Cardiovascular Ltd,30 days
-14174,B. Braun Medical Limited,25 days
-42704,ACIST Europe BV,30 days
-10007,Abbott Laboratories Ltd,60 days
-10226,Biotronik UK Ltd,25 days
-29998,Continuous Dataprint Ltd,60 days
-16511,Peskett Solutions Ltd t/a Ruhof,60 days
-42973,Change Healthcare UK Holdings Ltd,25 days
-29611,Fannin (UK) Ltd,60 days
-12775,Uniplex UK Ltd,60 days
-14854,Mana Tech Ltd,60 days
-10255,BOC Ltd,30 days
-23986,Repton Medical,60 days
-37754,Baylis Medical Company Inc,immediate
+﻿tenant_id,supplier_id,supplier_name,payment_terms
+1,16899,Edwards Lifesciences,60 days
+1,11342,Medtronic,25 days
+1,28779,Abbott Laboratories Ltd,25 days
+1,11359,Merit Medical UK Limited,60 days
+1,10263,Boston Scientific Ltd,25 days
+1,11103,Johnson and Johnson Medical Ltd,60 days
+1,12017,St Jude Medical UK Ltd,60 days
+1,25606,Teleflex Medical,60 days
+1,34758,Medical Services Group,60 days
+1,25820,Vascular Perspectives Ltd,60 days
+1,28838,K&R Badges,60 days
+1,12140,Terumo UK,60 days
+1,35893,Office Depot,30 days
+1,42809,Abbott Medical UK Limited,60 days
+1,40995,Cardinal Health UK 432 Ltd,60 days
+1,18900,Maquet Limited,60 days
+1,43107,Shockwave Medical Inc,60 days
+1,38399,Insight Health Limited,60 days
+1,12046,Stryker (UK) Ltd,60 days
+1,39216,Acrostak-UK-Limited,60 days
+1,12165,3M United Kingdom PLC,60 days
+1,19628,Protecx Medical Ltd,60 days
+1,11146,Kimal PLC,30 days
+1,31241,GBUK Ltd,60 days
+1,37245,Imagex Medical Ltd,60 days
+1,38419,Lindsay Surgical Supplies Ltd,60 days
+1,36885,Volcano,60 days
+1,29656,DLS Medical,60 days
+1,12170,Toffeln Global LLP,30 days
+1,12293,Vygon (UK)Ltd,60 days
+1,31758,Bunzl Retail & Healthcare Supplies limited,25 days
+1,39665,Werfen Ltd,60 days
+1,27614,Unisurge International Ltd,30 days
+1,10176,Bayer Plc,25 days
+1,10496,Cook (UK) Ltd,25 days
+1,24713,Technomed Limited,60 days
+1,42943,Link Treasury Services Ltd,60 days
+1,15949,Dot Medical Ltd,60 days
+1,11981,Spacelabs Healthcare Ltd,30 days
+1,10100,APC Cardiovascular Ltd,30 days
+1,14174,B. Braun Medical Limited,25 days
+1,42704,ACIST Europe BV,30 days
+1,10007,Abbott Laboratories Ltd,60 days
+1,10226,Biotronik UK Ltd,25 days
+1,29998,Continuous Dataprint Ltd,60 days
+1,16511,Peskett Solutions Ltd t/a Ruhof,60 days
+1,42973,Change Healthcare UK Holdings Ltd,25 days
+1,29611,Fannin (UK) Ltd,60 days
+1,12775,Uniplex UK Ltd,60 days
+1,14854,Mana Tech Ltd,60 days
+1,10255,BOC Ltd,30 days
+1,23986,Repton Medical,60 days
+1,37754,Baylis Medical Company Inc,immediate

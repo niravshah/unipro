@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         order_date: DataTypes.DATEONLY,
         posted: DataTypes.INTEGER,
         status: DataTypes.STRING,
-        tenant_id: DataTypes.INTEGER
+        tenant_id: {type: DataTypes.INTEGER, allowNull:false}
     });
 
     Order.associate = function (models) {

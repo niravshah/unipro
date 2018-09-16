@@ -1,67 +1,67 @@
-﻿eclass,description
-FVA,Catheter - Arterial
-FVI,Catheter - Vascular
-FRE,Angioplasty balloon catheter
-FRD,Guidewires
-FVD,Catheter - Introducers
-FCC,Disposable Surgical Instruments
-FXE,Intra Aortic Balloon Pumps
-FES,Thoracentesis catheters or catheterization kits or accessories
-FRU,Diagnostic or interventional vascular tray or pack
-FJB,Pressure Monitors
-FVT,Intravenous & arterial catheter & needle positioning aids
-WKG,Badges
-FRC,Introducers - vascular catheter
-FRP,Cardiac ablation catheter
-FRB,Diagnostic or interventional vascular catheters
-FRX,Catheterization procedure site closure device
-FRK,Drug-Eluting Stents
-FXD,Balloons PTCA Balloons
-BCZ,Workwear Protective/Chemical and Radiation Protection
-BAA,Accessories - Healthcare Wear
-BEB,Aprons
-JAA,X-Ray equipment
-FMJ,Syringe for injection of contrast medium
-FJH,Blood pressure Cuffs
-FXK,Sutures
-FYX,Medical & Surgical Equipment Repairs
-FCB,Surgical Instruments
-FRZ,Cardiology leads
-FCS,Surgical instrument sets & systems & trays & baskets
-BWH,Footwear - Theatre Wear
-FMA,Syringe 2 piece hypodermic with green plunger
-FBU,Other Medical & Surgical Equipment Purchases
-FXS,Wound Closure
-DSC,Bags - Pharmacy Equipment & Containers
-EVX,Procedure packs - misc
-ENQ,Cellulose Wadding
-EMI,Gauze swabs - X-ray Detectable
-FRA,Coronary stents
-KBY,Laboratory & Pathology equipment repairs
-PTX,Building & Engineering Tools Equipment Repairs & Maintenance
-ZLM,Works Staff
-FRL,Bare-Metal Stents
-FJD,Electrocardiography EKG units & accessories
-FJE,Electrocardiography EKG Electrodes
-FRF,Removal devices of diagnostic or interventional vascular catheters or sets
-KCA,Point of Care Test Kits Blood Gas Analysers (KFC) Diagnostic Test Strips & Point of Care Diagnostic Devices
-FKG,Dilator kits
-PNA,Cables Capacitors Connectors Grommets Insulator Meters Moving Iron Coil Relays Resistors Semiconductors Suppressers Terminals Inductors Wire
-FYZ,Medical Equipment Spares
-FJA,Acute care monitoring units & related products
-FYB,Lifting Equipment Manual
-WPH,Printed Stationery
-FYY,Medical & Surgical Equipment Maintenance & cleaning
-FBH,Defibrillators
-EVZ,CSSD Procedure packs
-EVR,Procedure Pack Cardiac Surgery
-FDP,Flow sensors or regulators or components
-FXB,Catheters
-FBX,Surgical Power Tools & accessories
-DYD,Medical Cylinder Gases
-JMB,Equipment & sundries: Superficial Therapy X-Ray Units Deep Therapy X-Ray Units Gamma Beta Ray Beam Therapy Units Linear Accelerators Radioactive Isotopes Radiotherapy Treatment Planning Simulators Radiotherapy Treatment Tables Other Radiotherapy Equipment
-DSR,Labels - Pharmacy Equipment & Containers
-EVQ,Procedure Pack Angiography
-FFM,Circuit connectors or adapters or valves
-FKB,Angioscopes or accessories
-NA,Unknown
+﻿tenant_id,eclass,description
+1,FVA,Catheter - Arterial
+1,FVI,Catheter - Vascular
+1,FRE,Angioplasty balloon catheter
+1,FRD,Guidewires
+1,FVD,Catheter - Introducers
+1,FCC,Disposable Surgical Instruments
+1,FXE,Intra Aortic Balloon Pumps
+1,FES,Thoracentesis catheters or catheterization kits or accessories
+1,FRU,Diagnostic or interventional vascular tray or pack
+1,FJB,Pressure Monitors
+1,FVT,Intravenous & arterial catheter & needle positioning aids
+1,WKG,Badges
+1,FRC,Introducers - vascular catheter
+1,FRP,Cardiac ablation catheter
+1,FRB,Diagnostic or interventional vascular catheters
+1,FRX,Catheterization procedure site closure device
+1,FRK,Drug-Eluting Stents
+1,FXD,Balloons PTCA Balloons
+1,BCZ,Workwear Protective/Chemical and Radiation Protection
+1,BAA,Accessories - Healthcare Wear
+1,BEB,Aprons
+1,JAA,X-Ray equipment
+1,FMJ,Syringe for injection of contrast medium
+1,FJH,Blood pressure Cuffs
+1,FXK,Sutures
+1,FYX,Medical & Surgical Equipment Repairs
+1,FCB,Surgical Instruments
+1,FRZ,Cardiology leads
+1,FCS,Surgical instrument sets & systems & trays & baskets
+1,BWH,Footwear - Theatre Wear
+1,FMA,Syringe 2 piece hypodermic with green plunger
+1,FBU,Other Medical & Surgical Equipment Purchases
+1,FXS,Wound Closure
+1,DSC,Bags - Pharmacy Equipment & Containers
+1,EVX,Procedure packs - misc
+1,ENQ,Cellulose Wadding
+1,EMI,Gauze swabs - X-ray Detectable
+1,FRA,Coronary stents
+1,KBY,Laboratory & Pathology equipment repairs
+1,PTX,Building & Engineering Tools Equipment Repairs & Maintenance
+1,ZLM,Works Staff
+1,FRL,Bare-Metal Stents
+1,FJD,Electrocardiography EKG units & accessories
+1,FJE,Electrocardiography EKG Electrodes
+1,FRF,Removal devices of diagnostic or interventional vascular catheters or sets
+1,KCA,Point of Care Test Kits Blood Gas Analysers (KFC) Diagnostic Test Strips & Point of Care Diagnostic Devices
+1,FKG,Dilator kits
+1,PNA,Cables Capacitors Connectors Grommets Insulator Meters Moving Iron Coil Relays Resistors Semiconductors Suppressers Terminals Inductors Wire
+1,FYZ,Medical Equipment Spares
+1,FJA,Acute care monitoring units & related products
+1,FYB,Lifting Equipment Manual
+1,WPH,Printed Stationery
+1,FYY,Medical & Surgical Equipment Maintenance & cleaning
+1,FBH,Defibrillators
+1,EVZ,CSSD Procedure packs
+1,EVR,Procedure Pack Cardiac Surgery
+1,FDP,Flow sensors or regulators or components
+1,FXB,Catheters
+1,FBX,Surgical Power Tools & accessories
+1,DYD,Medical Cylinder Gases
+1,JMB,Equipment & sundries: Superficial Therapy X-Ray Units Deep Therapy X-Ray Units Gamma Beta Ray Beam Therapy Units Linear Accelerators Radioactive Isotopes Radiotherapy Treatment Planning Simulators Radiotherapy Treatment Tables Other Radiotherapy Equipment
+1,DSR,Labels - Pharmacy Equipment & Containers
+1,EVQ,Procedure Pack Angiography
+1,FFM,Circuit connectors or adapters or valves
+1,FKB,Angioscopes or accessories
+1,NA,Unknown

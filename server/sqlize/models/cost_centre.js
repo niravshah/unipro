@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         division_description: DataTypes.STRING,
         pcm_division_description: DataTypes.STRING,
         reporting_division: DataTypes.STRING,
-        tenant_id:DataTypes.INTEGER,
-    },   {indexes: [{unique: true, fields: ['cost_centre']}]});
+        tenant_id: {type: DataTypes.INTEGER, allowNull: false}
+    }, {indexes: [{unique: true, fields: ['cost_centre']}]});
 
     CostCentre.associate = function (models) {
         models.CostCentre.belongsTo(models.Tenant, {
