@@ -58,6 +58,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
+var models = require('./sqlize/models');
+
 app.use(function (req, res, next) {
     if (req.subdomains[0]) {
         next();
@@ -71,7 +73,22 @@ app.use(function (req, res, next) {
             req.body.data = {};
             req.body.data['subdomain'] = req.query.subdomain
         }
-        next();
+
+        models.Tenant.findOne({where: {sudomain: req.body.data['subdomain']}}).then(tenant => {
+
+            if (tenant != null) {
+                req.body.data['tenant'] = tenant;
+                next();
+            } else {
+                var err = new Error('No valid tenants founds');
+                err.status = 404;
+                next(err)
+            }
+        }).catch(err => {
+            var err = new Error('No valid tenants founds');
+            err.status = 404;
+            next(err)
+        });
     } else {
         var err = new Error('No valid domains founds');
         err.status = 404;

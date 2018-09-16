@@ -6,6 +6,7 @@ var path = require('path');
 
 var Bulk = require('../utils/sequelizeBulkInsert');
 
+
 router.get('/users/:name', function (req, res) {
     models.User.build({username: req.params.name}).save().then(function (user, err) {
         res.json([err, user]);
@@ -15,6 +16,12 @@ router.get('/users/:name', function (req, res) {
 router.get('/users', function (req, res) {
     models.User.find({}).then(function (err, users) {
         res.json([err, users]);
+    })
+});
+
+router.get('/locations', function (req, res) {
+    models.Location.scope({method:['tenant',req.body.data['tenant'].id]}).find({}).then(function (err, locations) {
+        res.json([err, locations]);
     })
 });
 
