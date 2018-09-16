@@ -77,7 +77,7 @@ app.use(function (req, res, next) {
         models.Tenant.findOne({where: {sudomain: req.body.data['subdomain']}}).then(tenant => {
 
             if (tenant != null) {
-                req.body.data['tenant'] = tenant;
+                req.body.data['tenant'] = tenant.id;
                 next();
             } else {
                 var err = new Error('No valid tenants founds');

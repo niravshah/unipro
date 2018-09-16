@@ -5,15 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         description: DataTypes.STRING,
         tenant_id: {type: DataTypes.INTEGER, allowNull: false}
     }, {
-        indexes: [{unique: true, fields: ['location_id']}], scopes: {
-            tenant: function (tenantId) {
-                return {
-                    where: {
-                        tenant_id: tenantId
-                    }
-                }
-            }
-        }
+        indexes: [{unique: true, fields: ['location_id']}]
     });
 
     Location.associate = function (models) {

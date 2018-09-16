@@ -19,6 +19,10 @@ fs
     })
     .forEach(file => {
         const model = sequelize['import'](path.join(__dirname, file));
+
+        model.addScope('tenant', function (tenantId) {
+            return {where: {tenant_id: tenantId}}
+        });
         db[model.name] = model;
     });
 
