@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         eclass:DataTypes.STRING,
         supplier_id: DataTypes.BIGINT,
         cost_centre:DataTypes.STRING,
-    });
+    },{indexes: [{unique: true, fields: ['product_code']}]});
 
     Product.associate = function (models) {
         models.Product.belongsTo(models.ProductGroup, {
