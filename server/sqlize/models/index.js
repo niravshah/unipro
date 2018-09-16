@@ -31,6 +31,12 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
+const Tenant = db['Tenant'];
+Tenant.findAll({}).then(tenants => {
+    console.log("Loaded Tenants", tenants);
+    db.tenants = tenants
+});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

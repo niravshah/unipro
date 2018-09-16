@@ -70,17 +70,40 @@ app.use(function (req, res, next) {
         sdomain = req.query.subdomain;
     }
     if (sdomain !== null) {
-        Sequelize.Tenant.findOne({where: {sudomain: sdomain}}).then(tenant => {
-            if (tenant != null) {
-                if(!req.body.data){req.body.data = []}
-                req.body.data['tenant'] = tenant.id;
-                next();
-            } else {
+
+        if (Sequelize.tenants) {
+            var found = false;
+            Sequelize.tenants.forEach(tenant => {
+                if (tenant.sudomain === sdomain) {
+                    if (!req.body.data) {
+                        req.body.data = []
+                    }
+                    req.body.data['tenant'] = tenant.id;
+                    found = true;
+                    next();
+                }
+            });
+
+            if (!found) {
                 next(new Error('No valid tenants founds'))
             }
-        }).catch(err => {
-            next(err)
-        });
+
+        } else {
+            Sequelize.Tenant.findOne({where: {sudomain: sdomain}}).then(tenant => {
+                if (tenant != null) {
+                    if (!req.body.data) {
+                        req.body.data = []
+                    }
+                    req.body.data['tenant'] = tenant.id;
+                    next();
+                } else {
+                    next(new Error('No valid tenants founds'))
+                }
+            }).catch(err => {
+                next(err)
+            });
+        }
+
     } else {
         next(new Error('No valid tenants founds'))
     }
