@@ -73,6 +73,11 @@ router.get('/bulk/orders', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
+router.get('/bulk/inventory', function (req, res) {
+    var bulk = new Bulk(models.Inventory);
+    var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'inventory.csv');
+    bulkImport(bulk, fpath, res);
+});
 
 function bulkImport(bulk, fpath, res) {
     bulk.importFile(fpath, function (resp) {
