@@ -24,7 +24,6 @@ router.get('/bulk/tenants', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
-
 router.get('/bulk/tax_codes', function (req, res) {
     var bulk = new Bulk(models.TaxCode);
     var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'tax_code.csv');
