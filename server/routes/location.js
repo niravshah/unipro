@@ -3,9 +3,11 @@ var router = express.Router();
 var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
 var LocationModel = require('../models/location');
+var models = require('../sqlize/models');
 
 
 router.get('/', function (req, res) {
+/*
     var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0], req.body.data);
     LocationTenantModel.find({}).exec(function (err, locations) {
         if (err) {
@@ -13,13 +15,23 @@ router.get('/', function (req, res) {
         } else {
             res.json(locations)
         }
-    })
+    });
+*/
+
+
+    models.Location.scope({method: ['tenant', req.body.data.tenant]}).find()
+        .then(function (err, locations) {
+            res.json([err, locations])})
+        .catch(err=>{
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
+
 });
 
 router.get('/details', function (req, res) {
     var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0]);
     var ids = req.query.ids.split(",");
-    var idArr = []
+    var idArr = [];
     ids.forEach(function (id) {
         idArr.push(parseInt(id));
     });

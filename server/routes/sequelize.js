@@ -20,7 +20,7 @@ router.get('/users', function (req, res) {
 });
 
 router.get('/locations', function (req, res) {
-    models.Location.scope({method:['tenant',req.body.data['tenant']]}).find().then(function (err, locations) {
+    models.Location.scope({method:['tenant',req.body.data.tenant]}).find().then(function (err, locations) {
         res.json([err, locations]);
     })
 });

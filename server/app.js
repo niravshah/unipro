@@ -58,41 +58,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-var models = require('./sqlize/models');
-
 app.use(function (req, res, next) {
+
+    var sdomain = null;
+
     if (req.subdomains[0]) {
-        next();
+        sdomain = req.subdomains[0];
     } else if (typeof req.body.subdomain !== 'undefined') {
-        req.body.data = req.body;
-        next();
+        sdomain = req.body.subdomain;
     } else if (typeof req.query.subdomain !== 'undefined') {
-        if (req.body.data) {
-            req.body.data['subdomain'] = req.query.subdomain
-        } else {
-            req.body.data = {};
-            req.body.data['subdomain'] = req.query.subdomain
-        }
-
-        models.Tenant.findOne({where: {sudomain: req.body.data['subdomain']}}).then(tenant => {
-
+        sdomain = req.query.subdomain;
+    }
+    if (sdomain !== null) {
+        Sequelize.Tenant.findOne({where: {sudomain: sdomain}}).then(tenant => {
             if (tenant != null) {
+                if(!req.body.data){req.body.data = []}
                 req.body.data['tenant'] = tenant.id;
                 next();
             } else {
-                var err = new Error('No valid tenants founds');
-                err.status = 404;
-                next(err)
+                next(new Error('No valid tenants founds'))
             }
         }).catch(err => {
-            var err = new Error('No valid tenants founds');
-            err.status = 404;
             next(err)
         });
     } else {
-        var err = new Error('No valid domains founds');
-        err.status = 404;
-        next(err)
+        next(new Error('No valid tenants founds'))
     }
 });
 
