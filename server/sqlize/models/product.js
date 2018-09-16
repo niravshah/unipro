@@ -10,32 +10,32 @@ module.exports = (sequelize, DataTypes) => {
         unit_price: DataTypes.DECIMAL,
         nhs_supply_chain_code: DataTypes.STRING,
         bunzl_product_code: DataTypes.STRING,
-        group_id: DataTypes.BIGINT,
-        tax_code:DataTypes.STRING,
-        eclass:DataTypes.STRING,
-        supplier_id: DataTypes.BIGINT,
-        cost_centre:DataTypes.STRING,
+        group_id: DataTypes.INTEGER,
+        tax_code:DataTypes.INTEGER,
+        eclass:DataTypes.INTEGER,
+        supplier_id: DataTypes.INTEGER,
+        contract_id: DataTypes.INTEGER
     },{indexes: [{unique: true, fields: ['product_code']}]});
 
     Product.associate = function (models) {
         models.Product.belongsTo(models.ProductGroup, {
-            foreignKey: 'group_id', targetKey: 'group_id'
+            foreignKey: 'group_id', targetKey: 'id'
         });
 
         models.Product.belongsTo(models.TaxCode, {
-            foreignKey: 'tax_code', targetKey: 'tax_code'
+            foreignKey: 'tax_code', targetKey: 'id'
         });
 
         models.Product.belongsTo(models.EClass, {
-            foreignKey: 'eclass', targetKey: 'eclass'
+            foreignKey: 'eclass', targetKey: 'id'
         });
 
         models.Product.belongsTo(models.Supplier, {
-            foreignKey: 'supplier_id', targetKey: 'supplier_id'
+            foreignKey: 'supplier_id', targetKey: 'id'
         });
 
-        models.Product.belongsTo(models.CostCentre, {
-            foreignKey: 'cost_centre', targetKey: 'cost_centre'
+        models.Order.belongsTo(models.Contract, {
+            foreignKey: 'contract_id', targetKey: 'id'
         });
     };
 

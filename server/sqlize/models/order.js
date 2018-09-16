@@ -4,11 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     var Order = sequelize.define('Order', {
 
         order_id: DataTypes.BIGINT,
-        supplier_id: DataTypes.BIGINT,
+        supplier_id: DataTypes.INTEGER,
         product_code: DataTypes.INTEGER,
-        cost_centre: DataTypes.STRING,
-        contract_id: DataTypes.INTEGER,
-        delivery_point: DataTypes.BIGINT,
+        cost_centre: DataTypes.INTEGER,
+        location_id: DataTypes.INTEGER,
         order_type: DataTypes.STRING,
         period: DataTypes.INTEGER,
         quarter: DataTypes.STRING,
@@ -29,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Order.associate = function (models) {
         models.Order.belongsTo(models.Supplier, {
-            foreignKey: 'supplier_id', targetKey: 'supplier_id'
+            foreignKey: 'supplier_id', targetKey: 'id'
         });
 
         models.Order.belongsTo(models.Product, {
@@ -37,15 +36,11 @@ module.exports = (sequelize, DataTypes) => {
         });
 
         models.Order.belongsTo(models.CostCentre, {
-            foreignKey: 'cost_centre', targetKey: 'cost_centre'
-        });
-
-        models.Order.belongsTo(models.Contract, {
-            foreignKey: 'contract_id', targetKey: 'id'
+            foreignKey: 'cost_centre', targetKey: 'id'
         });
 
         models.Order.belongsTo(models.Location, {
-            foreignKey: 'delivery_point', targetKey: 'location_id'
+            foreignKey: 'location_id', targetKey: 'id'
         });
     };
 
