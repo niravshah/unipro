@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
         nhs_supply_chain_code: DataTypes.STRING,
         bunzl_product_code: DataTypes.STRING,
         group_id: DataTypes.INTEGER,
-        tax_code:DataTypes.INTEGER,
-        eclass:DataTypes.INTEGER,
+        tax_code: DataTypes.INTEGER,
+        eclass: DataTypes.INTEGER,
         supplier_id: DataTypes.INTEGER,
-        contract_id: DataTypes.INTEGER
-    },{indexes: [{unique: true, fields: ['product_code']}]});
+        contract_id: DataTypes.INTEGER,
+        tenant_id: DataTypes.INTEGER
+    }, {indexes: [{unique: true, fields: ['product_code']}]});
 
     Product.associate = function (models) {
         models.Product.belongsTo(models.ProductGroup, {
@@ -34,8 +35,12 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'supplier_id', targetKey: 'id'
         });
 
-        models.Order.belongsTo(models.Contract, {
+        models.Product.belongsTo(models.Contract, {
             foreignKey: 'contract_id', targetKey: 'id'
+        });
+
+        models.Product.belongsTo(models.Tenant, {
+            foreignKey: 'tenant_id', targetKey: 'id'
         });
     };
 

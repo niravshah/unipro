@@ -2,20 +2,20 @@
 
   <div class="container-fluid">
     <page-actions :pageActions="pageActions"></page-actions>
-    <!-- <div class="row u-mb-small">
+    <div class="row u-mb-small">
        <div class="col-md-4  u-mb-medium">
-         <label class="c-field__label">Filter By Location</label>
+         <label class="c-field__label">Select Location</label>
          <v-select id="input1" v-model="locationFilter" :options="['foo','bar']"></v-select>
        </div>
-       <div class="col-md-6  u-mb-medium">
+       <!--div class="col-md-6  u-mb-medium">
          <label class="c-field__label">Filter By Supplier</label>
          <v-select multiple v-model="supplierFilter" :options="['foo','bar','baz']"></v-select>
        </div>
        <div class="col-md-2  u-mb-medium">
          <a v-on:click="filterRecords" class="abs-bottom c-btn c-btn&#45;&#45;info c-btn&#45;&#45;fullwidth" style="width: 80%"
             href="#">Filter Records</a>
-       </div>
-     </div>-->
+       </div-->
+     </div>
 
     <summary-table :columns="columns"
                    :rows="rows"

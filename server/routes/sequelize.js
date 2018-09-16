@@ -18,6 +18,12 @@ router.get('/users', function (req, res) {
     })
 });
 
+router.get('/bulk/tenants', function (req, res) {
+    var bulk = new Bulk(models.Tenant);
+    var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'tenant.csv');
+    bulkImport(bulk, fpath, res);
+});
+
 
 router.get('/bulk/tax_codes', function (req, res) {
     var bulk = new Bulk(models.TaxCode);
@@ -49,6 +55,12 @@ router.get('/bulk/product_groups', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
+router.get('/bulk/locations', function (req, res) {
+    var bulk = new Bulk(models.Location);
+    var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'location.csv');
+    bulkImport(bulk, fpath, res);
+});
+
 router.get('/bulk/contracts', function (req, res) {
     var bulk = new Bulk(models.Contract);
     var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'contract.csv');
@@ -58,12 +70,6 @@ router.get('/bulk/contracts', function (req, res) {
 router.get('/bulk/products', function (req, res) {
     var bulk = new Bulk(models.Product);
     var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'product.csv');
-    bulkImport(bulk, fpath, res);
-});
-
-router.get('/bulk/locations', function (req, res) {
-    var bulk = new Bulk(models.Location);
-    var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'location.csv');
     bulkImport(bulk, fpath, res);
 });
 

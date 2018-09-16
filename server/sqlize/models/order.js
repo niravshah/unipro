@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
         transaction_no: DataTypes.INTEGER,
         order_date: DataTypes.DATEONLY,
         posted: DataTypes.INTEGER,
-        status: DataTypes.STRING
+        status: DataTypes.STRING,
+        tenant_id: DataTypes.INTEGER
     });
 
     Order.associate = function (models) {
@@ -42,6 +43,11 @@ module.exports = (sequelize, DataTypes) => {
         models.Order.belongsTo(models.Location, {
             foreignKey: 'location_id', targetKey: 'id'
         });
+
+        models.Order.belongsTo(models.Tenant, {
+            foreignKey: 'tenant_id', targetKey: 'id'
+        });
+
     };
 
 

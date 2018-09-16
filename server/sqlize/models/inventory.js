@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         cost_centre: DataTypes.INTEGER,
         current_level: DataTypes.INTEGER,
         min_level: DataTypes.INTEGER,
-        max_level: DataTypes.INTEGER
+        max_level: DataTypes.INTEGER,
+        tenant_id: DataTypes.INTEGER,
     });
 
     Inventory.associate = function (models) {
@@ -21,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
 
         models.Inventory.belongsTo(models.Location, {
             foreignKey: 'location_id', targetKey: 'id'
+        });
+
+        models.Inventory.belongsTo(models.Tenant, {
+            foreignKey: 'tenant_id', targetKey: 'id'
         });
     };
 

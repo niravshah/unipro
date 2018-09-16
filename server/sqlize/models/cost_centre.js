@@ -9,8 +9,15 @@ module.exports = (sequelize, DataTypes) => {
         directorate_description: DataTypes.STRING,
         division_description: DataTypes.STRING,
         pcm_division_description: DataTypes.STRING,
-        reporting_division: DataTypes.STRING
+        reporting_division: DataTypes.STRING,
+        tenant_id:DataTypes.INTEGER,
     },   {indexes: [{unique: true, fields: ['cost_centre']}]});
+
+    CostCentre.associate = function (models) {
+        models.CostCentre.belongsTo(models.Tenant, {
+            foreignKey: 'tenant_id', targetKey: 'id'
+        });
+    };
 
     return CostCentre;
 };
