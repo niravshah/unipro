@@ -74,6 +74,17 @@ router.get('/details', function (req, res) {
         })
 });
 
+router.post('/:id', function (req, res) {
+    var where = {};
+    where['id'] = req.params.id;
+    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+        .update(req.body.data, {where: where}).then(resp => {
+        res.json(resp)
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+});
+
 router.get('/location/:id', function (req, res) {
 
     var TM = factory.getTenantModel(M, req.subdomains[0], req.body.data);
@@ -122,31 +133,6 @@ router.post('/', function (req, res) {
         }
     });
 });
-
-router.post('/:id', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    TM.findOne({stock_id: req.params.id}, function (err, item) {
-        if (err) {
-            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            if (item) {
-                req.body.data.catalogue_ref = req.body.data.catalogue_ref._id;
-                req.body.data.location_ref = req.body.data.location_ref._id;
-
-                TM.findOneAndUpdate({stock_id: req.params.id}, req.body.data, {new: true}, function (err, loc) {
-                    if (err) {
-                        res.status(500).json({message: msgs.object_update_error(req.params.id), err: err.message})
-                    } else {
-                        res.json(loc)
-                    }
-                })
-            } else {
-                res.status(500).json({message: msgs.object_not_found(req.params.id)})
-            }
-        }
-    })
-});
-
 
 router.post('/delete/:id', function (req, res) {
     var TM = factory.getTenantModel(M, req.subdomains[0]);

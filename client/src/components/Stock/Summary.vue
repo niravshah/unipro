@@ -77,7 +77,7 @@
     },
     methods: {
       filterRecords: function () {
-        console.log("Filter Records. Location Id", this.locationFilter.value)
+        console.log("Filter Records. Location Id", this.locationFilter.value);
         this.updateParams({location_id: this.locationFilter.value});
         this.loadItems();
       },
@@ -126,11 +126,6 @@
             type: 'Number',
           },
           {
-            label: 'Location',
-            field: 'Location.description',
-            type: String
-          },
-          {
             label: 'Location ID',
             field: 'Location.location_id',
             type: String
@@ -138,11 +133,6 @@
           {
             label: 'Cost Centre Code',
             field: 'CostCentre.cost_centre',
-            type: String
-          },
-          {
-            label: 'Cost Centre',
-            field: 'CostCentre.description',
             type: String
           }
         ]
