@@ -4,17 +4,74 @@ var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
 var M = require('../models/stock');
 var LM = require('../models/location');
+var sequelize = require('sequelize');
+var models = require('../sqlize/models');
 
 
 router.get('/', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    TM.find({}).exec(function (err, locations) {
-        if (err) {
+
+    console.log("Request Query:", req.query);
+    var recordsPerPage = parseInt(req.query.perPage);
+    var pageNo = parseInt(req.query.page);
+
+    var where = {};
+    var searchTerm = req.query.search;
+    if (searchTerm) {
+        pageNo = 1;
+        where['$Product.description$'] = {[sequelize.Op.like]: '%' + searchTerm + '%'}
+    }
+    if (req.query.location_id > 0) {
+        where['location_id'] = req.query.location_id
+    }
+
+    var pageOffset = parseInt(req.query.perPage) * ( pageNo - 1);
+    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            where: where,
+            include: [{
+                model: models.Product,
+                attributes: ['product_code', 'description']
+            }, {
+                model: models.CostCentre,
+                attributes: ['cost_centre', 'description']
+            },
+                {
+                    model: models.Location,
+                    attributes: ['location_id', 'description']
+                }],
+            limit: recordsPerPage,
+            offset: pageOffset
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(locations)
-        }
-    })
+        })
+});
+
+
+router.get('/details', function (req, res) {
+
+    var ids = req.query.ids.split(",");
+    var idArr = [];
+    ids.forEach(function (id) {
+        idArr.push(parseInt(id));
+    });
+
+    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}],
+            where: {
+                id: {[sequelize.Op.in]: idArr}
+            }
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
 });
 
 router.get('/location/:id', function (req, res) {
@@ -43,22 +100,6 @@ router.get('/location/:id', function (req, res) {
             }
         }
     })
-});
-
-router.get('/details', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    var ids = req.query.ids.split(",");
-    var idArr = [];
-    ids.forEach(function (id) {
-        idArr.push(parseInt(id));
-    });
-    TM.find({stock_id: {$in: idArr}}).exec(function (err, items) {
-        if (err) {
-            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(items)
-        }
-    });
 });
 
 router.post('/', function (req, res) {

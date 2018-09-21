@@ -17,10 +17,14 @@
 
     <summary-table :columns="columns"
                    :rows="rows"
+                   :totalRecords="totalRecords"
                    :select-options="{ enabled: true }"
                    :search-options="{ enabled: true }"
                    :tableActions="tableActions"
-                   @details="getDetails"></summary-table>
+                   @details="getDetails"
+                   @onPerPageChange="onPerPageChange"
+                   @onPageChange="onPageChange"
+                   @onSearchFunction="onSearchFunction"></summary-table>
 
   </div>
 </template>
@@ -44,6 +48,7 @@
     data: function () {
       return {
         locationFilter: 0,
+        totalRecords: 0,
         locations: [],
         columns: [],
         rows: [],
@@ -54,17 +59,27 @@
         tableActions: [{name: 'Details', event: 'details'}, {name: 'Move Stock', event: 'move'}, {
           name: 'Write Off',
           event: 'writeoff'
-        }]
+        }],
+        totalRecords: 0,
+        serverParams: {
+          columnFilters: {},
+          page: 1,
+          perPage: 10,
+          search: '',
+          location_id: 0
+        }
       };
     },
     created: function () {
       this.getLocations();
       this.getStockSchema();
-      this.getStockData();
+      this.loadItems();
     },
     methods: {
       filterRecords: function () {
         console.log("Filter Records. Location Id", this.locationFilter.value)
+        this.updateParams({location_id: this.locationFilter.value});
+        this.loadItems();
       },
       async getLocations(){
         const response = await LocationService.fetchLocations();
@@ -72,22 +87,96 @@
           this.locations.push({label: location.description, value: location.id})
         });
       },
-      async getStockSchema () {
-        const response = await StockService.schema();
-        this.columns = response.data
-      },
-      async getStockData () {
-        const response = await StockService.get();
-        this.rows = response.data
-      },
       getDetails(selRows){
+        console.log("Get Details: ", selRows);
         var url = 'stock/details?ids=';
         selRows.forEach(record => {
-          url = url + record.stock_id + ","
+          url = url + record.id + ","
         });
-
         url = url.replace(/,\s*$/, "");
         this.$router.push(url);
+      },
+      async getStockSchema () {
+        // const response = await StockService.schema();
+        //this.columns = response.data
+        this.columns = [
+          {
+            label: 'Product Code',
+            field: 'Product.product_code',
+            type: 'String',
+          },
+          {
+            label: 'Description',
+            field: 'Product.description',
+            type: 'String',
+          },
+          {
+            label: 'Current Level',
+            field: 'current_level',
+            type: 'Number',
+          },
+          {
+            label: 'Min Level',
+            field: 'min_level',
+            type: 'Number',
+          },
+          {
+            label: 'Max Level',
+            field: 'max_level',
+            type: 'Number',
+          },
+          {
+            label: 'Location',
+            field: 'Location.description',
+            type: String
+          },
+          {
+            label: 'Location ID',
+            field: 'Location.location_id',
+            type: String
+          },
+          {
+            label: 'Cost Centre Code',
+            field: 'CostCentre.cost_centre',
+            type: String
+          },
+          {
+            label: 'Cost Centre',
+            field: 'CostCentre.description',
+            type: String
+          }
+        ]
+      },
+
+      updateParams(newProps) {
+        this.serverParams = Object.assign({}, this.serverParams, newProps);
+      },
+      onPageChange(params) {
+        this.updateParams({page: params.currentPage});
+        this.loadItems();
+      },
+      onPerPageChange(params) {
+        this.updateParams({perPage: params.currentPerPage});
+        this.loadItems();
+      },
+      onSearchFunction(params){
+        this.updateParams({search: params.searchTerm});
+        this.loadItems();
+      },
+      onSortChange(params) {
+        this.updateParams({
+          sort: {
+            type: params.sortType,
+            field: this.columns[params.columnIndex].field,
+          },
+        });
+        this.loadItems();
+      },
+
+      async loadItems() {
+        const response = await StockService.get(this.serverParams);
+        this.totalRecords = response.data.count;
+        this.rows = response.data.rows;
       }
     },
   }

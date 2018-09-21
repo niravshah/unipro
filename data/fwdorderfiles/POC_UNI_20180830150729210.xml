@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABWOrder xmlns="http://services.agresso.com/schema/ABWOrder/2005/05/13" xmlns:agrlib="http://services.agresso.com/schema/ABWSchemaLib/2005/05/13" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://services.agresso.com/schema/ABWOrder/2005/05/13
+http://services.agresso.com/schema/ABWOrder/2005/05/13/ABWOrder.xsd">
+  <Order>
+    <agrlib:OrderNo>102</agrlib:OrderNo>
+    <agrlib:VoucherType>NW</agrlib:VoucherType>
+    <TransType>41</TransType>
+    <Header>
+      <OrderType>PO</OrderType>
+      <agrlib:Status>N</agrlib:Status>
+      <agrlib:Currency>GBP</agrlib:Currency>
+      <Seller>
+        <agrlib:SellerNo>12017</agrlib:SellerNo>
+        <SellerReferences>
+          <SalesMan>102</SalesMan>
+        </SellerReferences>
+      </Seller>
+      <Buyer>
+        <BuyerReferences>
+          <Responsible>UNIQUS</Responsible>
+          <RequestedBy>UNIQUS</RequestedBy>
+        </BuyerReferences>
+      </Buyer>
+      <DeliveryInfo>
+        
+      </DeliveryInfo>
+      <ReferenceCode>
+        <agrlib:Code>14</agrlib:Code>
+        <agrlib:Value>BO</agrlib:Value>
+      </ReferenceCode>
+      <ReferenceCode>
+        <agrlib:Code>31</agrlib:Code>
+        <agrlib:Value>XRA1253</agrlib:Value>
+      </ReferenceCode>
+    </Header>
+    <Details>
+      <Detail>
+        <LineNo>1</LineNo>
+        <agrlib:Status>N</agrlib:Status>
+        <BuyerProductCode>11166</BuyerProductCode>
+        <BuyerProductDescr>FEMOSTOP II PLUS DISPOSABLE SET FEMORAL COMPRESSION ASSIST DEVICE</BuyerProductDescr>
+        <UnitCode>UN</UnitCode>
+        <Quantity>2</Quantity>
+        <Price>309.90</Price>
+        <LineTotal>619.80</LineTotal>
+        <DetailInfo>
+          <agrlib:UseLineTotal>true</agrlib:UseLineTotal>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>C1</agrlib:Code>
+            <agrlib:Value>XRA</agrlib:Value>
+          </agrlib:ReferenceCode>
+          
+          <agrlib:ReferenceCode>
+            <agrlib:Code>31</agrlib:Code>
+            <agrlib:Value>XRA1253</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>14</agrlib:Code>
+            <agrlib:Value>BO</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>19</agrlib:Code>
+            <agrlib:Value>102</agrlib:Value>
+          </agrlib:ReferenceCode>
+        </DetailInfo>
+        <Delivery>
+          
+        </Delivery>
+      </Detail>
+      <Detail>
+        <LineNo>2</LineNo>
+        <agrlib:Status>N</agrlib:Status>
+        <BuyerProductCode>11168</BuyerProductCode>
+        <BuyerProductDescr>FEMOSTOP II PLUS SUPPORT ARCH FEMORAL COMPRESSION ASSIST DEVICE</BuyerProductDescr>
+        <UnitCode>UN</UnitCode>
+        <Quantity>2</Quantity>
+        <Price>99.00</Price>
+        <LineTotal>198.00</LineTotal>
+        <DetailInfo>
+          <agrlib:UseLineTotal>true</agrlib:UseLineTotal>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>C1</agrlib:Code>
+            <agrlib:Value>XRA</agrlib:Value>
+          </agrlib:ReferenceCode>
+          
+          <agrlib:ReferenceCode>
+            <agrlib:Code>31</agrlib:Code>
+            <agrlib:Value>XRA1253</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>14</agrlib:Code>
+            <agrlib:Value>BO</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>19</agrlib:Code>
+            <agrlib:Value>102</agrlib:Value>
+          </agrlib:ReferenceCode>
+        </DetailInfo>
+        <Delivery>
+          
+        </Delivery>
+      </Detail>
+      <Detail>
+        <LineNo>3</LineNo>
+        <agrlib:Status>N</agrlib:Status>
+        <BuyerProductCode>405108</BuyerProductCode>
+        <BuyerProductDescr>Peel Away Intro Kit 7F 1 4Cm (5)</BuyerProductDescr>
+        <UnitCode>UN</UnitCode>
+        <Quantity>3</Quantity>
+        <Price>72.00</Price>
+        <LineTotal>216.00</LineTotal>
+        <DetailInfo>
+          <agrlib:UseLineTotal>true</agrlib:UseLineTotal>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>C1</agrlib:Code>
+            <agrlib:Value>XRA</agrlib:Value>
+          </agrlib:ReferenceCode>
+          
+          <agrlib:ReferenceCode>
+            <agrlib:Code>31</agrlib:Code>
+            <agrlib:Value>XRA1253</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>14</agrlib:Code>
+            <agrlib:Value>BO</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>19</agrlib:Code>
+            <agrlib:Value>102</agrlib:Value>
+          </agrlib:ReferenceCode>
+        </DetailInfo>
+        <Delivery>
+          
+        </Delivery>
+      </Detail>
+      <Detail>
+        <LineNo>4</LineNo>
+        <agrlib:Status>N</agrlib:Status>
+        <BuyerProductCode>405120</BuyerProductCode>
+        <BuyerProductDescr>Peel Away Intro Kit 10F 14Cm (5)</BuyerProductDescr>
+        <UnitCode>UN</UnitCode>
+        <Quantity>2</Quantity>
+        <Price>72.00</Price>
+        <LineTotal>144.00</LineTotal>
+        <DetailInfo>
+          <agrlib:UseLineTotal>true</agrlib:UseLineTotal>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>C1</agrlib:Code>
+            <agrlib:Value>XRA</agrlib:Value>
+          </agrlib:ReferenceCode>
+          
+          <agrlib:ReferenceCode>
+            <agrlib:Code>31</agrlib:Code>
+            <agrlib:Value>XRA1253</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>14</agrlib:Code>
+            <agrlib:Value>BO</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>19</agrlib:Code>
+            <agrlib:Value>102</agrlib:Value>
+          </agrlib:ReferenceCode>
+        </DetailInfo>
+        <Delivery>
+          
+        </Delivery>
+      </Detail>
+
+    </Details>
+  </Order>
+</ABWOrder>

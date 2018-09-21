@@ -2,46 +2,81 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <vue-tabs @tab-change="tabChanged">
-          <v-tab v-for="item in items" :title="'' + item.stock_id" v-bind:key="item.stock_id">
+        <vue-tabs @tab-change="tabChanged" v-if="items.length>0">
+          <v-tab v-for="item in items" :title="'' + item.id" v-bind:key="item.id">
             <div align="right" class="u-mt-medium">
-              <button v-if="!edit" @click="editForm(item.stock_id)" class="c-btn c-btn--small">Edit {{item.stock_id}}
+              <button v-if="!edit" @click="editForm(item.id)" class="c-btn c-btn--small">Edit {{item.id}}
               </button>
               <button v-if="!edit" @click="deleteForm(item)" class="c-btn c-btn--small">
-                Delete {{item.stock_id}}
+                Delete {{item.id}}
               </button>
-              <button v-if="edit" @click="saveForm(item.stock_id)" class="c-btn c-btn--small c-btn--success">
-                Save {{item.stock_id}}
+              <button v-if="edit" @click="saveForm(item.id, item)" class="c-btn c-btn--small c-btn--success">
+                Save {{item.id}}
               </button>
-              <button v-if="edit" @click="cancelEdit(item.stock_id)" class="c-btn c-btn--small c-btn--secondary">
+              <button v-if="edit" @click="cancelEdit(item.id)" class="c-btn c-btn--small c-btn--secondary">
                 Cancel
               </button>
             </div>
 
-            <div class="u-m-small">
-              <div class="col-md-4">
-                <div class="c-field u-mb-small">
-                  <label class="c-field__label" for="input14">Stock Id</label>
-                  <p v-if="!edit">{{item.stock_id}}</p>
-                  <input v-if="edit" class="c-input" id="input15" type="text" placeholder="Clark"
-                         :value="item.stock_id">
-                  <small v-if="error" class="c-field__message u-color-success">
-                    <i class="fa fa-check-circle"></i>Positive Feedback
-                  </small>
+            <div v-if="item.Product" class="u-m-small">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input1">Product Code</label>
+                    <p v-if="!edit">{{item.Product.product_code}}</p>
+                    <input v-if="edit" class="c-input" id="input1" type="text" placeholder="Clark"
+                           :value="item.Product.product_code">
+                    <small v-if="error" class="c-field__message u-color-success">
+                      <i class="fa fa-check-circle"></i>Positive Feedback
+                    </small>
+                  </div>
                 </div>
-
-                <div class="c-field">
-                  <label class="c-field__label" for="input14">Item Description</label>
-                  <p v-if="!edit">{{item.item_description}}</p>
-                  <input v-if="edit" class="c-input" id="input14" type="text" placeholder="Clark"
-                         :value="item.item_description">
-                  <small v-if="error" class="c-field__message u-color-success">
-                    <i class="fa fa-check-circle"></i>Positive Feedback
-                  </small>
+                <div class="col-md-6">
+                  <div class="c-field">
+                    <label class="c-field__label" for="input2">Product Description</label>
+                    <p v-if="!edit">{{item.Product.description}}</p>
+                    <input v-if="edit" class="c-input" id="input2" type="text"
+                           v-model="item.Product.description">
+                    <small v-if="error" class="c-field__message u-color-success">
+                      <i class="fa fa-check-circle"></i>Positive Feedback
+                    </small>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4"></div>
+              <div class="row">
+                <div class="col-md-2">
+                  <formp id="input18" :error=error :edit=edit description="Product Code"
+                         :model="item.Product.product_code"></formp>
+                </div>
+                <div class="col-md-6">
+                  <formp id="input19" :error=error :edit=edit description="Product"
+                         :model="item.Product.description"></formp>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <formp id="input21" :error=error :edit=edit description="Location Id"
+                         :model="item.Location.location_id"></formp>
+                </div>
+                <div class="col-md-6">
+                  <formp id="input22" :error=error :edit=edit description="Location"
+                         :model="item.Location.description"></formp>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <formp id="input23" :error=error :edit=edit description="Current Level"
+                         :model="item.current_level"></formp>
+                </div>
+                <div class="col-md-2">
+                  <formp id="input24" :error=error :edit=edit description="Max" :model="item.max_level"></formp>
+                </div>
+                <div class="col-md-2">
+                  <formp :error=error :edit=edit description="Min" :model="item.min_level"></formp>
+                </div>
+
+              </div>
+
             </div>
           </v-tab>
         </vue-tabs>
@@ -54,10 +89,15 @@
 <script>
   import Service from "@/services/StockService"
   import ToastedService from "../../services/ToastedService";
+  import Formp from '../_partials/_formp.vue'
   export default {
     name: 'StockDetails',
+    components: {
+      Formp,
+    },
     data: function () {
       return {
+        testProp: 'Test Val',
         ids: [],
         items: [],
         edit: false,
@@ -74,7 +114,7 @@
         this.items.push({stock_id: id});
       });
       Service.getByIds(this.ids).then(resp => {
-        this.items = resp.data
+        this.items = resp.data.rows;
       }).catch(ex => {
         console.log(ex)
       });
@@ -84,8 +124,8 @@
         console.log("editForm", stock_id);
         this.edit = true;
       },
-      saveForm: function (stock_id) {
-        console.log("saveForm", stock_id);
+      saveForm: function (stock_id, item) {
+        console.log("saveForm", stock_id, item);
         this.edit = false;
       },
       cancelEdit: function (stock_id) {

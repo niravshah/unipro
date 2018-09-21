@@ -3,11 +3,17 @@
     <div class="col-md-12">
 
       <vue-good-table
+        mode="remote"
         @on-selected-rows-change="selectionChanged"
+        @on-page-change="onPageChange"
+        @on-per-page-change="onPerPageChange"
         :columns="columns"
         :rows="rows"
+        :totalRows="totalRecords"
+        :pagination-options="{enabled:true}"
         :select-options="{ enabled: true }"
-        :search-options="{ enabled: true }">
+        :search-options="{ enabled: true, trigger:'enter', placeholder:'Press enter to search product description ' }"
+        @on-search="onSearch">
         <div slot="selected-row-actions">
           <button v-for="action in tableActions" @click="emitEvent(action.event,selRows)"
                   class="c-btn c-btn--success u-mr-small">
@@ -30,7 +36,7 @@
 <script>
   export default {
     name: 'SummaryTable',
-    props: ['columns', 'rows', 'selectOptions', 'searchOptions', 'tableActions'],
+    props: ['columns', 'rows', 'selectOptions', 'searchOptions', 'tableActions', 'totalRecords'],
     data: function () {
       return {
         selRows: []
@@ -42,6 +48,16 @@
       },
       emitEvent: function (event, data) {
         this.$emit(event, data)
+      },
+      onPageChange: function (data) {
+        this.$emit('onPageChange', data);
+      },
+      onPerPageChange: function (data) {
+        this.$emit('onPerPageChange', data);
+      },
+      onSearch: function (params) {
+        console.log('onSearchFunction', params);
+        this.$emit('onSearchFunction', params);
       }
     },
     computed: {

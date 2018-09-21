@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ABWOrder xmlns="http://services.agresso.com/schema/ABWOrder/2005/05/13" xmlns:agrlib="http://services.agresso.com/schema/ABWSchemaLib/2005/05/13" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://services.agresso.com/schema/ABWOrder/2005/05/13
+http://services.agresso.com/schema/ABWOrder/2005/05/13/ABWOrder.xsd">
+  <Order>
+    <agrlib:OrderNo>103</agrlib:OrderNo>
+    <agrlib:VoucherType>NW</agrlib:VoucherType>
+    <TransType>41</TransType>
+    <Header>
+      <OrderType>PO</OrderType>
+      <agrlib:Status>N</agrlib:Status>
+      <agrlib:Currency>GBP</agrlib:Currency>
+      <Seller>
+        <agrlib:SellerNo>12017</agrlib:SellerNo>
+        <SellerReferences>
+          <SalesMan>103</SalesMan>
+        </SellerReferences>
+      </Seller>
+      <Buyer>
+        <BuyerReferences>
+          <Responsible>UNIQUS</Responsible>
+          <RequestedBy>UNIQUS</RequestedBy>
+        </BuyerReferences>
+      </Buyer>
+      <DeliveryInfo>
+        
+      </DeliveryInfo>
+      <ReferenceCode>
+        <agrlib:Code>14</agrlib:Code>
+        <agrlib:Value>BO</agrlib:Value>
+      </ReferenceCode>
+      <ReferenceCode>
+        <agrlib:Code>31</agrlib:Code>
+        <agrlib:Value>XRA1253</agrlib:Value>
+      </ReferenceCode>
+    </Header>
+    <Details>
+      <Detail>
+        <LineNo>1</LineNo>
+        <agrlib:Status>N</agrlib:Status>
+        <BuyerProductCode>405120</BuyerProductCode>
+        <BuyerProductDescr>Peel Away Intro Kit 10F 14Cm (5)</BuyerProductDescr>
+        <UnitCode>UN</UnitCode>
+        <Quantity>2</Quantity>
+        <Price>72.00</Price>
+        <LineTotal>144.00</LineTotal>
+        <DetailInfo>
+          <agrlib:UseLineTotal>true</agrlib:UseLineTotal>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>C1</agrlib:Code>
+            <agrlib:Value>XRA</agrlib:Value>
+          </agrlib:ReferenceCode>
+          
+          <agrlib:ReferenceCode>
+            <agrlib:Code>31</agrlib:Code>
+            <agrlib:Value>XRA1253</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>14</agrlib:Code>
+            <agrlib:Value>BO</agrlib:Value>
+          </agrlib:ReferenceCode>
+          <agrlib:ReferenceCode>
+            <agrlib:Code>19</agrlib:Code>
+            <agrlib:Value>103</agrlib:Value>
+          </agrlib:ReferenceCode>
+        </DetailInfo>
+        <Delivery>
+          
+        </Delivery>
+      </Detail>
+
+    </Details>
+  </Order>
+</ABWOrder>

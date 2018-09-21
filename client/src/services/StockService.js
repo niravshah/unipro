@@ -1,8 +1,9 @@
 import Api from "@/services/Api";
 
 export default {
-  get() {
-    return Api().get('api/stock')
+  get(params) {
+    var url = 'api/stock?' + 'page=' + params.page + '&perPage=' + params.perPage + '&search=' + params.search + '&location_id=' + params.location_id;
+    return Api().get(url)
   },
   getByIds(ids)
   {
