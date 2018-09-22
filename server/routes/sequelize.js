@@ -38,6 +38,24 @@ router.get('/bulk2/manufacturers', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
+router.get('/bulk2/catalogues', function (req, res) {
+    var bulk = new Bulk(models2.Catalogue);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'catalogue.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/items', function (req, res) {
+    var bulk = new Bulk(models2.Item);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'item.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/inventories', function (req, res) {
+    var bulk = new Bulk(models2.Inventory);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'inventory.csv');
+    bulkImport(bulk, fpath, res);
+});
+
 router.get('/bulk2/suppliers', function (req, res) {
     var bulk = new Bulk(models2.Supplier);
     var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'supplier.csv');
