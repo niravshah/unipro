@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../sqlize/models');
+var models2 = require('../sequelize2/models');
 var path = require('path');
 
 
@@ -24,6 +25,25 @@ router.get('/locations', function (req, res) {
         res.json([err, locations]);
     })
 });
+
+router.get('/bulk2/tenants', function (req, res) {
+    var bulk = new Bulk(models2.Tenant);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'tenant.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/manufacturers', function (req, res) {
+    var bulk = new Bulk(models2.Manufacturer);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'manufacturer.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/suppliers', function (req, res) {
+    var bulk = new Bulk(models2.Supplier);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'supplier.csv');
+    bulkImport(bulk, fpath, res);
+});
+
 
 router.get('/bulk/tenants', function (req, res) {
     var bulk = new Bulk(models.Tenant);
