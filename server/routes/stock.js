@@ -5,7 +5,7 @@ var msgs = require('../utils/messages');
 var M = require('../models/stock');
 var LM = require('../models/location');
 var sequelize = require('sequelize');
-var models = require('../sqlize/models');
+var models = require('../sequelize2/models');
 
 
 router.get('/', function (req, res) {
@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
     var searchTerm = req.query.search;
     if (searchTerm) {
         pageNo = 1;
-        where['$Product.description$'] = {[sequelize.Op.like]: '%' + searchTerm + '%'}
+        where['$Item.description$'] = {[sequelize.Op.like]: '%' + searchTerm + '%'}
     }
     if (req.query.location_id > 0) {
         where['location_id'] = req.query.location_id
@@ -29,15 +29,16 @@ router.get('/', function (req, res) {
         .findAndCountAll({
             where: where,
             include: [{
-                model: models.Product,
+                model: models.Item,
                 attributes: ['product_code', 'description']
-            }, {
-                model: models.CostCentre,
-                attributes: ['cost_centre', 'description']
             },
                 {
                     model: models.Location,
-                    attributes: ['location_id', 'description']
+                    attributes: ['id', 'description']
+                },
+                {
+                    model: models.CostCentre,
+                    attributes: ['id', 'cost_centre']
                 }],
             limit: recordsPerPage,
             offset: pageOffset
@@ -63,7 +64,8 @@ router.get('/details', function (req, res) {
         .findAndCountAll({
             include: [{all: true}],
             where: {
-                id: {[sequelize.Op.in]: idArr}
+                inventory_id: {[sequelize.Op.in]: idArr},
+                active: {[sequelize.Op.eq]: true}
             }
         })
         .then(function (stock) {
@@ -75,14 +77,33 @@ router.get('/details', function (req, res) {
 });
 
 router.post('/:id', function (req, res) {
-    var where = {};
-    where['id'] = req.params.id;
-    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
-        .update(req.body.data, {where: where}).then(resp => {
-        res.json(resp)
+    console.log(req.body.data);
+    var oldRecrod = req.body.data;
+
+    var newRecord = models.Inventory.build({
+        tenant_id: oldRecrod.tenant_id,
+        supplier_id: oldRecrod.supplier_id,
+        item_id: oldRecrod.item_id,
+        location_id: oldRecrod.location_id,
+        cost_centre: oldRecrod.cost_centre,
+        inventory_id: oldRecrod.inventory_id,
+        min_level: oldRecrod.min_level,
+        max_level: oldRecrod.max_level,
+        current_level: oldRecrod.current_level,
+        active: true
+    });
+
+    newRecord.save().then(nR => {
+        models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+            .update({active: false}, {where: {'id': oldRecrod.id}}).then(resp => {
+            res.json(nR)
+        }).catch(err => {
+            res.status(500).json(err);
+        });
     }).catch(err => {
         res.status(500).json(err);
     });
+
 });
 
 router.get('/location/:id', function (req, res) {

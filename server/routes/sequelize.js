@@ -7,7 +7,6 @@ var path = require('path');
 
 var Bulk = require('../utils/sequelizeBulkInsert');
 
-
 router.get('/users/:name', function (req, res) {
     models.User.build({username: req.params.name}).save().then(function (user, err) {
         res.json([err, user]);
@@ -29,6 +28,12 @@ router.get('/locations', function (req, res) {
 router.get('/bulk2/tenants', function (req, res) {
     var bulk = new Bulk(models2.Tenant);
     var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'tenant.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/locations', function (req, res) {
+    var bulk = new Bulk(models2.Location);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'location.csv');
     bulkImport(bulk, fpath, res);
 });
 
@@ -62,6 +67,11 @@ router.get('/bulk2/suppliers', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
+router.get('/bulk2/cost_centre', function (req, res) {
+    var bulk = new Bulk(models2.CostCentre);
+    var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'cost_centre.csv');
+    bulkImport(bulk, fpath, res);
+});
 
 router.get('/bulk/tenants', function (req, res) {
     var bulk = new Bulk(models.Tenant);

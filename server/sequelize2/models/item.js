@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         nhs_eclass: DataTypes.STRING,
         trust_product_code: DataTypes.STRING,
         account_code: DataTypes.STRING,
-        manufacturer_item_code: DataTypes.STRING,
-
+        manufacturer_item_code: DataTypes.STRING
     });
 
     Item.associate = function (models) {

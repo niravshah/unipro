@@ -3,7 +3,7 @@ var router = express.Router();
 var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
 var LocationModel = require('../models/location');
-var models = require('../sqlize/models');
+var models = require('../sequelize2/models');
 
 
 router.get('/', function (req, res) {

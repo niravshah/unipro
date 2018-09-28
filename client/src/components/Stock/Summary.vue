@@ -91,7 +91,7 @@
         console.log("Get Details: ", selRows);
         var url = 'stock/details?ids=';
         selRows.forEach(record => {
-          url = url + record.id + ","
+          url = url + record.inventory_id + ","
         });
         url = url.replace(/,\s*$/, "");
         this.$router.push(url);
@@ -101,13 +101,18 @@
         //this.columns = response.data
         this.columns = [
           {
+            label: 'Id',
+            field: 'inventory_id',
+            type: 'Number',
+          },
+          {
             label: 'Product Code',
-            field: 'Product.product_code',
+            field: 'Item.product_code',
             type: 'String',
           },
           {
             label: 'Description',
-            field: 'Product.description',
+            field: 'Item.description',
             type: 'String',
           },
           {
@@ -127,7 +132,7 @@
           },
           {
             label: 'Location ID',
-            field: 'Location.location_id',
+            field: 'Location.id',
             type: String
           },
           {
