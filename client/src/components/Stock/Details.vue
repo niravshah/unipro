@@ -91,7 +91,7 @@
                       <h3 class="c-card__title">Revenue</h3>
                       <span class="u-text-small u-text-uppercase u-text-mute">January 2017</span>
                     </div>
-                    <canvas id="js-chart-revenue" width="300" height="178"></canvas>
+                    <line-chart :data=spendData></line-chart>
                   </div>
                 </div>
               </div>
@@ -121,7 +121,29 @@
         ids: [],
         items: [],
         edit: false,
-        error: false
+        error: false,
+        spendData: [
+          {
+            name: 'Actual',
+            data: {
+              '2018-01-01': 100000,
+              '2018-02-01': 200000,
+              '2018-03-01': 250000,
+              '2018-04-01': 350000,
+              '2018-05-01': 550000,
+              '2018-06-01': 750000,
+              '2018-07-01': 850000,
+              '2018-08-01': 900000
+            }
+          },
+          {
+            name: 'Forecast', data: {
+            '2018-01-01': 125000, '2018-02-01': 150000, '2018-03-01': 200000, '2018-04-01': 250000,
+            '2018-05-01': 300000, '2018-06-01': 350000, '2018-07-01': 400000, '2018-08-01': 500000,
+            '2018-09-01': 600000, '2018-10-01': 650000, '2018-11-01': 800000, '2018-12-01': 1200000
+          }
+          }
+        ]
       }
     },
     mounted: function () {

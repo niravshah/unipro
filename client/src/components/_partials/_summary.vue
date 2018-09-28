@@ -7,13 +7,13 @@
         @on-selected-rows-change="selectionChanged"
         @on-page-change="onPageChange"
         @on-per-page-change="onPerPageChange"
+        @on-row-click="onRowClick"
+        @on-search="onSearch"
         :columns="columns"
         :rows="rows"
         :totalRows="totalRecords"
         :pagination-options="{enabled:true}"
-        :select-options="{ enabled: true }"
-        :search-options="{ enabled: true, trigger:'enter', placeholder:'Press enter to search product description ' }"
-        @on-search="onSearch">
+        :search-options="{ enabled: true, trigger:'enter', placeholder:'Press enter to search product description ' }">
         <div slot="selected-row-actions">
           <button v-for="action in tableActions" @click="emitEvent(action.event,selRows)"
                   class="c-btn c-btn--success u-mr-small">
@@ -56,8 +56,10 @@
         this.$emit('onPerPageChange', data);
       },
       onSearch: function (params) {
-        console.log('onSearchFunction', params);
         this.$emit('onSearchFunction', params);
+      },
+      onRowClick: function (params) {
+        this.$emit('onRowClick', params);
       }
     },
     computed: {

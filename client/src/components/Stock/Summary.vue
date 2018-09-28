@@ -24,7 +24,8 @@
                    @details="getDetails"
                    @onPerPageChange="onPerPageChange"
                    @onPageChange="onPageChange"
-                   @onSearchFunction="onSearchFunction"></summary-table>
+                   @onSearchFunction="onSearchFunction"
+                   @onRowClick="onRowClick"></summary-table>
 
   </div>
 </template>
@@ -88,7 +89,6 @@
         });
       },
       getDetails(selRows){
-        console.log("Get Details: ", selRows);
         var url = 'stock/details?ids=';
         selRows.forEach(record => {
           url = url + record.inventory_id + ","
@@ -157,6 +157,9 @@
       onSearchFunction(params){
         this.updateParams({search: params.searchTerm});
         this.loadItems();
+      },
+      onRowClick(params){
+        this.getDetails([params.row]);
       },
       onSortChange(params) {
         this.updateParams({
