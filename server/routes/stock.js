@@ -62,7 +62,7 @@ router.get('/details', function (req, res) {
 
     models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
         .findAndCountAll({
-            include: [{all: true}],
+            include: [{all: true}, {model: models.Item, include: [models.Manufacturer]}],
             where: {
                 inventory_id: {[sequelize.Op.in]: idArr},
                 active: {[sequelize.Op.eq]: true}

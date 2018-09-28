@@ -20,56 +20,20 @@
             </div>
 
             <div v-if="item.Item" class="u-m-small">
+
               <div class="row">
                 <div class="col-md-4">
-                  <stats faclass="fa-box-open" :value=item.current_level description="Current Level"></stats>
+                  <stats faclass="fa-box-open" :value=item.current_level :description=getCurrentLevels(item)></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-chevron-down" :value=item.min_level description="Minimum Level"></stats>
+                  <stats faclass="fa-pound-sign" :value=item.min_level description="Spend YTD"></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-chevron-up" :value=item.max_level description="Maximum Level"></stats>
+                  <stats faclass="fa-box" :value=item.max_level description="Orders YTD"></stats>
                 </div>
-
               </div><!-- .row -->
               <div class="row">
                 <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <formp id="input18" :error=error :edit=false description="Product Code"
-                             :model="item.Item.product_code"
-                             @fromp="function(newval){item.Item.product_code=newval}"></formp>
-                    </div>
-                    <div class="col-md-8">
-                      <formp id="input19" :error=error :edit=edit description="Product"
-                             :model="item.Item.description"
-                             @fromp="function(newval){item.Item.description=newval}"></formp>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <formp id="input21" :error=error :edit=false description="Location Id"
-                             :model="item.Location.id"
-                             @fromp="function(newval){item.Location.id=newval}"></formp>
-                    </div>
-                    <div class="col-md-8">
-                      <formp id="input22" :error=error :edit=edit description="Location"
-                             :model="item.Location.description"
-                             @fromp="function(newval){item.Location.description=newval}"></formp>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <formp id="input211" :error=error :edit=false description="Supplier Id"
-                             :model="item.Supplier.id"
-                             @fromp="function(newval){item.Supplier.id=newval}"></formp>
-                    </div>
-                    <div class="col-md-8">
-                      <formp id="input221" :error=error :edit=edit description="Supplier"
-                             :model="item.Supplier.name"
-                             @fromp="function(newval){item.Supplier.name=newval}"></formp>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-md-4">
                       <formp id="input23" :error=error :edit=edit description="Current Level"
@@ -84,12 +48,83 @@
                              :model="item.min_level" @fromp="function(newval){item.min_level=newval}"></formp>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input18" :error=error :edit=false description="Product Code"
+                             :model="item.Item.product_code"
+                             @fromp="function(newval){item.Item.product_code=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input19" :error=error :edit=edit description="Product"
+                             :model="item.Item.description"
+                             @fromp="function(newval){item.Item.description=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input181" :error=error :edit=false description="NHS eClass"
+                             :model="item.Item.nhs_eclass"
+                             @fromp="function(newval){item.Item.nhs_eclass=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input191" :error=error :edit=edit description="GTIN"
+                             :model="item.Item.gtin"
+                             @fromp="function(newval){item.Item.gtin=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input212" :error=error :edit=false description="Cost Centre"
+                             :model="item.CostCentre.cost_centre"
+                             @fromp="function(newval){item.CostCentre.cost_centre=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input223" :error=error :edit=edit description="Description"
+                             :model="item.CostCentre.description"
+                             @fromp="function(newval){item.CostCentre.description=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input213" :error=error :edit=false description="Location Id"
+                             :model="item.Location.id"
+                             @fromp="function(newval){item.Location.id=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input22" :error=error :edit=edit description="Location"
+                             :model="item.Location.description"
+                             @fromp="function(newval){item.Location.description=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input214" :error=error :edit=false description="Manufacturer Id"
+                             :model="item.Item.Manufacturer.id"
+                             @fromp="function(newval){item.Item.Manufacturer.id=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input225" :error=error :edit=edit description="Name"
+                             :model="item.Item.Manufacturer.name"
+                             @fromp="function(newval){item.Item.Manufacturer.name=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input211" :error=error :edit=false description="Supplier Id"
+                             :model="item.Supplier.id"
+                             @fromp="function(newval){item.Supplier.id=newval}"></formp>
+                    </div>
+                    <div class="col-md-8">
+                      <formp id="input221" :error=error :edit=edit description="Supplier"
+                             :model="item.Supplier.name"
+                             @fromp="function(newval){item.Supplier.name=newval}"></formp>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <div class="c-card u-p-medium u-mb-medium">
                     <div class="u-flex u-justify-between u-align-items-center">
-                      <h3 class="c-card__title">Revenue</h3>
-                      <span class="u-text-small u-text-uppercase u-text-mute">January 2017</span>
+                      <h3 class="c-card__title" style="color: black">Current Usage</h3>
                     </div>
                     <line-chart :data=spendData></line-chart>
                   </div>
@@ -162,6 +197,9 @@
       });
     },
     methods: {
+      getCurrentLevels: function (item) {
+        return "Min: " + item.min_level + " Max: " + item.max_level;
+      },
       editForm: function () {
         this.edit = true;
       },
