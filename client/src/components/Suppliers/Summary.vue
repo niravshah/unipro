@@ -71,11 +71,7 @@
       this.loadItems();
     },
     methods: {
-      selectionChanged: function (params) {
-        this.selRows = params.selectedRows;
-      },
       async getSupplierSchema () {
-        // const response = await Service.schema();
         this.columns = [
           {
             label: 'Supplier Id',
@@ -93,6 +89,11 @@
             mDef: {type: 'String', required: true, field_name: 'supplier_name'}
           }
         ]
+      },
+      async loadItems() {
+        const response = await Service.get(this.serverParams);
+        this.totalRecords = response.data.count;
+        this.rows = response.data.rows;
       },
       getDetails(rows){
         var url = 'suppliers/details?ids=';
@@ -119,13 +120,7 @@
         this.loadItems();
       },
       onRowClick(params){
-          console.log(params);
         this.getDetails([params.row]);
-      },
-      async loadItems() {
-        const response = await Service.get(this.serverParams);
-        this.totalRecords = response.data.count;
-        this.rows = response.data.rows;
       }
     }
   }

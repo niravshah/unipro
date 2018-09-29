@@ -58,10 +58,7 @@ var schemas = {
 
     ],
     supplier_schema_vdef: [
-        {field_name: 'supplier_name', title: 'Supplier Name', rules: 'required', col: 'col-md-6'},
-        {field_name: 'gs1_gsrn', title: 'GS1 GSRN', rules: '', col: 'col-md-6'},
-        {field_name: 'contact_person', title: 'Contact Person', rules: '', col: 'col-md-6'},
-        {field_name: 'contact_number', title: 'Contact Number', rules: '', col: 'col-md-6'},
+        {field_name: 'name', title: 'Supplier Name', rules: 'required', col: 'col-md-6'},
         {field_name: 'address', title: 'Address', rules: '', col: 'col-md-12'},
         {field_name: 'additional_details', title: 'Additional Details', rules: '', col: 'col-md-12'}
     ],

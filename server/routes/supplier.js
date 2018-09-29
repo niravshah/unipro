@@ -41,19 +41,26 @@ router.get('/', function (req, res) {
 });
 
 router.get('/details', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
+
     var ids = req.query.ids.split(",");
     var idArr = [];
     ids.forEach(function (id) {
         idArr.push(parseInt(id));
     });
-    TM.find({supplier_id: {$in: idArr}}).exec(function (err, locations) {
-        if (err) {
+
+    models.Supplier.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}],
+            where: {
+                id: {[sequelize.Op.in]: idArr}
+            }
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(locations)
-        }
-    });
+        })
 });
 
 router.post('/', function (req, res) {

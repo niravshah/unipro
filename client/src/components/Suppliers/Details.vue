@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <vue-tabs @tab-change="tabChanged">
-          <v-tab class="u-p-medium" v-for="item in items" :title="'' + item.supplier_id" v-bind:key="item.supplier_id">
+          <v-tab class="u-p-medium" v-for="item in items" :title="'' + item.id" v-bind:key="item.id">
             <div align="right" class="u-mt-medium">
               <button v-if="!edit" @click="editForm(item)" class="c-btn c-btn--small">
                 Edit {{item.supplier_id}}
@@ -22,7 +22,7 @@
               <div class="col-md-3">
                 <div class="c-field u-mb-small">
                   <label class="c-field__label" for="location_id">Supplier Id</label>
-                  <p id="location_id">{{item.supplier_id}}</p>
+                  <p id="location_id">{{item.id}}</p>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
           this.items.push({stock_id: id});
         });
         Service.getByIds(this.ids).then(resp => {
-          this.items = resp.data
+          this.items = resp.data.rows
         }).catch(ex => {
           console.log(ex)
         });
