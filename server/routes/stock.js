@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
-var M = require('../models/stock');
-var LM = require('../models/location');
+//var factory = require('../utils/factory');
+//var M = require('../models/stock');
+//var LM = require('../models/location');
 var sequelize = require('sequelize');
 var models = require('../sequelize2/models');
 
 
 router.get('/', function (req, res) {
 
-    console.log("Request Query:", req.query);
     var recordsPerPage = parseInt(req.query.perPage);
     var pageNo = parseInt(req.query.page);
 

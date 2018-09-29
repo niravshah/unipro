@@ -1,18 +1,46 @@
 var express = require('express');
 var router = express.Router();
-var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
-var M = require('../models/catalogue');
+//var factory = require('../utils/factory');
+//var M = require('../models/catalogue');
+
+var sequelize = require('sequelize');
+var models = require('../sequelize2/models');
 
 router.get('/', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    TM.find({}).populate({path: 'supplier_ref', select: 'supplier_name'}).exec(function (err, locations) {
-        if (err) {
+
+    var recordsPerPage = parseInt(req.query.perPage);
+    var pageNo = parseInt(req.query.page);
+
+    var where = {};
+    var searchTerm = req.query.search;
+    if (searchTerm) {
+        pageNo = 1;
+        where['$Item.description$'] = {[sequelize.Op.like]: '%' + searchTerm + '%'}
+    }
+
+
+    var pageOffset = parseInt(req.query.perPage) * ( pageNo - 1);
+    models.Catalogue.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            where: where,
+            include: [{
+                model: models.Item,
+                attributes: ['product_code', 'description']
+            },
+                {
+                    model: models.Supplier,
+                    attributes: ['id', 'name']
+                }],
+            limit: recordsPerPage,
+            offset: pageOffset
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(locations)
-        }
-    })
+        })
 });
 
 router.post('/', function (req, res) {

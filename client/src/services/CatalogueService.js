@@ -7,8 +7,9 @@ export default {
   vdef(){
     return Api().get('api/schema/catalogue/v-def')
   },
-  get() {
-    return Api().get('api/catalogue')
+  get(params) {
+    var url = 'api/catalogue?' + 'page=' + params.page + '&perPage=' + params.perPage + '&search=' + params.search + '&location_id=' + params.location_id;
+    return Api().get(url)
   },
   add(data){
     return Api().post('api/catalogue', {data: data})
