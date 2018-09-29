@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
     var recordsPerPage = parseInt(req.query.perPage);
     var pageNo = parseInt(req.query.page);
 
-    var where = {};
+    var where = {active: true};
     var searchTerm = req.query.search;
     if (searchTerm) {
         pageNo = 1;
