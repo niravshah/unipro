@@ -3095,7 +3095,7 @@ be a descendant of the grid when it is being dragged.
 /**
  * Calendar Header
  *
- * 1. These classes aren't created by fullcalendar plugin, but it's used to 
+ * 1. These classes aren't created by fullcalendar plugin, but it's used to
  *    customize the header of the calender to suit Dashboard's original design.
  */
 .fc-header {
@@ -3638,7 +3638,7 @@ be a descendant of the grid when it is being dragged.
  * Instead of modifying `_datepicker.scss` directly, we add Dashboard's custom
  * styles for datepicker plugin here.
  *
- * This file  isn't for asscoited with `fullcalendar` plugin, `fullcalender` has 
+ * This file  isn't for asscoited with `fullcalendar` plugin, `fullcalender` has
  * its own custom styles in `vendor` folder.
  *
  * SCSS variables used in this file can be found in: settings/_settings.calendar.scss
@@ -7394,10 +7394,10 @@ readers do not read off random characters that represent icons */
   .o-page__content.is-pushed {
     margin-left: 250px; }
 
-/** 
+/**
  * Page Card
  *
- * A centered page card is used when you want the card to be centered and 
+ * A centered page card is used when you want the card to be centered and
  * provide a little space at the top & bottom e.g. login, 404 pages.
  */
 .o-page__card {
@@ -7407,7 +7407,7 @@ readers do not read off random characters that represent icons */
     .o-page__card {
       width: 95%; } }
 
-/** 
+/**
  * Horizontal Page Card
  *
  * Used with login-2 page.
@@ -7431,7 +7431,7 @@ readers do not read off random characters that represent icons */
 
 /**
  * 1. Spacing between the image and the text should be declared through
- *    the component, usually using a `spacing` utility class. 
+ *    the component, usually using a `spacing` utility class.
  */
 .o-media__img {
   /* [1] */
@@ -7470,7 +7470,7 @@ readers do not read off random characters that represent icons */
  * Ratio object is used to keep media (e.g. images, videos) in
  * their correct aspect ratios.
  *
- * USAGE: 
+ * USAGE:
  * <div class="o-ratio o-ratio--16:9">
  *     <iframe src"/"></iframe>
  * </div>
@@ -7739,8 +7739,8 @@ readers do not read off random characters that represent icons */
 /**
  * 1. Apply (c-btn--info) background if `c-btn--{style}` class isn't specified.
  * 2. Align icon (if placed inside button) with text properly.
- * 3. Add dropdown icon/arrow to button with `has-dropdown` class, it depends 
- *    on (FontAwesome) icon font so make sure to modify it if you changed your 
+ * 3. Add dropdown icon/arrow to button with `has-dropdown` class, it depends
+ *    on (FontAwesome) icon font so make sure to modify it if you changed your
  *    base icon font.
  * 4. Use `disabled` property on <button> elements, and `is-disabled` class on
  *    <a> elements as they don't support `disabled` property.
@@ -7836,8 +7836,8 @@ readers do not read off random characters that represent icons */
 /* Style variants
    ========================================================================== */
 /**
- * Buttons have a simple, nice gradient on the background, we use 
- * sass's `darken()` method to generate a dark shade of the requested color, 
+ * Buttons have a simple, nice gradient on the background, we use
+ * sass's `darken()` method to generate a dark shade of the requested color,
  * then we use our `linear-gradient` mixin to generate the gradient background.
  */
 .c-btn--primary {
@@ -7945,7 +7945,7 @@ readers do not read off random characters that represent icons */
    #CARD
    ========================================================================== */
 /**
- * A simple component to apply card-like style, used with genearal widgets that 
+ * A simple component to apply card-like style, used with genearal widgets that
  * have sub-components in it.
  */
 .c-card {
@@ -7955,7 +7955,7 @@ readers do not read off random characters that represent icons */
   background-color: #fff; }
 
 /**
- * 1. Display a scrollbar if the content of the card is larger than the 
+ * 1. Display a scrollbar if the content of the card is larger than the
  *    card's width.
  */
 .c-card--responsive {
@@ -8019,10 +8019,10 @@ readers do not read off random characters that represent icons */
    ========================================================================== */
 /**
  * Checkboxes & Radios are controlled with a simple class called `c-choice`
- * because they are similar in styling, this class is used to share same 
+ * because they are similar in styling, this class is used to share same
  * styles between them.
  *
- * EXAMPLE: 
+ * EXAMPLE:
  *
  * <div class="c-choice c-choice--checkbox">
  *     <input class="c-choice__input" id="custom-checkbox" type="checkbox">
@@ -8031,7 +8031,7 @@ readers do not read off random characters that represent icons */
  */
 /**
  * 1. Get rid of white space cause by using `inline-flex`.
- * 
+ *
  * Read More: https://goo.gl/ajXW52
  */
 .c-choice {
@@ -8127,8 +8127,8 @@ readers do not read off random characters that represent icons */
    #CLOSE
    ========================================================================== */
 /**
- * A small button for closing components, used with closable components 
- * like alerts, modals. 
+ * A small button for closing components, used with closable components
+ * like alerts, modals.
  */
 .c-close {
   padding: 0;
@@ -8158,7 +8158,7 @@ readers do not read off random characters that represent icons */
 
 /**
  * Dropdown Menu
- * 
+ *
  * 1. No matter what size is the dropdown toggle `dropdown-toggle` (a class from
  *    bootstrap), dropdown menu should be positioned properly.
  */
@@ -8269,7 +8269,7 @@ readers do not read off random characters that represent icons */
     right: 15px; }
 
 /**
- * Inline fields don't take up whole width 
+ * Inline fields don't take up whole width
  *
  * Used with search input in the navbar & toolbar.
  */
@@ -8280,8 +8280,8 @@ readers do not read off random characters that represent icons */
       width: 100%; } }
 
 /**
- * Labels are used with inputs, always use labels with inputs for better 
- * accesibility. Hide labels using `u-hidden-visually` to display it for 
+ * Labels are used with inputs, always use labels with inputs for better
+ * accesibility. Hide labels using `u-hidden-visually` to display it for
  * screen readers.
  *
  * USAGE: <label class="c-field__label u-hidden-visually"></label>
@@ -8339,8 +8339,8 @@ readers do not read off random characters that represent icons */
 /**
  * Add rounded/circular box background to any icon.
  *
- * USAGE: 
- *      
+ * USAGE:
+ *
  * <div class="c-icon c-icon--large c-icon--success">
  *     <i class="fa fa-facebook"></i>
  * </div>
@@ -8493,7 +8493,7 @@ textarea.c-input {
     color: #ed1c24; }
 
 /* ==========================================================================
-   #MODAL 
+   #MODAL
    ========================================================================== */
 .modal-open {
   overflow: hidden; }
@@ -8581,7 +8581,7 @@ textarea.c-input {
     color: #fff; }
 
 /**
- * Use this clas to quicklu position the close icon relative 
+ * Use this clas to quicklu position the close icon relative
  * to its container, `c-modal__content`.
  */
 .c-modal__close--absolute {
@@ -8609,7 +8609,7 @@ textarea.c-input {
     color: inherit; }
 
 /**
- * Tab-style navigation inside modal subheader. When used, make sure to remove 
+ * Tab-style navigation inside modal subheader. When used, make sure to remove
  * default vertical padding from `c-modal__subheader`.
  */
 .c-modal__subheader-tab {
@@ -8651,7 +8651,7 @@ textarea.c-input {
   border-top: 1px solid #e6eaee;
   background-color: #EFF3F6; }
 
-/** 
+/**
  * Add a dark background to make modal dialog standout.
  */
 .modal-backdrop {
@@ -8701,8 +8701,8 @@ textarea.c-input {
    #NAV
    ========================================================================== */
 /**
- * Nav sits within the main navbar area. It’s fully responsive as it holds 
- * navigation items/links that will be collapsed, toggled in small 
+ * Nav sits within the main navbar area. It’s fully responsive as it holds
+ * navigation items/links that will be collapsed, toggled in small
  * screens via `c-nav-toggle` component.
  */
 .c-nav {
@@ -8710,7 +8710,7 @@ textarea.c-input {
   /**
 	 * Responsive Nav
 	 *
-	 * 1. Remove extra margin when `u-mr-auto` utility is used. 
+	 * 1. Remove extra margin when `u-mr-auto` utility is used.
 	 */ }
   @media (max-width: 768px) {
     .c-nav {
@@ -8753,7 +8753,7 @@ textarea.c-input {
       -ms-flex-align: center;
           align-items: center; }
 
-/** 
+/**
  * 1. Allow positioning dropdown menus inside nav items.
  */
 .c-nav__item {
@@ -8791,9 +8791,9 @@ textarea.c-input {
 /* Nav Toggle
    ========================================================================== */
 /**
- * Nav toggle is the popular hamburger-like icon that would show/hide `c-nav` 
+ * Nav toggle is the popular hamburger-like icon that would show/hide `c-nav`
  * via javascript through `js-nav-toggle` to toggle `is-open` class.
- * 
+ *
  * 1. Remove default button styles.
  * 2. Show only on small screens, hide on large screen.
  */
@@ -8818,7 +8818,7 @@ textarea.c-input {
       /* [2] */ } }
 
 /**
- * The hamburger icon itself, 3 bars stacked on top of each other. 
+ * The hamburger icon itself, 3 bars stacked on top of each other.
  */
 .c-nav-toggle__bar {
   display: block;
@@ -8869,9 +8869,9 @@ textarea.c-input {
   width: 270px !important; }
 
 /**
- * 1. Custom width, height is specififed for proper alignment, adding your own 
+ * 1. Custom width, height is specififed for proper alignment, adding your own
  *    brand/logo image will require custom styles for proper alignment.
- * 2. On small screens, seperate logo/brand from other navbar components as 
+ * 2. On small screens, seperate logo/brand from other navbar components as
  *    navbar links would be collapsed.
  */
 .c-navbar__brand {
@@ -9070,7 +9070,7 @@ textarea.c-input {
   z-index: 400;
   word-wrap: break-word;
   /**
-	 * 1. (bs-popover-*) classes are inserted by bootstrap's popover plugin, we 
+	 * 1. (bs-popover-*) classes are inserted by bootstrap's popover plugin, we
 	 *    customize these classes for better compatibility with Dashboard UI Kit.
 	 */ }
   .c-popover .arrow {
@@ -9134,7 +9134,7 @@ textarea.c-input {
   background-color: #E2E7EE; }
 
 /**
- * 1. Default (info) background-color would be applied, if class 
+ * 1. Default (info) background-color would be applied, if class
  *    `c-progress--[color]` isn't specified.
  */
 .c-progress__bar {
@@ -9389,7 +9389,7 @@ textarea.c-input {
    #TABLES
    ========================================================================== */
 /**
- * 1. The border-collapse CSS property specifies that the table's borders are 
+ * 1. The border-collapse CSS property specifies that the table's borders are
  *    collapsed and it means that adjacent cells share borders.
  */
 .c-table {
@@ -9408,7 +9408,7 @@ textarea.c-input {
  * Wrap any table with one of these classes to make it responsive at certain
  * breakpoint.
  *
- * 1. Wrap your table with this class `c-table-responsive` if the table's width 
+ * 1. Wrap your table with this class `c-table-responsive` if the table's width
  * is larger than 1200px.
  */
 .c-table-responsive {
@@ -9478,7 +9478,7 @@ textarea.c-input {
 
 /**
  * Table title/caption
- * <caption> 
+ * <caption>
  */
 .c-table__title {
   position: relative;
@@ -10054,7 +10054,7 @@ textarea.c-input {
 /**
  * Use brand color utilities to set the background-color of every icon.
  *
- * Example: 
+ * Example:
  * 		<a class="c-profile__social-icon u-bg-dribbble" href="#">
  *     		<i class="fa fa-dribbble"></i>
  * 		</a>
@@ -10123,7 +10123,7 @@ textarea.c-input {
   font-weight: 500;
   text-transform: uppercase; }
 
-/** 
+/**
  * Meta information about the event
  */
 .c-event__meta {
@@ -10161,7 +10161,7 @@ textarea.c-input {
 /* ==========================================================================
    #SIDEBAR
    ========================================================================== */
-/** 
+/**
  * NOTE: The layout, width of the sidebar is controlled by `o-page__sidebar` in
  *       `o-page` object, found in `objects/_objects.page.scss`.
  */
@@ -10183,7 +10183,7 @@ textarea.c-input {
     background-color: rgba(0, 0, 0, 0.5); }
 
 /**
- * 1. Height of sidebar brand should equal the height of the navbar for perfect 
+ * 1. Height of sidebar brand should equal the height of the navbar for perfect
  *    alignment.
  * 2. You can change the height of brand/logo image as you want, but its height
  *    shouldn't be more than navbar's height.
@@ -10332,7 +10332,7 @@ textarea.c-input {
 /* Sidebar toggle
    ========================================================================== */
 /**
- * An icon the is used to toggle (show/hide) sidebar on small screen, you will 
+ * An icon the is used to toggle (show/hide) sidebar on small screen, you will
  * find this component placed in the main navbar.
  */
 .c-sidebar-toggle {
@@ -10356,7 +10356,7 @@ textarea.c-input {
       /* [2] */ } }
 
 /**
- * The hamburger icon itself, 3 bars stacked on top of each other. 
+ * The hamburger icon itself, 3 bars stacked on top of each other.
  */
 .c-sidebar-toggle__bar {
   display: block;
@@ -10657,7 +10657,7 @@ textarea.c-input {
           justify-content: space-between; }
 
 /**
- * 1. Set width of gallery image to be half of its container minus (5px) as 
+ * 1. Set width of gallery image to be half of its container minus (5px) as
  *    a spacing between images.
  */
 .c-gallery-card__img {
@@ -10717,7 +10717,7 @@ textarea.c-input {
 /* Style variants
    ========================================================================== */
 /**
- * 1. If `c-state--{color}` isn't specified, (info) background color will 
+ * 1. If `c-state--{color}` isn't specified, (info) background color will
  *    be applied.
  */
 .c-state,
@@ -10739,7 +10739,7 @@ textarea.c-input {
    ========================================================================== */
 /**
  * 1. Get rid of white space cause by using `inline-flex`.
- * 
+ *
  * Read More: https://goo.gl/ajXW52
  */
 .c-todo {
@@ -10859,7 +10859,7 @@ textarea.c-input {
  * Table of content:
  *
  * 1. Messages
- * 2. Chat 
+ * 2. Chat
  */
 /* 1. Messages
    ========================================================================== */
@@ -11582,7 +11582,7 @@ textarea.c-input {
    #MENU
    ========================================================================== */
 /**
- * A list of horizontal or vertical links, and unlike `c-menu` component, this 
+ * A list of horizontal or vertical links, and unlike `c-menu` component, this
  * component shouldn't be used inside a sidebar or any other component.
  */
 .c-menu__title {
@@ -11618,10 +11618,10 @@ textarea.c-input {
 /**
  * Boards consist of 2 main components:
  *
- * 1. Board 
+ * 1. Board
  * 2. Task
  *
- * NOTE: We didn't seperate these components into their own files as it's 
+ * NOTE: We didn't seperate these components into their own files as it's
  * intended to be used togther.
  */
 /* 1. Board
@@ -11805,7 +11805,7 @@ textarea.c-input {
   border-left-color: #ed1c24; }
 
 /* ==========================================================================
-   #PLANS 
+   #PLANS
    ========================================================================== */
 .c-plan {
   margin: 0 5px 30px;
@@ -11906,7 +11906,7 @@ textarea.c-input {
    #OVERVIEW CARD
    ========================================================================== */
 /**
- * Not really a reusable component, but it fixes responsive issues with 
+ * Not really a reusable component, but it fixes responsive issues with
  * `Dashboard Overview` section in index.html page.
  */
 @media (max-width: 768px) {
@@ -11940,7 +11940,7 @@ textarea.c-input {
  * Invoice Header
  *
  * Contains:
- * - compnay's name & logo 
+ * - compnay's name & logo
  * - invoice's title & date
  */
 .c-invoice__header {
@@ -12093,8 +12093,8 @@ textarea.c-input {
    ========================================================================== */
 /**
  * User Activity Feed
- * 
- * This component is used to show a stream of the user's activities and it's 
+ *
+ * This component is used to show a stream of the user's activities and it's
  * used in user-profile.html page.
  */
 .c-feed {
@@ -12450,8 +12450,8 @@ textarea.c-input {
    #COUNTER NAV
    ========================================================================== */
 /**
- * Counter nav is a different style of navigation, every navigation link has 
- * an icon (that contains current number) before it. 
+ * Counter nav is a different style of navigation, every navigation link has
+ * an icon (that contains current number) before it.
  *
  * This component is used in project-overview.html page.
  */
@@ -12506,7 +12506,7 @@ textarea.c-input {
     color: #fff; }
 
 /**
- * Inverse 
+ * Inverse
  *
  * Use `.c-counter-nav--inverse` when using this component on a dark background.
  */
@@ -12937,7 +12937,7 @@ textarea.c-input {
    #CLEARFIX UTILITIY
    ========================================================================== */
 /**
- * Clear floated elements by adding `u-clearfix` to the parent element. 
+ * Clear floated elements by adding `u-clearfix` to the parent element.
  */
 .u-clearfix::after {
   display: table !important;
@@ -12948,8 +12948,8 @@ textarea.c-input {
    #SPACING UTILITIES
    ========================================================================== */
 /**
- * Spacing utilities are used to provide spacing between components using 
- * margins or inside the components using paddings. Different sizes allow you 
+ * Spacing utilities are used to provide spacing between components using
+ * margins or inside the components using paddings. Different sizes allow you
  * to easily construct consistent layouts of components.
  */
 /**
@@ -12957,7 +12957,7 @@ textarea.c-input {
  *
  * m  -> all sides
  * mt -> margin-top
- * mr -> margin-right 
+ * mr -> margin-right
  * mb -> margin-bottom
  * ml -> margin-left
  * mv -> margin-top & margin-bottom (vertically)
@@ -13130,7 +13130,7 @@ textarea.c-input {
  *
  * p  -> all sides
  * pt -> padding-top
- * pr -> padding-right 
+ * pr -> padding-right
  * pb -> padding-bottom
  * pl -> padding-left
  * pv -> padding-top & padding-bottom (vertically)
@@ -13361,7 +13361,7 @@ textarea.c-input {
   background-color: #fff !important; }
 
 /**
-  * Use brand-color utilities to apply text colors and background colors to 
+  * Use brand-color utilities to apply text colors and background colors to
   * brand-related components like social icons.
   */
 /**
@@ -13432,7 +13432,7 @@ textarea.c-input {
    #BORDER UTILITIES
    ========================================================================== */
 /**
- * Use border utilities to add or remove borders from certain components 
+ * Use border utilities to add or remove borders from certain components
  * to prevent border collapsing.
  */
 /**
@@ -13595,13 +13595,13 @@ textarea.c-input {
           clip-path: inset(50%) !important; }
 
 /**
- * Use `u-hidden-down@{breakpoint}` to hide content from a specific breakpoint 
+ * Use `u-hidden-down@{breakpoint}` to hide content from a specific breakpoint
  * and smaller viewports.
  *
  * 1. Hide on mobile.
  * 2. Hide on mobile and tablet.
  * 3. Hide on mobile, tablet and desktop.
- * 4. Hide on mobile, tablet, desktop and wide. 
+ * 4. Hide on mobile, tablet, desktop and wide.
  *
  * NOTE: u-hidden@wide : still visible on viewports larger than wide breakpoint.
  */
@@ -13626,7 +13626,7 @@ textarea.c-input {
     display: none !important; } }
 
 /**
- * Use `u-hidden-up@{breakpoint}` to hide content from a specific breakpoint 
+ * Use `u-hidden-up@{breakpoint}` to hide content from a specific breakpoint
  * and larger viewports.
  *
  * 1. Hide on viewports larger than mobile.

@@ -65,3 +65,14 @@ h1, h2, h3, h4, h5, h6 {
 .c-navbar__title{
   text-transform: uppercase;
 }
+
+.c-state,
+.c-state--info {
+  background-color: #005EB8; }
+
+.c-state {
+  margin-bottom: 0;
+}
+.c-state__number {
+  margin: 0 0 10px .9375rem;
+}

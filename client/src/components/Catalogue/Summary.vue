@@ -74,7 +74,7 @@
       getDetails(data){
         var url = 'catalogue/details?ids=';
         data.forEach(record => {
-          url = url + record.catalogue_id + ","
+          url = url + record.id + ","
         });
         url = url.replace(/,\s*$/, "");
         this.$router.push(url);

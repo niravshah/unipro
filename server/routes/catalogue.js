@@ -43,6 +43,29 @@ router.get('/', function (req, res) {
         })
 });
 
+router.get('/details', function (req, res) {
+
+    var ids = req.query.ids.split(",");
+    var idArr = [];
+    ids.forEach(function (id) {
+        idArr.push(parseInt(id));
+    });
+
+    models.Catalogue.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}, {model: models.Item, include: [models.Manufacturer]}],
+            where: {
+                id: {[sequelize.Op.in]: idArr},
+            }
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        });
+});
+
 router.post('/', function (req, res) {
     var TM = factory.getTenantModel(M, req.subdomains[0]);
     var nTM = new TM();
@@ -59,25 +82,6 @@ router.post('/', function (req, res) {
             } else {
                 res.status(500).json({message: msgs.unexpected_error_message})
             }
-        }
-    });
-});
-
-router.get('/details', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    var ids = req.query.ids.split(",");
-    var idArr = [];
-    ids.forEach(function (id) {
-        idArr.push(parseInt(id));
-    });
-    TM.find({catalogue_id: {$in: idArr}}).populate({
-        path: 'supplier_ref',
-        select: 'supplier_name'
-    }).exec(function (err, items) {
-        if (err) {
-            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(items)
         }
     });
 });
