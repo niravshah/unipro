@@ -3,14 +3,14 @@
     <div class="row u-mt-large u-mb-large">
       <div class="col-md-12">
         <div class="c-field">
-          <input ref="barcode" v-model="barcode" class="c-input" id="input3" type="text" placeholder="Scan Your Items"
+          <input :disabled=checkoutDisabled ref="barcode" v-model="barcode" class="c-input" id="input3" type="text" placeholder="Scan Your Items"
                  v-on:textInput="textInput">
         </div>
       </div>
     </div>
 
-    <div class="row u-mb-large">
-      <div class="col-md-12">
+    <div v-if="items.length>0" class="row">
+      <div class="col-md-12 u-mb-large">
         <div class="c-table-responsive@wide">
           <table class="c-table">
             <caption class="c-table__title">
@@ -47,11 +47,16 @@
           </table>
         </div><!-- // .c-card -->
       </div>
+      <div class="col-md-12 text-center">
+        <button :disabled=checkoutDisabled v-on:click="checkout" class="c-btn c-btn--large c-btn--success">Checkout
+        </button>
+      </div>
     </div><!-- // .row -->
 
-    <div v-if="items.length>0" class="row">
+    <div v-if="checkoutMessage" class="row u-mt-medium text-center">
       <div class="col-md-12">
-        <button v-on:click="checkout" class="c-btn c-btn--large c-btn--success">Checkout</button>
+        <h2>{{checkoutMessage}}</h2>
+        <p v-if="checkoutError">{{checkoutError}}</p>
       </div>
     </div>
 
@@ -65,7 +70,10 @@
       return {
         timeout: null,
         barcode: null,
-        items: []
+        items: [],
+        checkoutDisabled: false,
+        checkoutMessage: null,
+        checkoutError: null
       }
     },
     mounted: function () {
@@ -101,14 +109,18 @@
         item.qty = item.qty - 1;
       },
       checkout: function () {
-
+        this.checkoutDisabled = true;
         var sendObj = {};
         this.items.forEach(item => {
           sendObj[item.id] = item.qty;
         });
 
         Service.checkout(sendObj).then(resp => {
+          this.items = [];
+          this.checkoutMessage = "Checkout Successful !"
         }).catch(err => {
+          this.checkoutMessage = "Error. Could not Checkout.";
+          this.checkoutError = err.message;
         })
       }
 
