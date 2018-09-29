@@ -50,7 +50,6 @@ router.get('/', function (req, res) {
         })
 });
 
-
 router.get('/details', function (req, res) {
 
     var ids = req.query.ids.split(",");
@@ -75,6 +74,29 @@ router.get('/details', function (req, res) {
         })
 });
 
+router.get('/orders', function (req, res) {
+    var ids = req.query.ids.split(",");
+    var idArr = [];
+    ids.forEach(function (id) {
+        idArr.push(parseInt(id));
+    });
+
+    models.Order.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}],
+            where: {
+                product_code: {[sequelize.Op.in]: idArr}
+            }
+        })
+        .then(function (orders) {
+            res.json(orders);
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
+
+});
+
 router.get('/usage', function (req, res) {
     var ids = req.query.ids.split(",");
     var idArr = [];
@@ -92,39 +114,38 @@ router.get('/usage', function (req, res) {
             }
         })
         .then(function (stock) {
-            res.json(stock)
+            idArr.forEach(function (id) {
+                usageDate[id] = [
+                    {
+                        name: 'Actual',
+                        data: {
+                            '2018-01-01': 100000,
+                            '2018-02-01': 200000,
+                            '2018-03-01': 250000,
+                            '2018-04-01': 350000,
+                            '2018-05-01': 550000,
+                            '2018-06-01': 750000,
+                            '2018-07-01': 850000,
+                            '2018-08-01': 900000
+                        }
+                    },
+                    {
+                        name: 'Forecast', data: {
+                        '2018-01-01': 125000, '2018-02-01': 150000, '2018-03-01': 200000, '2018-04-01': 250000,
+                        '2018-05-01': 300000, '2018-06-01': 350000, '2018-07-01': 400000, '2018-08-01': 500000,
+                        '2018-09-01': 600000, '2018-10-01': 650000, '2018-11-01': 800000, '2018-12-01': 1200000
+                    }
+                    }
+                ]
+            });
+
+            res.json(usageDate);
         })
         .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         })
 
 
-    idArr.forEach(function (id) {
-        usageDate[id] = [
-            {
-                name: 'Actual',
-                data: {
-                    '2018-01-01': 100000,
-                    '2018-02-01': 200000,
-                    '2018-03-01': 250000,
-                    '2018-04-01': 350000,
-                    '2018-05-01': 550000,
-                    '2018-06-01': 750000,
-                    '2018-07-01': 850000,
-                    '2018-08-01': 900000
-                }
-            },
-            {
-                name: 'Forecast', data: {
-                '2018-01-01': 125000, '2018-02-01': 150000, '2018-03-01': 200000, '2018-04-01': 250000,
-                '2018-05-01': 300000, '2018-06-01': 350000, '2018-07-01': 400000, '2018-08-01': 500000,
-                '2018-09-01': 600000, '2018-10-01': 650000, '2018-11-01': 800000, '2018-12-01': 1200000
-            }
-            }
-        ]
-    });
-
-    res.json(usageDate);
 });
 
 router.post('/:id', function (req, res) {
@@ -155,7 +176,6 @@ router.post('/:id', function (req, res) {
     });
 
 });
-
 
 router.get('/location/:id', function (req, res) {
 

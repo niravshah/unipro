@@ -32,5 +32,8 @@ export default {
   },
   getUsageDetails(ids){
     return Api().get('api/stock/usage?ids=' + ids.toString());
+  },
+  getOrders(ids){
+    return Api().get('api/stock/orders?ids=' + ids.toString());
   }
 }

@@ -40,10 +40,10 @@
                   <stats faclass="fa-box-open" :value=item.current_level :description=getCurrentLevels(item)></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-pound-sign" :value=item.min_level description="Spend YTD"></stats>
+                  <stats faclass="fa-pound-sign" :value=spendValue description="Spend YTD"></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-box" :value=item.max_level description="Orders YTD"></stats>
+                  <stats faclass="fa-box" :value=orders description="Orders YTD"></stats>
                 </div>
               </div><!-- .row -->
               <div class="row">
@@ -158,6 +158,8 @@
   import ToastedService from "../../services/ToastedService";
   import Formp from '../_partials/_formp.vue'
   import Stats from "../_partials/_stats";
+  import OrderService from "@/services/OrderService";
+
   export default {
     name: 'StockDetails',
     components: {
@@ -168,10 +170,18 @@
       return {
         testProp: 'Test Val',
         ids: [],
+        pids: [],
         items: [],
         edit: false,
         error: false,
+        orders: 0,
+        spend: 0,
         usageData: []
+      }
+    },
+    computed: {
+      spendValue: function () {
+        return "£" + this.spend.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
       }
     },
     mounted: function () {
@@ -179,15 +189,23 @@
       this.$store.commit('heading', "Stock Details");
     },
     created: function () {
+      var _this = this;
       this.ids = this.$route.query.ids.split(',');
       this.ids.forEach(id => {
         this.items.push({stock_id: id});
       });
       Service.getByIds(this.ids).then(resp => {
         this.items = resp.data.rows;
+        this.items.forEach(item => {
+          _this.pids.push(item.item_id);
+        });
+
+        this.getOrders(_this.pids);
+
       }).catch(ex => {
         console.log(ex)
       });
+
 
       this.getUsageData(this.ids);
     },
@@ -227,6 +245,16 @@
       getUsageData: async function (ids) {
         Service.getUsageDetails(ids).then(resp => {
           this.usageData = resp.data[ids[0]]
+        }).catch(err => {
+        })
+      },
+      getOrders: async function (ids) {
+        var _this = this;
+        Service.getOrders(ids).then(resp => {
+          this.orders = resp.data.count;
+          resp.data.rows.forEach(order => {
+            _this.spend += order.amount;
+          })
         }).catch(err => {
         })
       }
