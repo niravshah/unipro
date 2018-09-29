@@ -40,10 +40,10 @@
                   <stats faclass="fa-box-open" :value=item.current_level :description=getCurrentLevels(item)></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-pound-sign" :value=spendValue description="Spend YTD"></stats>
+                  <stats faclass="fa-box" :value=orders description="Orders"></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-box" :value=orders description="Orders YTD"></stats>
+                  <stats faclass="fa-pound-sign" :value=spendValue description="Spend"></stats>
                 </div>
               </div><!-- .row -->
               <div class="row">

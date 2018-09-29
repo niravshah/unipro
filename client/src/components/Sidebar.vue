@@ -30,7 +30,7 @@
               <i class="fa fa-file-invoice"></i></span>Manage Catalogue
           </router-link>
         </li>
-        <li class="c-sidebar__item">
+      <!--  <li class="c-sidebar__item">
           <router-link class="c-sidebar__link" :to="{name:'Locations'}">
             <span class="c-sidebar__icon u-mr-xsmall"><i class="fa fa-map-marker-alt"></i></span>
             Manage Locations
@@ -48,7 +48,7 @@
             <span class="c-sidebar__icon u-mr-xsmall">
               <i class="fa fa-box-open"></i></span>Receive Goods
           </router-link>
-        </li>
+        </li>-->
       </ul>
       <h4 class="c-sidebar__title" :class="{'u-hidden':isMinimized}">Administration</h4>
       <ul class="c-sidebar__list">
