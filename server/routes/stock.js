@@ -1,4 +1,5 @@
 var express = require('express');
+var async = require('async');
 var router = express.Router();
 var msgs = require('../utils/messages');
 //var factory = require('../utils/factory');
@@ -97,6 +98,26 @@ router.get('/orders', function (req, res) {
 
 });
 
+router.get('/gtin', function (req, res) {
+    var gtin = req.query.gtin;
+
+    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}, {model: models.Item, include: [models.Manufacturer]}],
+            where: {
+                '$Item.gtin$': {[sequelize.Op.eq]: gtin},
+                active: {[sequelize.Op.eq]: true}
+            }
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
+
+});
+
 router.get('/usage', function (req, res) {
     var ids = req.query.ids.split(",");
     var idArr = [];
@@ -148,7 +169,106 @@ router.get('/usage', function (req, res) {
 
 });
 
+router.post('/checkout', function (req, res) {
+    console.log("Request Data:", req.body.items);
+
+    async.forEachOf(req.body.items, function (value, key, callback) {
+        console.log(value, key);
+
+
+        models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+            .findOne({where: {'id': key}})
+            .then(item => {
+
+                var newRecord = models.Inventory.build({
+                    tenant_id: item.tenant_id,
+                    supplier_id: item.supplier_id,
+                    item_id: item.item_id,
+                    location_id: item.location_id,
+                    cost_centre: item.cost_centre,
+                    inventory_id: item.inventory_id,
+                    min_level: item.min_level,
+                    max_level: item.max_level,
+                    current_level: item.current_level - value,
+                    active: true
+                });
+
+                newRecord.save().then(nR => {
+                    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+                        .update({active: false}, {where: {'id': item.id}}).then(resp => {
+                        callback()
+                    }).catch(err => {
+                        callback(err);
+                    });
+                }).catch(err => {
+                    callback(err);
+                });
+                callback();
+            })
+            .catch(err => {
+                callback(err);
+            });
+
+    }, function (err) {
+        if (err) {
+            res.status(500).json(err);
+        } else {
+            res.json({msg: "ok"});
+        }
+    });
+
+    /*req.body.items.forEach(item => {
+
+     var newRecord = models.Inventory.build({
+     tenant_id: item.tenant_id,
+     supplier_id: item.supplier_id,
+     item_id: item.item_id,
+     location_id: item.location_id,
+     cost_centre: item.cost_centre,
+     inventory_id: item.inventory_id,
+     min_level: item.min_level,
+     max_level: item.max_level,
+     current_level: item.current_level - item.qty,
+     active: true
+     });
+
+     newRecord.save().then(nR => {
+     models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+     .update({active: false}, {where: {'id': item.id}}).then(resp => {
+     res.json(nR)
+     }).catch(err => {
+     res.status(500).json(err);
+     });
+     }).catch(err => {
+     res.status(500).json(err);
+     });
+
+     });
+     */
+
+
+});
+
 router.post('/:id', function (req, res) {
+
+    console.log(req.body.data);
+    models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
+        .update(req.body.data, {where: {'inventory_id': req.params.id}})
+        .then(resp => {
+            models.Item.scope({method: ['tenant', req.body.data.tenant]}).update(
+                req.body.data.Item, {where: {'id': req.body.data.Item.id}}
+            ).then(resp2 => {
+                res.json({inventory: resp, item: resp2})
+            }).catch(err => {
+                res.status(500).json(err);
+            })
+        }).catch(err => {
+        res.status(500).json(err);
+    });
+
+});
+
+router.post('/levels/:id', function (req, res) {
     var oldRecrod = req.body.data;
 
     var newRecord = models.Inventory.build({

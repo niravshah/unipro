@@ -35,5 +35,11 @@ export default {
   },
   getOrders(ids){
     return Api().get('api/stock/orders?ids=' + ids.toString());
+  },
+  getByGtin(gtin){
+    return Api().get('api/stock/gtin?gtin=' + gtin);
+  },
+  checkout(items){
+    return Api().post('api/stock/checkout', {items: items});
   }
 }

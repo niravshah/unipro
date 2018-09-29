@@ -39,13 +39,13 @@ mongoose.connect(url, {useNewUrlParser: true})
     })
     .catch((err) => console.error(err));
 
-//var Sequelize = require('./sqlize/models');
+/*
 var Sequelize = require('./sequelize2/models');
 Sequelize.sequelize.sync().then(function () {
     console.log('Sequelize Sync Successful')
 }).catch(function (err) {
     console.log('Sequelize Sync Error: ', err)
-});
+});*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -33,6 +33,8 @@ import AddCatalogue from "@/components/Catalogue/Add";
 import Users from "@/components/Users/Summary";
 import UsersAdd from "@/components/Users/Add";
 
+import Checkout from "@/components/Checkout/Checkout"
+
 Vue.use(Router);
 
 const router = new Router({
@@ -164,12 +166,17 @@ const router = new Router({
             meta: {requiresAuth: true, mini: true},
           },
           {
+            path: 'checkout',
+            name: 'Checkout',
+            component: Checkout,
+            meta: {requiresAuth: true, mini: true}
+          },
+          {
             path: '',
             name: 'Dashboard',
             component: Dashboard,
             meta: {requiresAuth: true, mini: false}
-          },
-
+          }
         ]
       },
       {
