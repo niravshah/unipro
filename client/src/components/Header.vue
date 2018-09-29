@@ -6,7 +6,7 @@
       <span class="c-sidebar-toggle__bar"></span>
     </button><!-- // .c-sidebar-toggle -->
 
-    <h2 class="c-navbar__title u-mr-auto">{{heading}}</h2>
+    <h2 class="c-navbar__title white u-mr-auto">{{heading}}</h2>
 
 
     <div class="c-dropdown dropdown">

@@ -29,5 +29,8 @@ export default {
   },
   vdef(){
     return Api().get('api/schema/stock/v-def')
+  },
+  getUsageDetails(ids){
+    return Api().get('api/stock/usage?ids=' + ids.toString());
   }
 }
