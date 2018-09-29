@@ -2,26 +2,13 @@
   <div class="container-fluid">
 
     <page-actions :pageActions="pageActions"></page-actions>
-    <!--div class="row">
-      <div class="col-md-4  u-mb-small">
-        <label class="c-field__label">Filter By Location</label>
-        <v-select id="input1" v-model="locationFilter" :options="['foo','bar']"></v-select>
-      </div>
-      <div class="col-md-6  u-mb-medium">
-        <label class="c-field__label">Filter By Supplier</label>
-        <v-select multiple v-model="supplierFilter" :options="['foo','bar','baz']"></v-select>
-      </div>
-      <div class="col-md-2  u-mb-medium">
-        <a v-on:click="filterRecords" class="abs-bottom c-btn c-btn--info c-btn--fullwidth" style="width: 80%"
-           href="#">Filter Records</a>
-      </div>
-    </div-->
     <summary-table :columns="columns"
                    :rows="rows"
                    :select-options="{ enabled: true }"
                    :search-options="{ enabled: true }"
                    :tableActions="tableActions"
-                   @details="getDetails"></summary-table>
+                   @details="getDetails"
+                   @onRowClick="onRowClick"></summary-table>
   </div>
 
 </template>
@@ -59,8 +46,31 @@
         console.log("Filter Records", this.supplierFilter, this.locationFilter)
       },
       async getLocationSchema () {
-        const response = await SchemaService.fetchLocationSchema();
-        this.columns = response.data
+        //const response = await SchemaService.fetchLocationSchema();
+        this.columns = [
+          {
+            label: 'Location Id',
+            field: 'id',
+            type: 'Number',
+            excelUpload: false,
+            summaryScreen: true,
+            mDef: {type: 'Number', field_name: 'location_id'}
+          },
+          {
+            label: 'Description',
+            field: 'description',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: 'String', required: false, field_name: 'description'}
+          },
+          {
+            label: 'GS1 GLN',
+            field: 'gs1_gln',
+            excelUpload: true,
+            summaryScreen: true,
+            mDef: {type: 'String', required: false, field_name: 'gs1_gln'}
+          }
+        ]
       },
       async getLocationData () {
         const response = await LocationService.fetchLocations();
@@ -69,11 +79,13 @@
       getDetails(data){
         var url = 'locations/details?ids=';
         data.forEach(record => {
-          url = url + record.location_id + ","
+          url = url + record.id + ","
         });
         url = url.replace(/,\s*$/, "");
-        console.log(url);
         this.$router.push(url);
+      },
+      onRowClick(params){
+        this.getDetails([params.row]);
       }
     }
 

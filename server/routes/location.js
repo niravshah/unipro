@@ -2,23 +2,12 @@ var express = require('express');
 var router = express.Router();
 var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
-var LocationModel = require('../models/location');
+// var LocationModel = require('../models/location');
+var sequelize = require('sequelize');
 var models = require('../sequelize2/models');
 
 
 router.get('/', function (req, res) {
-    /*
-     var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0], req.body.data);
-     LocationTenantModel.find({}).exec(function (err, locations) {
-     if (err) {
-     res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-     } else {
-     res.json(locations)
-     }
-     });
-     */
-
-
     models.Location.scope({method: ['tenant', req.body.data.tenant]}).findAll()
         .then(function (locations) {
             res.json(locations)
@@ -26,23 +15,26 @@ router.get('/', function (req, res) {
         .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         })
-
 });
 
 router.get('/details', function (req, res) {
-    var LocationTenantModel = factory.getTenantModel(LocationModel, req.subdomains[0]);
     var ids = req.query.ids.split(",");
     var idArr = [];
     ids.forEach(function (id) {
         idArr.push(parseInt(id));
     });
-    LocationTenantModel.find({location_id: {$in: idArr}}).exec(function (err, locations) {
-        if (err) {
-            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
+    models.Location.scope({method: ['tenant', req.body.data.tenant]})
+        .findAll({
+            where: {
+                id: {[sequelize.Op.in]: idArr}
+            }
+        })
+        .then(function (locations) {
             res.json(locations)
-        }
-    });
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
 });
 
 router.post('/', function (req, res) {

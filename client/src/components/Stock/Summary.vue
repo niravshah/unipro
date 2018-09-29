@@ -49,7 +49,6 @@
     data: function () {
       return {
         locationFilter: 0,
-        totalRecords: 0,
         locations: [],
         columns: [],
         rows: [],

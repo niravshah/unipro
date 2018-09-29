@@ -1,18 +1,43 @@
 var express = require('express');
 var router = express.Router();
 var msgs = require('../utils/messages');
-var factory = require('../utils/factory');
-var M = require('../models/supplier');
+// var factory = require('../utils/factory');
+// var M = require('../models/supplier');
+var sequelize = require('sequelize');
+var models = require('../sequelize2/models');
+
 
 router.get('/', function (req, res) {
-    var TM = factory.getTenantModel(M, req.subdomains[0]);
-    TM.find({}).exec(function (err, locations) {
-        if (err) {
+
+
+    var recordsPerPage = parseInt(req.query.perPage);
+    var pageNo = parseInt(req.query.page);
+
+    var where = {};
+    var searchTerm = req.query.search;
+    if (searchTerm) {
+        pageNo = 1;
+        where['$Item.description$'] = {[sequelize.Op.like]: '%' + searchTerm + '%'}
+    }
+    if (req.query.location_id > 0) {
+        where['location_id'] = req.query.location_id
+    }
+
+    var pageOffset = parseInt(req.query.perPage) * ( pageNo - 1);
+
+
+    models.Supplier.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            where: where,
+            limit: recordsPerPage,
+            offset: pageOffset
+        })
+        .then(function (stock) {
+            res.json(stock)
+        })
+        .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
-        } else {
-            res.json(locations)
-        }
-    })
+        })
 });
 
 router.get('/details', function (req, res) {
