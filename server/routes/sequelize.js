@@ -73,6 +73,32 @@ router.get('/bulk2/cost_centre', function (req, res) {
     bulkImport(bulk, fpath, res);
 });
 
+router.get('/bulk2/order_types', function (req, res) {
+    var bulk = new Bulk(models2.OrderType);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'order_type.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/eclass', function (req, res) {
+    var bulk = new Bulk(models2.Eclass);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'eclass.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/tax_codes', function (req, res) {
+    var bulk = new Bulk(models2.TaxCode);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'tax_code.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+router.get('/bulk2/orders', function (req, res) {
+    var bulk = new Bulk(models2.Order);
+    var fpath = path.join(__dirname, '..', 'sequelize2', 'data', 'order.csv');
+    bulkImport(bulk, fpath, res);
+});
+
+
+
 router.get('/bulk/tenants', function (req, res) {
     var bulk = new Bulk(models.Tenant);
     var fpath = path.join(__dirname, '..', 'sqlize', 'data', 'tenant.csv');
