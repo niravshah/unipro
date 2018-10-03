@@ -4,7 +4,7 @@ var msgs = require('../utils/messages');
 // var factory = require('../utils/factory');
 // var M = require('../models/supplier');
 var sequelize = require('sequelize');
-var models = require('../sequelize2/models');
+var models = require('../sequelize/models');
 
 
 router.get('/', function (req, res) {

@@ -1,0 +1,66 @@
+﻿code,id,description,tenant_id
+FVA,1,Catheter - Arterial,1
+FVI,2,Catheter - Vascular,1
+FRE,3,Angioplasty balloon catheter,1
+FRD,4,Guidewires,1
+FVD,5,Catheter - Introducers,1
+FCC,6,Disposable Surgical Instruments,1
+FXE,7,Intra Aortic Balloon Pumps,1
+FES,8,Thoracentesis catheters or catheterization kits or accessories,1
+FRU,9,Diagnostic or interventional vascular tray or pack,1
+FJB,10,Pressure Monitors,1
+FVT,11,Intravenous & arterial catheter & needle positioning aids,1
+WKG,12,Badges,1
+FRC,13,Introducers - vascular catheter,1
+FRP,14,Cardiac ablation catheter,1
+FRB,15,Diagnostic or interventional vascular catheters,1
+FRX,16,Catheterization procedure site closure device,1
+FRK,17,Drug-Eluting Stents,1
+FXD,18,Balloons PTCA Balloons,1
+BCZ,19,Workwear Protective/Chemical and Radiation Protection,1
+BAA,20,Accessories - Healthcare Wear,1
+BEB,21,Aprons,1
+JAA,22,X-Ray equipment,1
+FMJ,23,Syringe for injection of contrast medium,1
+FJH,24,Blood pressure Cuffs,1
+FXK,25,Sutures,1
+FYX,26,Medical & Surgical Equipment Repairs,1
+FCB,27,Surgical Instruments,1
+FRZ,28,Cardiology leads,1
+FCS,29,Surgical instrument sets & systems & trays & baskets,1
+BWH,30,Footwear - Theatre Wear,1
+FMA,31,Syringe 2 piece hypodermic with green plunger,1
+FBU,32,Other Medical & Surgical Equipment Purchases,1
+FXS,33,Wound Closure,1
+DSC,34,Bags - Pharmacy Equipment & Containers,1
+EVX,35,Procedure packs - misc,1
+ENQ,36,Cellulose Wadding,1
+EMI,37,Gauze swabs - X-ray Detectable,1
+FRA,38,Coronary stents,1
+KBY,39,Laboratory & Pathology equipment repairs,1
+PTX,40,Building & Engineering Tools Equipment Repairs & Maintenance,1
+ZLM,41,Works Staff,1
+FRL,42,Bare-Metal Stents,1
+FJD,43,Electrocardiography EKG units & accessories,1
+FJE,44,Electrocardiography EKG Electrodes,1
+FRF,45,Removal devices of diagnostic or interventional vascular catheters or sets,1
+KCA,46,Point of Care Test Kits Blood Gas Analysers (KFC) Diagnostic Test Strips & Point of Care Diagnostic Devices,1
+FKG,47,Dilator kits,1
+PNA,48,Cables Capacitors Connectors Grommets Insulator Meters Moving Iron Coil Relays Resistors Semiconductors Suppressers Terminals Inductors Wire,1
+FYZ,49,Medical Equipment Spares,1
+FJA,50,Acute care monitoring units & related products,1
+FYB,51,Lifting Equipment Manual,1
+WPH,52,Printed Stationery,1
+FYY,53,Medical & Surgical Equipment Maintenance & cleaning,1
+FBH,54,Defibrillators,1
+EVZ,55,CSSD Procedure packs,1
+EVR,56,Procedure Pack Cardiac Surgery,1
+FDP,57,Flow sensors or regulators or components,1
+FXB,58,Catheters,1
+FBX,59,Surgical Power Tools & accessories,1
+DYD,60,Medical Cylinder Gases,1
+JMB,61,Equipment & Sundries,1
+DSR,62,Labels - Pharmacy Equipment & Containers,1
+EVQ,63,Procedure Pack Angiography,1
+FFM,64,Circuit connectors or adapters or valves,1
+FKB,65,Angioscopes or accessories,1

@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
-// var LocationModel = require('../models/location');
 var sequelize = require('sequelize');
-var models = require('../sequelize2/models');
+var models = require('../sequelize/models');
 
 
 router.get('/', function (req, res) {

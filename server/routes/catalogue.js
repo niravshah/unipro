@@ -5,7 +5,7 @@ var msgs = require('../utils/messages');
 //var M = require('../models/catalogue');
 
 var sequelize = require('sequelize');
-var models = require('../sequelize2/models');
+var models = require('../sequelize/models');
 
 router.get('/', function (req, res) {
 
@@ -35,8 +35,8 @@ router.get('/', function (req, res) {
             limit: recordsPerPage,
             offset: pageOffset
         })
-        .then(function (stock) {
-            res.json(stock)
+        .then(function (cats) {
+            res.json(cats);
         })
         .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})

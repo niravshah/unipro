@@ -1,0 +1,4 @@
+﻿description,id,tennat_id,code,tenant_id
+Purchase Order,1,1,PO,1
+Standing Order (ST),2,1,ST,1
+Call Off Order,3,1,COF,1

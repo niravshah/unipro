@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var factory = require('../utils/factory');
 var msgs = require('../utils/messages');
-var GoodsModel = require('../models/goods');
 
 
 router.get('/', function (req, res) {

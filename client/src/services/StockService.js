@@ -36,6 +36,9 @@ export default {
   getOrders(ids){
     return Api().get('api/stock/orders?ids=' + ids.toString());
   },
+  getCatalogueInfo(ids){
+    return Api().get('api/stock/catalogues?ids=' + ids.toString());
+  },
   getByGtin(gtin){
     return Api().get('api/stock/gtin?gtin=' + gtin);
   },

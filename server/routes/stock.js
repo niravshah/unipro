@@ -6,7 +6,7 @@ var msgs = require('../utils/messages');
 //var M = require('../models/stock');
 //var LM = require('../models/location');
 var sequelize = require('sequelize');
-var models = require('../sequelize2/models');
+var models = require('../sequelize/models');
 
 
 router.get('/', function (req, res) {
@@ -91,6 +91,47 @@ router.get('/orders', function (req, res) {
         })
         .then(function (orders) {
             res.json(orders);
+        })
+        .catch(err => {
+            res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+        })
+
+});
+
+router.get('/catalogues', function (req, res) {
+    var ids = req.query.ids.split(",");
+    var idArr = [];
+    ids.forEach(function (id) {
+        idArr.push(parseInt(id));
+    });
+
+    models.Catalogue.scope({method: ['tenant', req.body.data.tenant]})
+        .findAndCountAll({
+            include: [{all: true}],
+            where: {
+                item_id: {[sequelize.Op.in]: idArr}
+            }
+        })
+        .then(function (cats) {
+            var suppids = [];
+            cats.rows.forEach(cat => {
+                suppids.push(cat.supplier_id);
+            });
+            var where = {};
+            where['supplier_id'] = {[sequelize.Op.in]: suppids}
+            models.CarriageCharge.scope({method: ['tenant', req.body.data.tenant]})
+                .findAndCountAll({
+                    where: where,
+                    include: [{
+                        all: true
+                    }]
+                })
+                .then(function (cc) {
+                    res.json({cats: cats, cc: cc})
+                })
+                .catch(err => {
+                    res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
+                })
         })
         .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})

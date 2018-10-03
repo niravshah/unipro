@@ -4,11 +4,7 @@
       <div class="col-md-12">
         <vue-tabs @tab-change="tabChanged" v-if="items.length>0">
           <v-tab v-for="item in items" :title="'' + item.inventory_id" v-bind:key="item.inventory_id">
-
-
             <div v-if="item.Item" class="u-m-small">
-
-
               <div class="row u-mt-medium u-mb-medium">
                 <div class="col-md-6">
                   <span class="c-toolbar__state-title"><small>{{item.Location.description}}</small></span>
@@ -136,11 +132,48 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="c-card u-p-medium u-mb-medium">
-                    <div class="u-flex u-justify-between u-align-items-center">
-                      <h3 class="c-card__title" style="color: black">Usage Trends</h3>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="c-card u-p-medium u-mb-medium">
+                        <div class="u-flex u-justify-between u-align-items-center">
+                          <h3 class="c-card__title" style="color: black">Usage Trends</h3>
+                        </div>
+                        <line-chart :data=usageData></line-chart>
+                      </div>
                     </div>
-                    <line-chart :data=usageData></line-chart>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="c-card c-card--responsive u-mb-medium">
+                        <div class="c-card__header c-card__header--transparent o-line">
+                          <h5 class="c-card__title">Catalogue Information</h5>
+                        </div>
+
+                        <table class="c-table u-border-zero">
+                          <thead>
+                          <th>Supplier Name</th>
+                          <th>Current Price</th>
+                          <th>Min Order</th>
+                          <th>Lead Time</th>
+                          <th>Carriage Charge</th>
+                          </thead>
+                          <tbody>
+                          <tr v-for="cR in catalogueRows" class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">{{cR.Supplier.name}}</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">{{cR.current_price}}</td>
+                            <td class="c-table__cell u-text-right">{{cR.min_order}}</td>
+                            <td class="c-table__cell u-text-right">{{cR.order_lead_time}}</td>
+                            <td class="c-table__cell u-text-right">{{cR.order_lead_time}}</td>
+                          </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -176,7 +209,9 @@
         error: false,
         orders: 0,
         spend: 0,
-        usageData: []
+        usageData: [],
+        catalogueRows: [],
+        carraigeCharges: []
       }
     },
     computed: {
@@ -201,6 +236,7 @@
         });
 
         this.getOrders(_this.pids);
+        this.getCatalogueInfo(_this.pids);
 
       }).catch(ex => {
         console.log(ex)
@@ -256,6 +292,14 @@
             _this.spend += order.amount;
           })
         }).catch(err => {
+        })
+      },
+      getCatalogueInfo: async function (ids) {
+        Service.getCatalogueInfo(ids).then(resp => {
+          this.catalogueRows = resp.data.cats.rows;
+          this.carraigeCharges = resp.data.cc.rows;
+        }).catch(err => {
+          console.log("ERROR: getCatalogueInfo: ", err);
         })
       }
     }

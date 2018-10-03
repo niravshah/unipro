@@ -18,7 +18,6 @@ var location = require('./routes/location');
 var goods = require('./routes/goods');
 var stock = require('./routes/stock');
 var supplier = require('./routes/supplier');
-var options = require('./routes/options');
 var catalogue = require('./routes/catalogue');
 var users = require('./routes/users');
 
@@ -39,13 +38,13 @@ mongoose.connect(url, {useNewUrlParser: true})
     })
     .catch((err) => console.error(err));
 
-/*
-var Sequelize = require('./sequelize2/models');
+
+var Sequelize = require('./sequelize/models');
 Sequelize.sequelize.sync().then(function () {
     console.log('Sequelize Sync Successful')
 }).catch(function (err) {
     console.log('Sequelize Sync Error: ', err)
-});*/
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -64,11 +63,9 @@ app.use(tenantFinder);
 
 app.use('/', index);
 app.use('/api/auth', auth);
-app.use('/api/options', options);
 app.use('/api/upload', upload);
 app.use('/api/schema', schema);
 app.use('/api/locations', location);
-app.use('/api/goods', goods);
 app.use('/api/stock', stock);
 app.use('/api/suppliers', supplier);
 app.use('/api/catalogue', catalogue);

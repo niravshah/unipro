@@ -1,4 +1,4 @@
-var Sequelize = require('../sqlize/models');
+var Sequelize = require('../sequelize/models');
 module.exports = function (req, res, next) {
 
     var sdomain = null;
