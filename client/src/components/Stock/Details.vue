@@ -46,20 +46,6 @@
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-4">
-                      <formp id="input23" :error=error :edit=edit description="Current Level"
-                             :model="item.current_level" @fromp="function(newval){item.current_level=newval}"></formp>
-                    </div>
-                    <div class="col-md-4">
-                      <formp id="input24" :error=error :edit=edit description="Max"
-                             :model="item.max_level" @fromp="function(newval){item.max_level=newval}"></formp>
-                    </div>
-                    <div class="col-md-4">
-                      <formp :error=error :edit=edit description="Min"
-                             :model="item.min_level" @fromp="function(newval){item.min_level=newval}"></formp>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
                       <formp id="input18" :error=error :edit=false description="Product Code"
                              :model="item.Item.product_code"
                              @fromp="function(newval){item.Item.product_code=newval}"></formp>
@@ -68,30 +54,6 @@
                       <formp id="input19" :error=error :edit=edit description="Product"
                              :model="item.Item.description"
                              @fromp="function(newval){item.Item.description=newval}"></formp>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <formp id="input181" :error=error :edit=false description="NHS eClass"
-                             :model="item.Item.nhs_eclass"
-                             @fromp="function(newval){item.Item.nhs_eclass=newval}"></formp>
-                    </div>
-                    <div class="col-md-8">
-                      <formp id="input191" :error=error :edit=edit description="GTIN"
-                             :model="item.Item.gtin"
-                             @fromp="function(newval){item.Item.gtin=newval}"></formp>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <formp id="input212" :error=error :edit=false description="Cost Centre"
-                             :model="item.CostCentre.cost_centre"
-                             @fromp="function(newval){item.CostCentre.cost_centre=newval}"></formp>
-                    </div>
-                    <div class="col-md-8">
-                      <formp id="input223" :error=error :edit=edit description="Description"
-                             :model="item.CostCentre.description"
-                             @fromp="function(newval){item.CostCentre.description=newval}"></formp>
                     </div>
                   </div>
                   <div class="row">
@@ -130,31 +92,93 @@
                              @fromp="function(newval){item.Supplier.name=newval}"></formp>
                     </div>
                   </div>
+                  <div class="row u-mt-small">
+                    <div class="col-md-4">
+                      <formp id="input23" :error=error :edit=edit description="Current Level"
+                             :model="item.current_level" @fromp="function(newval){item.current_level=newval}"></formp>
+                    </div>
+                    <div class="col-md-4">
+                      <formp id="input24" :error=error :edit=edit description="Max"
+                             :model="item.max_level" @fromp="function(newval){item.max_level=newval}"></formp>
+                    </div>
+                    <div class="col-md-4">
+                      <formp :error=error :edit=edit description="Min"
+                             :model="item.min_level" @fromp="function(newval){item.min_level=newval}"></formp>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <formp id="input212" :error=error :edit=false description="Cost Centre"
+                             :model="item.CostCentre.cost_centre"
+                             @fromp="function(newval){item.CostCentre.cost_centre=newval}"></formp>
+                    </div>
+                    <div class="col-md-4">
+                      <formp id="input223" :error=error :edit=edit description="Description"
+                             :model="item.CostCentre.description"
+                             @fromp="function(newval){item.CostCentre.description=newval}"></formp>
+                    </div>
+                    <div class="col-md-4">
+                      <formp id="input181" :error=error :edit=false description="NHS eClass"
+                             :model="item.Item.nhs_eclass"
+                             @fromp="function(newval){item.Item.nhs_eclass=newval}"></formp>
+                    </div>
+
+                  </div>
                   <div class="row u-mt-medium">
                     <div class="col-md-12">
                       <div class="c-card c-card--responsive u-mb-medium">
                         <div class="c-card__header c-card__header--transparent o-line">
-                          <h5 class="c-card__title">Catalogue Information</h5>
+                          <h5 class="c-card__title">Bar Codes</h5>
+                          <a class="c-card__meta" href="#">Add New</a>
                         </div>
 
                         <table class="c-table u-border-zero">
-                          <thead>
-                          <th>Supplier Name</th>
-                          <th>Current Price</th>
-                          <th>Min Order</th>
-                          <th>Lead Time</th>
-                          <th>Carriage Charge</th>
-                          <th>Updated</th>
-                          </thead>
                           <tbody>
-                          <tr v-for="cR in catalogueRows" class="c-table__row">
-                            <td class="c-table__cell">{{cR.Supplier.name}}</td>
-                            <td class="c-table__cell">{{cR.current_price}}</td>
-                            <td class="c-table__cell">{{cR.min_order}}</td>
-                            <td class="c-table__cell">{{cR.order_lead_time}}</td>
-                            <td class="c-table__cell">{{formatCurrency(carriageCharges[cR.supplier_id])}}</td>
-                            <td class="c-table__cell">{{cR.updatedAt | moment('from')}}</td>
+                          <tr class="c-table__row u-border-top-zero">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Minnie Ferguson</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
                           </tr>
+
+                          <tr class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Minnie Ferguson</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+
+                          <tr class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Minnie Ferguson</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+
                           </tbody>
                         </table>
 
@@ -172,6 +196,106 @@
                         <line-chart :data=usageData></line-chart>
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="c-card c-card--responsive u-mb-medium">
+
+                        <table class="c-table u-border-zero">
+                          <tbody>
+                          <tr class="c-table__row u-border-top-zero">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Last 7 days</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+
+                          <tr class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Last 30 days</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+                          <tr class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Last 6 months</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+                          <tr class="c-table__row">
+                            <td class="c-table__cell">
+                              <div class="u-flex u-align-items-center">
+                                <span class="u-text-bold">Last 1 year</span>
+                              </div>
+                            </td>
+                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-bold">$150</span>
+                            </td>
+                            <td class="c-table__cell u-text-right">
+                              <span class="u-text-mute">3 Days ago</span>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row u-mt-medium">
+                <div class="col-md-12">
+                  <div class="catalogue c-card c-card--responsive u-mb-medium">
+                    <div class="c-card__header c-card__header--transparent o-line">
+                      <h5 class="c-card__title">Catalogue Information</h5>
+                    </div>
+
+                    <table class="c-table u-border-zero">
+                      <thead>
+                      <th>Supplier Name</th>
+                      <th>Current Price</th>
+                      <th>Min Order</th>
+                      <th>Lead Time</th>
+                      <th>Carriage Charge</th>
+                      <th>Updated</th>
+                      </thead>
+                      <tbody>
+                      <tr v-for="cR in catalogueRows" class="c-table__row">
+                        <td class="c-table__cell">{{cR.Supplier.name}}</td>
+                        <td class="c-table__cell">{{cR.current_price}}</td>
+                        <td class="c-table__cell">{{cR.min_order}}</td>
+                        <td class="c-table__cell">{{cR.order_lead_time}}</td>
+                        <td class="c-table__cell">{{formatCurrency(carriageCharges[cR.supplier_id])}}</td>
+                        <td class="c-table__cell">{{cR.updatedAt | moment('from')}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+
                   </div>
                 </div>
               </div>
@@ -312,19 +436,19 @@
 
 </script>
 <style>
-  .c-table th {
+  .catalogue .c-table th {
     text-align: center;
     color: #7f8fa4;
     font-size: .875rem;
     font-weight: 400;
   }
 
-  .c-table__cell {
+  .catalogue .c-table__cell {
     text-align: center;
     padding: 20px 0 20px 0px;
   }
 
-  .c-table__cell:last-child {
+  .catalogue .c-table__cell:last-child {
     padding-right: 0rem;
   }
 
