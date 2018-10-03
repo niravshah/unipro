@@ -130,19 +130,7 @@
                              @fromp="function(newval){item.Supplier.name=newval}"></formp>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="c-card u-p-medium u-mb-medium">
-                        <div class="u-flex u-justify-between u-align-items-center">
-                          <h3 class="c-card__title" style="color: black">Usage Trends</h3>
-                        </div>
-                        <line-chart :data=usageData></line-chart>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
+                  <div class="row u-mt-medium">
                     <div class="col-md-12">
                       <div class="c-card c-card--responsive u-mb-medium">
                         <div class="c-card__header c-card__header--transparent o-line">
@@ -156,22 +144,32 @@
                           <th>Min Order</th>
                           <th>Lead Time</th>
                           <th>Carriage Charge</th>
+                          <th>Updated</th>
                           </thead>
                           <tbody>
                           <tr v-for="cR in catalogueRows" class="c-table__row">
-                            <td class="c-table__cell">
-                              <div class="u-flex u-align-items-center">
-                                <span class="u-text-bold">{{cR.Supplier.name}}</span>
-                              </div>
-                            </td>
+                            <td class="c-table__cell">{{cR.Supplier.name}}</td>
                             <td class="c-table__cell">{{cR.current_price}}</td>
-                            <td class="c-table__cell u-text-right">{{cR.min_order}}</td>
-                            <td class="c-table__cell u-text-right">{{cR.order_lead_time}}</td>
-                            <td class="c-table__cell u-text-right">{{cR.order_lead_time}}</td>
+                            <td class="c-table__cell">{{cR.min_order}}</td>
+                            <td class="c-table__cell">{{cR.order_lead_time}}</td>
+                            <td class="c-table__cell">{{formatCurrency(carriageCharges[cR.supplier_id])}}</td>
+                            <td class="c-table__cell">{{cR.updatedAt | moment('from')}}</td>
                           </tr>
                           </tbody>
                         </table>
 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="c-card u-p-medium u-mb-medium">
+                        <div class="u-flex u-justify-between u-align-items-center">
+                          <h3 class="c-card__title" style="color: black">Usage Trends</h3>
+                        </div>
+                        <line-chart :data=usageData></line-chart>
                       </div>
                     </div>
                   </div>
@@ -211,7 +209,7 @@
         spend: 0,
         usageData: [],
         catalogueRows: [],
-        carraigeCharges: []
+        carriageCharges: {}
       }
     },
     computed: {
@@ -246,6 +244,9 @@
       this.getUsageData(this.ids);
     },
     methods: {
+      formatCurrency: function (num) {
+        return "£" + num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      },
       getCurrentLevels: function (item) {
         return "Min: " + item.min_level + " Max: " + item.max_level;
       },
@@ -295,9 +296,13 @@
         })
       },
       getCatalogueInfo: async function (ids) {
+        var _this = this;
         Service.getCatalogueInfo(ids).then(resp => {
           this.catalogueRows = resp.data.cats.rows;
-          this.carraigeCharges = resp.data.cc.rows;
+          resp.data.cc.rows.forEach(row => {
+            _this.carriageCharges[row.supplier_id] = row.current_price;
+          })
+
         }).catch(err => {
           console.log("ERROR: getCatalogueInfo: ", err);
         })
@@ -307,4 +312,20 @@
 
 </script>
 <style>
+  .c-table th {
+    text-align: center;
+    color: #7f8fa4;
+    font-size: .875rem;
+    font-weight: 400;
+  }
+
+  .c-table__cell {
+    text-align: center;
+    padding: 20px 0 20px 0px;
+  }
+
+  .c-table__cell:last-child {
+    padding-right: 0rem;
+  }
+
 </style>

@@ -24,6 +24,7 @@ import "vue-nav-tabs/themes/vue-tabs.css";
 
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+import VueMoment from 'vue-moment'
 
 
 Vue.config.productionTip = false;
@@ -36,6 +37,7 @@ Vue.use(VueTabs);
 Vue.use(VeeValidate, {
   fieldsBagName: 'vvFieldsBag'
 });
+Vue.use(VueMoment);
 Vue.component('v-select', vSelect);
 Vue.component('v-dropzone', vue2Dropzone);
 Vue.component('downloadExcel', JsonExcel);
