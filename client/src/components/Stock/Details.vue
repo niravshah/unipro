@@ -132,12 +132,13 @@
                     </div>
 
                   </div>
+                  <!---START : BARCODE --->
                   <div class="row u-mt-medium">
                     <div class="col-md-12">
                       <div class=" barcodes c-card c-card--responsive u-mb-medium">
                         <div class="c-card__header c-card__header--transparent o-line">
                           <h5 class="c-card__title">Bar Codes</h5>
-                          <a class="c-card__meta" href="#">Add New</a>
+                          <a v-on:click.prevent="showBarcodeModal" class="c-card__meta" href="#">Add New</a>
                         </div>
 
                         <table class="c-table u-border-zero">
@@ -193,6 +194,7 @@
                       </div>
                     </div>
                   </div>
+                  <!---END : BARCODE --->
                 </div>
                 <!---END : DATA ROW --->
                 <!---START : USAGE --->
@@ -305,6 +307,46 @@
         </vue-tabs>
       </div>
     </div>
+    <modal height="auto" name="barcode-modal">
+
+      <div class="c-modal__content">
+
+        <div class="c-modal__header">
+          <h3 class="c-modal__title">This is the modal title</h3>
+
+          <span class="c-modal__close" data-dismiss="modal" aria-label="Close">
+                                        <i class="fa fa-close"></i>
+                                    </span>
+        </div>
+
+        <div class="c-modal__subheader">
+          <p>This is the sub header title</p>
+        </div>
+
+        <div class="c-modal__body">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, ratione quibusdam? Consequuntur natus praesentium adipisci eos, reiciendis distinctio error nostrum animi quos hic perferendis eius fugiat fuga sunt fugit deserunt!</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis eveniet modi excepturi error nesciunt cupiditate tempora deserunt perspiciatis exercitationem, suscipit temporibus officia sit recusandae autem iure vero neque quia consequatur!</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, ratione quibusdam? Consequuntur natus praesentium adipisci eos, reiciendis distinctio error nostrum animi quos hic perferendis eius fugiat fuga sunt fugit deserunt!</p>
+          <barcode value="123456789012" format="EAN13">
+            Unable to render the generated barcode
+          </barcode>
+        </div>
+
+        <div class="c-modal__footer">
+          <button type="button" class="c-btn c-btn--success">
+            Save
+          </button>
+          <button type="button" class="c-btn c-btn--secondary">
+            Cancel
+          </button>
+        </div>
+
+      </div><!-- // .c-modal__content -->
+
+    </modal>
   </div>
 
 
@@ -315,12 +357,14 @@
   import Formp from '../_partials/_formp.vue'
   import Stats from "../_partials/_stats";
   import OrderService from "@/services/OrderService";
+  import barcode from 'vue-barcode';
 
   export default {
     name: 'StockDetails',
     components: {
       Stats,
       Formp,
+      barcode
     },
     data: function () {
       return {
@@ -458,6 +502,9 @@
         }).catch(err => {
           console.log("ERROR: counterDown: ", err);
         })
+      },
+      showBarcodeModal: function () {
+        this.$modal.show('barcode-modal');
       }
     }
   }

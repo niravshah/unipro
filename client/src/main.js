@@ -15,6 +15,7 @@ import vue2Dropzone from "vue2-dropzone";
 import JsonExcel from "vue-json-excel";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import VeeValidate from "vee-validate";
+import VModal from 'vue-js-modal';
 
 import "vue-good-table/dist/vue-good-table.css";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
@@ -27,6 +28,7 @@ import Chart from "chart.js";
 import VueMoment from "vue-moment";
 
 
+
 Vue.config.productionTip = false;
 
 Vue.use(VueJWT, {"keyName": "jwt"});
@@ -37,6 +39,7 @@ Vue.use(VueTabs);
 Vue.use(VeeValidate, {fieldsBagName: 'vvFieldsBag'  });
 Vue.use(VueMoment);
 Vue.use(VueChartkick, {adapter: Chart});
+Vue.use(VModal);
 
 Vue.component('v-select', vSelect);
 Vue.component('v-dropzone', vue2Dropzone);
