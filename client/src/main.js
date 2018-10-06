@@ -27,8 +27,6 @@ import VueChartkick from "vue-chartkick";
 import Chart from "chart.js";
 import VueMoment from "vue-moment";
 
-
-
 Vue.config.productionTip = false;
 
 Vue.use(VueJWT, {"keyName": "jwt"});

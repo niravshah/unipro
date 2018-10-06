@@ -50,5 +50,8 @@ export default {
   },
   counterDown(id){
     return Api().post('api/stock/' + id + '/level_down');
+  },
+  addBarcode(data){
+    return Api().post('api/stock/' + data.item_id + '/barcode',data);
   }
 }
