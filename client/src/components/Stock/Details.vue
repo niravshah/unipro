@@ -133,7 +133,7 @@
 
                   </div>
                   <!---START : BARCODE --->
-                  <div class="row u-mt-medium">
+                  <div v-if="barcodes[item.inventory_id]" class="row u-mt-medium">
                     <div class="col-md-12">
                       <div class=" barcodes c-card c-card--responsive u-mb-medium">
                         <div class="c-card__header c-card__header--transparent o-line">
@@ -143,51 +143,14 @@
 
                         <table class="c-table u-border-zero">
                           <tbody>
-                          <tr class="c-table__row u-border-top-zero">
+                          <tr v-for="it in barcodes[item.inventory_id]" class="c-table__row u-border-top-zero">
                             <td class="c-table__cell">
                               <div class="u-flex u-align-items-center">
-                                <span class="u-text-bold">Minnie Ferguson</span>
+                                <span class="u-text-bold">{{it.description}}</span>
                               </div>
                             </td>
-                            <td class="c-table__cell">New Website</td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
-                            </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
+                            <td class="c-table__cell">{{it.barcode}}</td>
                           </tr>
-
-                          <tr class="c-table__row">
-                            <td class="c-table__cell">
-                              <div class="u-flex u-align-items-center">
-                                <span class="u-text-bold">Minnie Ferguson</span>
-                              </div>
-                            </td>
-                            <td class="c-table__cell">New Website</td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
-                            </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
-                          </tr>
-
-                          <tr class="c-table__row">
-                            <td class="c-table__cell">
-                              <div class="u-flex u-align-items-center">
-                                <span class="u-text-bold">Minnie Ferguson</span>
-                              </div>
-                            </td>
-                            <td class="c-table__cell">New Website</td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
-                            </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
-                          </tr>
-
                           </tbody>
                         </table>
 
@@ -401,6 +364,7 @@
         usageStats: {},
         catalogueRows: [],
         carriageCharges: {},
+        barcodes: {},
         generatedBarcode: '',
         addBarcodeDesc: ''
       }
@@ -441,11 +405,13 @@
           });
           this.getOrders(_this.pids);
           this.getCatalogueInfo(_this.pids);
+          this.getBarcodes();
         }).catch(err => {
           console.log("ERROR: loadData: ", err);
         });
 
         this.getUsageData(this.ids);
+
       },
       editForm: function () {
         this.edit = true;
@@ -511,6 +477,19 @@
         }).catch(err => {
           console.log("ERROR: getCatalogueInfo: ", err);
         })
+      },
+      getBarcodes: async function () {
+        this.items.forEach(item => {
+          Service.getBarcodes(item.item_id, item.supplier_id).then(resp => {
+            console.log("getBarcodes", resp.data.count, resp.data.count.rows);
+            this.barcodes[item.inventory_id] = [];
+            if (resp.data.count > 0) {
+
+              this.barcodes[item.inventory_id] = resp.data.rows;
+            }
+          }).catch(err => {
+          });
+        });
       },
       counterUp: function (params) {
         Service.counterUp(params).then(resp => {

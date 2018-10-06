@@ -52,6 +52,9 @@ export default {
     return Api().post('api/stock/' + id + '/level_down');
   },
   addBarcode(data){
-    return Api().post('api/stock/' + data.item_id + '/barcode',data);
+    return Api().post('api/item/' + data.item_id + '/barcode', {data: data});
+  },
+  getBarcodes(item_id, supplier_id){
+    return Api().get('api/item/' + item_id + '/supplier/' + supplier_id + '/barcodes');
   }
 }

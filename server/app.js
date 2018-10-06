@@ -16,29 +16,29 @@ var upload = require('./routes/upload');
 var schema = require('./routes/schema');
 var location = require('./routes/location');
 var stock = require('./routes/stock');
+var item = require('./routes/item');
 var supplier = require('./routes/supplier');
 var catalogue = require('./routes/catalogue');
 var users = require('./routes/users');
-
 var sequelize = require('./routes/sequelize');
 
-var mongoose = require('mongoose');
-
-//var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
 /*
-var url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
-if (process.env.NODE_ENV == "dev") {
-    url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
-}
-console.log("Connecting to MongoDB URL: " + url);
+ var mongoose = require('mongoose');
+ //var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
 
-mongoose.connect(url, {useNewUrlParser: true})
-    .then(() => {
-        console.log('mongo connection successful');
-    })
-    .catch((err) => console.error(err));
+ var url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
+ if (process.env.NODE_ENV == "dev") {
+ url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
+ }
+ console.log("Connecting to MongoDB URL: " + url);
 
-*/
+ mongoose.connect(url, {useNewUrlParser: true})
+ .then(() => {
+ console.log('mongo connection successful');
+ })
+ .catch((err) => console.error(err));
+
+ */
 
 var Sequelize = require('./sequelize/models');
 Sequelize.sequelize.sync().then(function () {
@@ -68,10 +68,10 @@ app.use('/api/upload', upload);
 app.use('/api/schema', schema);
 app.use('/api/locations', location);
 app.use('/api/stock', stock);
+app.use('/api/item', item);
 app.use('/api/suppliers', supplier);
 app.use('/api/catalogue', catalogue);
 app.use('/api/users', users);
-
 app.use('/api/sequelize', sequelize);
 
 // catch 404 and forward to error handler
@@ -94,4 +94,3 @@ var server = http.createServer(app);
 server.listen(port, function () {
     console.log('Uniprocure API running on port: ' + port)
 });
-
