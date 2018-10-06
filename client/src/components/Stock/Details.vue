@@ -5,12 +5,12 @@
         <vue-tabs @tab-change="tabChanged" v-if="items.length>0">
           <v-tab v-for="item in items" :title="'' + item.inventory_id" v-bind:key="item.inventory_id">
             <div v-if="item.Item" class="u-m-small">
+              <!---START : HEADER ROW --->
               <div class="row u-mt-medium u-mb-medium">
                 <div class="col-md-6">
                   <span class="c-toolbar__state-title"><small>{{item.Location.description}}</small></span>
                   <h2 class="c-navbar__title u-mr-auto">{{item.Item.description}}</h2>
                   <span class="c-toolbar__state-title"><small>{{item.Item.product_code}}</small> | <small>{{item.Item.gtin}}</small></span>
-
                 </div>
                 <div class="col-md-6">
                   <div align="right">
@@ -31,10 +31,12 @@
                   </div>
                 </div>
               </div>
+              <!---END : HEADER ROW --->
+              <!---START : STATS ROW --->
               <div class="row">
                 <div class="col-md-4">
                   <stats :inv_id="item.inventory_id" faclass="fa-box-open" :value=item.current_level
-                         :description=getCurrentLevels(item)
+                         :description=formatCurrentLevels(item)
                          counters=1 @counterUp="counterUp" @counterDown="counterDown"></stats>
                 </div>
                 <div class="col-md-4">
@@ -45,8 +47,10 @@
                   <stats :inv_id="item.inventory_id" faclass="fa-pound-sign" :value=spendValue description="Spend"
                          counters=0></stats>
                 </div>
-              </div><!-- .row -->
+              </div>
+              <!---END : STATS ROW --->
               <div class="row">
+                <!---START : DATA --->
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-4">
@@ -98,7 +102,7 @@
                   </div>
                   <div class="row u-mt-small">
                     <div class="col-md-4">
-                      <formp id="input23" :error=error :edit=edit description="Current Level"
+                      <formp id="input23" :error=error :edit=false description="Current Level"
                              :model="item.current_level" @fromp="function(newval){item.current_level=newval}"></formp>
                     </div>
                     <div class="col-md-4">
@@ -190,11 +194,13 @@
                     </div>
                   </div>
                 </div>
+                <!---END : DATA ROW --->
+                <!---START : USAGE --->
                 <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="c-card u-p-medium u-mb-medium">
-                        <line-chart :data=usageData></line-chart>
+                        <line-chart :data=usData(item.inventory_id)></line-chart>
                       </div>
                     </div>
                   </div>
@@ -267,8 +273,11 @@
                       </div>
                     </div>
                   </div>
+                  <!---END : USAGE --->
                 </div>
+                <!---END : USAGE --->
               </div>
+              <!---START : CATALOGUE --->
               <div class="row u-mt-medium">
                 <div class="col-md-12">
                   <div class="catalogue c-card c-card--responsive u-mb-medium">
@@ -299,6 +308,7 @@
                   </div>
                 </div>
               </div>
+              <!---END : CATALOGUE --->
             </div>
           </v-tab>
         </vue-tabs>
@@ -331,7 +341,7 @@
         error: false,
         orders: 0,
         spend: 0,
-        usageData: [],
+        usageData: {},
         catalogueRows: [],
         carriageCharges: {}
       }
@@ -339,6 +349,10 @@
     computed: {
       spendValue: function () {
         return "£" + this.spend.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      },
+      usData: function (id) {
+        console.log("usData:: ", id, this.usageData[id]);
+        return [this.usageData[id]];
       }
     },
     mounted: function () {
@@ -346,33 +360,34 @@
       this.$store.commit('heading', "Stock Details");
     },
     created: function () {
-      var _this = this;
+
       this.ids = this.$route.query.ids.split(',');
       this.ids.forEach(id => {
         this.items.push({stock_id: id});
       });
-      Service.getByIds(this.ids).then(resp => {
-        this.items = resp.data.rows;
-        this.items.forEach(item => {
-          _this.pids.push(item.item_id);
-        });
-
-        this.getOrders(_this.pids);
-        this.getCatalogueInfo(_this.pids);
-
-      }).catch(ex => {
-        console.log(ex)
-      });
-
-
-      this.getUsageData(this.ids);
+      this.loadData();
     },
     methods: {
       formatCurrency: function (num) {
         return "£" + num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
       },
-      getCurrentLevels: function (item) {
+      formatCurrentLevels: function (item) {
         return "Min: " + item.min_level + " Max: " + item.max_level;
+      },
+      loadData: function () {
+        var _this = this;
+        Service.getByIds(this.ids).then(resp => {
+          this.items = resp.data.rows;
+          this.items.forEach(item => {
+            _this.pids.push(item.item_id);
+          });
+          this.getOrders(_this.pids);
+          this.getCatalogueInfo(_this.pids);
+        }).catch(err => {
+          console.log("ERROR: loadData: ", err);
+        });
+
+        this.getUsageData(this.ids);
       },
       editForm: function () {
         this.edit = true;
@@ -380,9 +395,9 @@
       saveForm: function (stock_id, item) {
         this.edit = false;
         Service.update(stock_id, item).then(resp => {
-          console.log("Stock Update Response: ", resp)
+          this.loadData();
         }).catch(err => {
-          console.log("Stock Update Error: ", error);
+          console.log("ERROR: saveForm: ", err);
         });
       },
       cancelEdit: function (stock_id) {
@@ -405,8 +420,16 @@
       },
       getUsageData: async function (ids) {
         Service.getUsageDetails(ids).then(resp => {
-          this.usageData = resp.data[ids[0]]
+
+          ids.forEach(id => {
+            var arr = resp.data[id];
+            this.usageData[id] = arr[0];
+          });
+
+          console.log(this.usageData);
+
         }).catch(err => {
+          console.log("ERROR: getCatalogueInfo: ", err);
         })
       },
       getOrders: async function (ids) {
@@ -432,15 +455,15 @@
         })
       },
       counterUp: function (params) {
-        console.log("Counter Up Event", params);
         Service.counterUp(params).then(resp => {
+          this.loadData();
         }).catch(err => {
           console.log("ERROR: counterUp: ", err);
         })
       },
       counterDown: function (params) {
-        console.log("Counter Down Event", params);
         Service.counterDown(params).then(resp => {
+          this.loadData();
         }).catch(err => {
           console.log("ERROR: counterDown: ", err);
         })

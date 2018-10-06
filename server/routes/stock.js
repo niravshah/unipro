@@ -2,9 +2,6 @@ var express = require('express');
 var async = require('async');
 var router = express.Router();
 var msgs = require('../utils/messages');
-//var factory = require('../utils/factory');
-//var M = require('../models/stock');
-//var LM = require('../models/location');
 var sequelize = require('sequelize');
 var models = require('../sequelize/models');
 
@@ -180,10 +177,18 @@ router.get('/usage', function (req, res) {
             if (inventories.count > 0) {
                 idArr.forEach(function (id) {
                     var data = {};
+                    var sixmonths = {};
+                    var twelve_months = {};
+                    var seven_days = {};
+                    var thirty_days = {};
                     inventories.rows.forEach(row => {
                         if (row.inventory_id == id) {
                             console.log("Inventory Data:", row.createdAt, typeof row.createdAt);
-                            data[row.getCreatedDate()] = row.current_level
+                            data[row.getCreatedDate()] = row.current_level;
+
+                            if (row.isCreatedAtSevenDaysAgo()) {
+                                seven_days[row.getCreatedDate()] = row.current_level;
+                            }
                         }
                     });
 
@@ -192,6 +197,9 @@ router.get('/usage', function (req, res) {
                         {
                             name: 'Current Usage',
                             data: data
+                        }, {
+                            name: 'Seven Data',
+                            data: seven_days
                         }
                     ]
                 });
@@ -305,39 +313,10 @@ router.post('/:id', function (req, res) {
 
 });
 
-router.post('/levels/:id', function (req, res) {
-    var oldRecrod = req.body.data;
-
-    var newRecord = models.Inventory.build({
-        tenant_id: oldRecrod.tenant_id,
-        supplier_id: oldRecrod.supplier_id,
-        item_id: oldRecrod.item_id,
-        location_id: oldRecrod.location_id,
-        cost_centre: oldRecrod.cost_centre,
-        inventory_id: oldRecrod.inventory_id,
-        min_level: oldRecrod.min_level,
-        max_level: oldRecrod.max_level,
-        current_level: oldRecrod.current_level,
-        active: true
-    });
-
-    newRecord.save().then(nR => {
-        models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
-            .update({active: false}, {where: {'id': oldRecrod.id}}).then(resp => {
-            res.json(nR)
-        }).catch(err => {
-            res.status(500).json(err);
-        });
-    }).catch(err => {
-        res.status(500).json(err);
-    });
-
-});
-
 router.post('/:id/level_up', function (req, res) {
 
     models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
-        .findOne({where: {inventory_id: req.params.id}}).then(oldRecrod => {
+        .findOne({where: {inventory_id: req.params.id, active: true}}).then(oldRecrod => {
 
         var newRecord = models.Inventory.build({
             tenant_id: oldRecrod.tenant_id,
@@ -366,10 +345,11 @@ router.post('/:id/level_up', function (req, res) {
         res.status(500).json(err);
     });
 });
+
 router.post('/:id/level_down', function (req, res) {
 
     models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
-        .findOne({where: {inventory_id: req.params.id}}).then(oldRecrod => {
+        .findOne({where: {inventory_id: req.params.id, active: true}}).then(oldRecrod => {
 
         var newRecord = models.Inventory.build({
             tenant_id: oldRecrod.tenant_id,
@@ -398,7 +378,6 @@ router.post('/:id/level_down', function (req, res) {
         res.status(500).json(err);
     });
 });
-
 
 router.get('/location/:id', function (req, res) {
 

@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = (sequelize, DataTypes) => {
 
     var Inventory = sequelize.define('Inventory', {
@@ -36,8 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         return new Date(this.createdAt).toISOString();
     };
 
-    Inventory.prototype.getCreatedDate = function () {
-        return new Date(this.updatedAt).toISOString();
+    Inventory.prototype.isCreatedAtSevenDaysAgo = function () {
+        var a = moment().subtract(7,'days');
+        console.log("isCreatedAtSevenDaysAgo", a, this.createdAt);
+        return a.isSameOrBefore(this.createdAt);
     };
 
     return Inventory;
