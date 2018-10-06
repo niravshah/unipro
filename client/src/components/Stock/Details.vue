@@ -134,7 +134,7 @@
                   </div>
                   <div class="row u-mt-medium">
                     <div class="col-md-12">
-                      <div class="c-card c-card--responsive u-mb-medium">
+                      <div class=" barcodes c-card c-card--responsive u-mb-medium">
                         <div class="c-card__header c-card__header--transparent o-line">
                           <h5 class="c-card__title">Bar Codes</h5>
                           <a class="c-card__meta" href="#">Add New</a>
@@ -196,7 +196,7 @@
                 </div>
                 <!---END : DATA ROW --->
                 <!---START : USAGE --->
-                <div class="col-md-6">
+                <div v-if="usageData[item.inventory_id]" class="col-md-6">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="c-card u-p-medium u-mb-medium">
@@ -216,28 +216,23 @@
                                 <span class="u-text-bold">Last 7 days</span>
                               </div>
                             </td>
-                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell"></td>
                             <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
+                              <span class="u-text-bold">{{usageStats[item.inventory_id]['seven_days']}}</span>
                             </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
+                            <td class="c-table__cell"></td>
                           </tr>
-
                           <tr class="c-table__row">
                             <td class="c-table__cell">
                               <div class="u-flex u-align-items-center">
                                 <span class="u-text-bold">Last 30 days</span>
                               </div>
                             </td>
-                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell"></td>
                             <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
+                              <span class="u-text-bold">{{usageStats[item.inventory_id]['thirty_days']}}</span>
                             </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
+                            <td class="c-table__cell"></td>
                           </tr>
                           <tr class="c-table__row">
                             <td class="c-table__cell">
@@ -245,13 +240,11 @@
                                 <span class="u-text-bold">Last 6 months</span>
                               </div>
                             </td>
-                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell"></td>
                             <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
+                              <span class="u-text-bold">{{usageStats[item.inventory_id]['six_months']}}</span>
                             </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
+                            <td class="c-table__cell"></td>
                           </tr>
                           <tr class="c-table__row">
                             <td class="c-table__cell">
@@ -259,13 +252,11 @@
                                 <span class="u-text-bold">Last 1 year</span>
                               </div>
                             </td>
-                            <td class="c-table__cell">New Website</td>
+                            <td class="c-table__cell"></td>
                             <td class="c-table__cell u-text-right">
-                              <span class="u-text-bold">$150</span>
+                              <span class="u-text-bold">{{usageStats[item.inventory_id]['twelve_months']}}</span>
                             </td>
-                            <td class="c-table__cell u-text-right">
-                              <span class="u-text-mute">3 Days ago</span>
-                            </td>
+                            <td class="c-table__cell"></td>
                           </tr>
                           </tbody>
                         </table>
@@ -342,6 +333,7 @@
         orders: 0,
         spend: 0,
         usageData: {},
+        usageStats: {},
         catalogueRows: [],
         carriageCharges: {}
       }
@@ -349,10 +341,6 @@
     computed: {
       spendValue: function () {
         return "£" + this.spend.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-      },
-      usData: function (id) {
-        console.log("usData:: ", id, this.usageData[id]);
-        return [this.usageData[id]];
       }
     },
     mounted: function () {
@@ -373,6 +361,9 @@
       },
       formatCurrentLevels: function (item) {
         return "Min: " + item.min_level + " Max: " + item.max_level;
+      },
+      usData: function (id) {
+        return [this.usageData[id]];
       },
       loadData: function () {
         var _this = this;
@@ -422,11 +413,11 @@
         Service.getUsageDetails(ids).then(resp => {
 
           ids.forEach(id => {
-            var arr = resp.data[id];
+            var arr = resp.data.usage[id];
+            var uarr = resp.data.stats[id];
             this.usageData[id] = arr[0];
+            this.usageStats[id] = uarr;
           });
-
-          console.log(this.usageData);
 
         }).catch(err => {
           console.log("ERROR: getCatalogueInfo: ", err);
@@ -487,6 +478,14 @@
 
   .catalogue .c-table__cell:last-child {
     padding-right: 0rem;
+  }
+
+  .barcodes .c-card__header {
+    padding: 0.5rem 1rem;
+  }
+
+  .barcodes .c-card__title {
+    font-size: 1rem;
   }
 
 </style>

@@ -39,10 +39,25 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     Inventory.prototype.isCreatedAtSevenDaysAgo = function () {
-        var a = moment().subtract(7,'days');
-        console.log("isCreatedAtSevenDaysAgo", a, this.createdAt);
+        var a = moment().subtract(7, 'days');
         return a.isSameOrBefore(this.createdAt);
     };
+
+    Inventory.prototype.isCreatedAtThirtyDaysAgo = function () {
+        var a = moment().subtract(30, 'days');
+        return a.isSameOrBefore(this.createdAt);
+    };
+
+    Inventory.prototype.isCreatedAtSixMonthsAgo = function () {
+        var a = moment().subtract(6, 'months');
+        return a.isSameOrBefore(this.createdAt);
+    };
+
+    Inventory.prototype.isCreatedAtTwelveMonthsAgo = function () {
+        var a = moment().subtract(12, 'months');
+        return a.isSameOrBefore(this.createdAt);
+    };
+
 
     return Inventory;
 };

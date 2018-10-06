@@ -11,8 +11,8 @@
         <p class="c-state-card__meta">{{description}}</p>
       </div>
       <div class="c-state-card__counters" v-if="counters==1">
-        <div v-on:click="counterUp" class="c-state-card__counter"><i class="fa fa-chevron-up"></i></div>
-        <div v-on:click="counterDown" class="c-state-card__counter down"><i class="fa fa-chevron-down"></i></div>
+        <div v-on:click="counterUp" class="c-state-card__counter"><i class="fa fa-chevron-circle-up"></i></div>
+        <div v-on:click="counterDown" class="c-state-card__counter down"><i class="fa fa-chevron-circle-down"></i></div>
       </div>
     </div>
   </div>
@@ -32,11 +32,22 @@
   }
 </script>
 <style>
+
+  .c-state-card__icon--info {
+    background-color: #0072CE;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0072CE), to(#0072CE));
+    background: linear-gradient(to bottom, #0072CE, #0072CE);
+  }
+
   .c-state-card__counters {
     position: absolute;
     top: 0;
     right: 20px;
     font-size: 20px;
+  }
+
+  .c-state-card__counter {
+    color: #0072CE;
   }
 
   .c-state-card__counter:hover {

@@ -1,3 +1,26 @@
+/*
+
+NHS Colors - https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+
+NHS Dark Blue, Pantone: 287, CMYK: 100/75/2/18, RGB: 0/48/135, #003087
+NHS Blue, Pantone: 300, CMYK: 99/50/0/0, RGB: 0/94/184, #005EB8
+NHS Bright Blue, Pantone: 285, CMYK: 90/48/0/0, RGB: 0/114/206, #0072CE
+NHS Light Blue, Pantone: 298, CMYK: 67/2/0/0, RGB: 65/182/230, #41B6E6
+NHS Aqua Blue, Pantone: 312, CMYK: 88/0/11/0, RGB: 0/169/206, #00A9CE
+
+NHS Black Pantone: Black 6 CMYK: 100k RGB: 35/31/32 #231f20
+NHS Dark Grey Pantone: 7545 CMYK: 58/32/18/54 RGB: 66/85/99 #425563
+NHS Mid Grey Pantone: 7544 CMYK: 35/14/11/34 RGB: 118/134/146 #768692
+NHS Pale grey Pantone: 7541 CMYK: 7/1/3/2 RGB: 232/237/238 #E8EDEE
+NHS White CMYK: 0/0/0/0 RGB: 255/255/255 #FFFFFF
+
+NHS Dark Green Pantone: 342 CMYK: 93/10/75/43 RGB: 0/103/71 #006747
+NHS Green Pantone: 355 CMYK: 91/0/100/0 RGB: 0/150/57 #009639
+NHS Light Green Pantone: 368 CMYK: 65/0/100/0 RGB: 120/190/32 #78BE20
+NHS Aqua Green Pantone: 3272 CMYK: 94/0/48/0 RGB: 0/164/153 #00A499
+
+*/
+
 body{
   background-color: #ffffff;
 }

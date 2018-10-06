@@ -163,7 +163,8 @@ router.get('/usage', function (req, res) {
         idArr.push(parseInt(id));
     });
 
-    var usageDate = {};
+    var usageData = {};
+    var usageStats = {};
 
     models.Inventory.scope({method: ['tenant', req.body.data.tenant]})
         .findAndCountAll({
@@ -177,43 +178,87 @@ router.get('/usage', function (req, res) {
             if (inventories.count > 0) {
                 idArr.forEach(function (id) {
                     var data = {};
-                    var sixmonths = {};
-                    var twelve_months = {};
                     var seven_days = {};
+                    var seven_days_arr = [];
                     var thirty_days = {};
+                    var thirty_days_arr = [];
+                    var six_months = {};
+                    var six_months_arr = [];
+                    var twelve_months = {};
+                    var twelve_months_arr = [];
+
                     inventories.rows.forEach(row => {
                         if (row.inventory_id == id) {
-                            console.log("Inventory Data:", row.createdAt, typeof row.createdAt);
+
                             data[row.getCreatedDate()] = row.current_level;
 
                             if (row.isCreatedAtSevenDaysAgo()) {
                                 seven_days[row.getCreatedDate()] = row.current_level;
+                                seven_days_arr.push({date: row.getCreatedDate(), level: row.current_level});
+                            }
+
+                            if (row.isCreatedAtThirtyDaysAgo()) {
+                                thirty_days[row.getCreatedDate()] = row.current_level;
+                                thirty_days_arr.push({date: row.getCreatedDate(), level: row.current_level});
+                            }
+
+                            if (row.isCreatedAtSixMonthsAgo()) {
+                                six_months[row.getCreatedDate()] = row.current_level;
+                                six_months_arr.push({date: row.getCreatedDate(), level: row.current_level});
+                            }
+
+                            if (row.isCreatedAtTwelveMonthsAgo()) {
+                                twelve_months[row.getCreatedDate()] = row.current_level;
+                                twelve_months_arr.push({date: row.getCreatedDate(), level: row.current_level});
                             }
                         }
                     });
 
-                    console.log("Inventory Data:", data);
-                    usageDate[id] = [
+                    var seven_days_usage = calculateTotalUsage(seven_days_arr);
+                    var thirty_days_usage = calculateTotalUsage(thirty_days_arr);
+                    var six_months_usage = calculateTotalUsage(six_months_arr);
+                    var twelve_months_usage = calculateTotalUsage(twelve_months_arr);
+
+                    var stats = {};
+                    stats['seven_days'] = seven_days_usage;
+                    stats['thirty_days'] = thirty_days_usage;
+                    stats['six_months'] = six_months_usage;
+                    stats['twelve_months'] = twelve_months_usage;
+
+                    usageStats[id] = stats;
+                    usageData[id] = [
                         {
                             name: 'Current Usage',
                             data: data
                         }, {
-                            name: 'Seven Data',
+                            name: 'Seven Days',
                             data: seven_days
+                        },
+                        {
+                            name: 'Thirty Days',
+                            data: thirty_days
+                        },
+                        {
+                            name: 'Six Months',
+                            data: six_months
+                        },
+                        {
+                            name: 'Twelve Months',
+                            data: twelve_months
                         }
-                    ]
+                    ];
+
+
                 });
             }
 
-            res.json(usageDate);
+            res.json({usage: usageData, stats: usageStats});
         })
         .catch(err => {
             res.status(500).json({message: msgs.unexpected_error_message, err: err.message})
         })
+});
 
-
-})
-;
 router.post('/checkout', function (req, res) {
     console.log("Request Data:", req.body.items);
 
@@ -438,5 +483,28 @@ router.post('/delete/:id', function (req, res) {
         }
     });
 });
+
+
+function calculateTotalUsage(dataArr) {
+
+    dataArr.sort(function (a, b) {
+        if (a.date < b.date)
+            return -1;
+        if (a.date > b.date)
+            return 1;
+        return 0;
+    });
+
+    var curr_level = dataArr[0].level;
+    var usage = 0;
+    dataArr.forEach(data => {
+        if (data.level < curr_level) {
+            usage = usage + (curr_level - data.level);
+        }
+        curr_level = data.level;
+    });
+
+    return usage;
+}
 
 module.exports = router;
