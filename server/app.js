@@ -15,7 +15,6 @@ var auth = require('./routes/auth');
 var upload = require('./routes/upload');
 var schema = require('./routes/schema');
 var location = require('./routes/location');
-var goods = require('./routes/goods');
 var stock = require('./routes/stock');
 var supplier = require('./routes/supplier');
 var catalogue = require('./routes/catalogue');
@@ -26,6 +25,7 @@ var sequelize = require('./routes/sequelize');
 var mongoose = require('mongoose');
 
 //var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
+/*
 var url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
 if (process.env.NODE_ENV == "dev") {
     url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
@@ -38,6 +38,7 @@ mongoose.connect(url, {useNewUrlParser: true})
     })
     .catch((err) => console.error(err));
 
+*/
 
 var Sequelize = require('./sequelize/models');
 Sequelize.sequelize.sync().then(function () {

@@ -22,9 +22,9 @@ import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import VueTabs from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
 
-import VueChartkick from 'vue-chartkick'
-import Chart from 'chart.js'
-import VueMoment from 'vue-moment'
+import VueChartkick from "vue-chartkick";
+import Chart from "chart.js";
+import VueMoment from "vue-moment";
 
 
 Vue.config.productionTip = false;
@@ -34,17 +34,15 @@ Vue.use(VueLocalStorage, {name: 'ls', bind: true});
 Vue.use(Toasted);
 Vue.use(VueGoodTablePlugin);
 Vue.use(VueTabs);
-Vue.use(VeeValidate, {
-  fieldsBagName: 'vvFieldsBag'
-});
+Vue.use(VeeValidate, {fieldsBagName: 'vvFieldsBag'  });
 Vue.use(VueMoment);
+Vue.use(VueChartkick, {adapter: Chart});
+
 Vue.component('v-select', vSelect);
 Vue.component('v-dropzone', vue2Dropzone);
 Vue.component('downloadExcel', JsonExcel);
-
 Vue.component('pulse-loader', PulseLoader);
 
-Vue.use(VueChartkick, {adapter: Chart})
 
 /* eslint-disable no-new */
 new Vue({

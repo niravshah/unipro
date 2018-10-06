@@ -44,5 +44,11 @@ export default {
   },
   checkout(items){
     return Api().post('api/stock/checkout', {items: items});
+  },
+  counterUp(id){
+    return Api().post('api/stock/' + id + '/level_up');
+  },
+  counterDown(id){
+    return Api().post('api/stock/' + id + '/level_down');
   }
 }

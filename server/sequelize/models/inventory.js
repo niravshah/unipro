@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
 
+    Inventory.prototype.getCreatedDate = function () {
+        return new Date(this.createdAt).toISOString();
+    };
+
+    Inventory.prototype.getCreatedDate = function () {
+        return new Date(this.updatedAt).toISOString();
+    };
+
     return Inventory;
 };
 

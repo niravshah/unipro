@@ -33,13 +33,17 @@
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <stats faclass="fa-box-open" :value=item.current_level :description=getCurrentLevels(item)></stats>
+                  <stats :inv_id="item.inventory_id" faclass="fa-box-open" :value=item.current_level
+                         :description=getCurrentLevels(item)
+                         counters=1 @counterUp="counterUp" @counterDown="counterDown"></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-box" :value=orders description="Orders"></stats>
+                  <stats :inv_id="item.inventory_id" faclass="fa-box" :value=orders description="Orders"
+                         counters=0></stats>
                 </div>
                 <div class="col-md-4">
-                  <stats faclass="fa-pound-sign" :value=spendValue description="Spend"></stats>
+                  <stats :inv_id="item.inventory_id" faclass="fa-pound-sign" :value=spendValue description="Spend"
+                         counters=0></stats>
                 </div>
               </div><!-- .row -->
               <div class="row">
@@ -190,9 +194,6 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="c-card u-p-medium u-mb-medium">
-                        <div class="u-flex u-justify-between u-align-items-center">
-                          <h3 class="c-card__title" style="color: black">Usage Trends</h3>
-                        </div>
                         <line-chart :data=usageData></line-chart>
                       </div>
                     </div>
@@ -295,7 +296,6 @@
                       </tr>
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
@@ -429,6 +429,20 @@
 
         }).catch(err => {
           console.log("ERROR: getCatalogueInfo: ", err);
+        })
+      },
+      counterUp: function (params) {
+        console.log("Counter Up Event", params);
+        Service.counterUp(params).then(resp => {
+        }).catch(err => {
+          console.log("ERROR: counterUp: ", err);
+        })
+      },
+      counterDown: function (params) {
+        console.log("Counter Down Event", params);
+        Service.counterDown(params).then(resp => {
+        }).catch(err => {
+          console.log("ERROR: counterDown: ", err);
         })
       }
     }
