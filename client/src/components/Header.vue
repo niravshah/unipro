@@ -8,7 +8,7 @@
 
     <h2 class="c-navbar__title white u-mr-auto">{{heading}}</h2>
 
-
+    <h3 class="c-navbar__title c-navbar__trustName white u-ml-auto u-mr-large">{{trustName}}</h3>
     <div class="c-dropdown dropdown">
       <a class="c-avatar c-avatar--xsmall has-dropdown dropdown-toggle" href="#" id="dropdwonMenuAvatar"
          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -27,6 +27,9 @@
     computed: {
       heading: function () {
         return this.$store.state.heading
+      },
+      trustName: function () {
+        return this.$store.state.trustName
       }
     }
   }
@@ -39,5 +42,10 @@
     font-family: 'Font Awesome\ 5 Free';
     content: "\f078";
     font-weight: 900;
+  }
+
+  .c-navbar__trustName {
+    font-family: 'Roboto Slab', serif;
+    text-transform: inherit;
   }
 </style>

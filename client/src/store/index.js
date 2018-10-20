@@ -10,7 +10,8 @@ var vuexStore = new Vuex.Store({
     count: 0,
     sidebarMinified: false,
     loggedIn: false,
-    heading: "Dashboard"
+    heading: "Dashboard",
+    trustName: "Demo Trust"
   },
   mutations: {
     sidebar(state, val){
@@ -21,6 +22,9 @@ var vuexStore = new Vuex.Store({
     },
     heading(state, val){
       state.heading = val;
+    },
+    trustName(state, val){
+      state.trustName = val;
     }
   },
   plugins: [createPersistedState()]

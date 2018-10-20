@@ -12,6 +12,9 @@
 
 <style>
 
+  #app{
+    height:100%
+  }
   .text-center {
     text-align: center;
   }

@@ -1,13 +1,15 @@
 <template>
   <div class="login-container">
-    <div class="u-mt-xlarge o-page__card o-page__card--horizontal">
+    <div class="container">
+      <div class="row u-pt-xlarge">
+        <img class="login-logo" src="/static/img/logo-light.png" alt="Uniprocure Logo">
+      </div>
+    </div>
+
+    <div class="u-mt-large o-page__card o-page__card--horizontal">
       <div class="c-card c-login-horizontal">
         <div class="c-login__content-wrapper">
           <header class="c-login__header">
-            <a class="c-login__icon c-login__icon--rounded c-login__icon--left" href="#!">
-              <img src="/static/img/logo.png" alt="Dashboard's Logo">
-            </a>
-
             <h2 class="c-login__title">Sign In</h2>
           </header>
 
@@ -35,18 +37,16 @@
             </button>
           </form>
         </div>
-
-        <div class="c-login__content-image">
-          <img src="/static/img/login2.png" alt="Welcome to Uniprocure">
-
-          <!--
-                    <h3>Welcome to Uniprocure</h3>
-                    <p class="u-text-large">
-                      GS1 compliant Inventory & Catalogue Management System for NHS Trusts.</p>
-          -->
-        </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="row u-pt-xlarge">
+        <p class="footer">© Copyright 2018 Uniprocure - All Rights Reserved</p>
+      </div>
+
+    </div>
+
   </div>
 </template>
 <script>
@@ -84,24 +84,27 @@
   }
 </script>
 <style>
-  .c-login-horizontal .c-login__icon {
-    background: none;
-  }
-
-  .c-login-horizontal .c-login__content-image img {
-    opacity: 1;
-  }
-
-  .c-login-horizontal .c-login__content-image {
-    background-color: #ffffff;
-  }
 
   .login-container {
-    height: 100vh;
-    background-image: url("/static/img/login-bg-1.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 60px;
+    height: 100%;
+    background-color: #005EB8;
   }
+
+  .login-logo {
+    margin: auto;
+  }
+
+  .c-login-horizontal .c-login__content-wrapper {
+    width: 100%
+  }
+
+  .o-page__card--horizontal {
+    width: 400px;
+  }
+
+  .login-container .footer {
+    margin: auto;
+    color: #FFFFFF;
+  }
+
 </style>
