@@ -3,7 +3,7 @@
     <div class="row u-mt-large u-mb-large">
       <div class="col-md-12">
         <div class="c-field">
-          <input :disabled=checkoutDisabled ref="barcode" v-model="barcode" class="c-input" id="input3" type="text" placeholder="Scan Your Items"
+          <input :disabled=checkoutDisabled ref="barcode" v-model="barcode" class="checkout c-input" id="input3" type="text" placeholder="Scan Your Items"
                  v-on:textInput="textInput">
         </div>
       </div>
@@ -129,7 +129,7 @@
 </script>
 <style>
 
-  .c-input {
+  .checkout .c-input {
     width: 50%;
     margin: auto
   }
