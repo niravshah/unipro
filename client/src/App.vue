@@ -74,4 +74,6 @@
     position: absolute;
     top: 30%;
     left: 50%;
-  }</style>
+  }
+
+</style>

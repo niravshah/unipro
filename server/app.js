@@ -22,24 +22,6 @@ var catalogue = require('./routes/catalogue');
 var users = require('./routes/users');
 var sequelize = require('./routes/sequelize');
 
-/*
- var mongoose = require('mongoose');
- //var url = "mongodb://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongodb/" + process.env.MONGODB_DATABASE
-
- var url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
- if (process.env.NODE_ENV == "dev") {
- url = process.env.MONGODB_URL + process.env.MONGODB_DATABASE
- }
- console.log("Connecting to MongoDB URL: " + url);
-
- mongoose.connect(url, {useNewUrlParser: true})
- .then(() => {
- console.log('mongo connection successful');
- })
- .catch((err) => console.error(err));
-
- */
-
 var Sequelize = require('./sequelize/models');
 Sequelize.sequelize.sync().then(function () {
     console.log('Sequelize Sync Successful')

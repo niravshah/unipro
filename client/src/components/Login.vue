@@ -72,9 +72,9 @@
               this.$router.push(this.$route.query.redirect || '/')
             }).catch(err => {
               if (err.response) {
-                ToastedService.showError("Unable to Login. " + err.response.data.message, 4000)
+                ToastedService.showError("Unable to Login. " + err.response.data.message, 5000)
               } else {
-                ToastedService.showError("Unable to Login. " + err.message, 4000)
+                ToastedService.showError("Unable to Login. " + err.message, 5000)
               }
             });
           }

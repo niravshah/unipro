@@ -21,7 +21,7 @@ NHS Aqua Green Pantone: 3272 CMYK: 94/0/48/0 RGB: 0/164/153 #00A499
 
 */
 
-body{
+body {
   background-color: #ffffff;
 }
 
@@ -73,8 +73,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .c-btn--success {
-  background: #78BE20;
-  border-color: #78BE20;
+  background: #005EB8;
+  border-color: #005EB8;
+}
+
+.c-btn--success:hover {
+  background: #0072CE;
+  border-color: #0072CE ;
+}
+
+.c-btn--success:focus {
+  background: #003087;
 }
 
 .c-btn {
@@ -85,17 +94,19 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #005EB8;
 }
 
-.c-navbar__title{
+.c-navbar__title {
   text-transform: uppercase;
 }
 
 .c-state,
 .c-state--info {
-  background-color: #005EB8; }
+  background-color: #005EB8;
+}
 
 .c-state {
   margin-bottom: 0;
 }
+
 .c-state__number {
   margin: 0 0 10px .9375rem;
 }
