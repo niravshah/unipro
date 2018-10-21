@@ -4,6 +4,7 @@ import Router from "vue-router";
 import Home from "@/components/Home";
 import Dashboard from "@/components/Dashboard";
 import Login from "@/components/Login";
+import SignUp from "@/components/SignUp";
 import Logout from "@/components/Logout";
 
 import StockSummary from "@/components/Stock/Summary";
@@ -183,6 +184,11 @@ const router = new Router({
         path: '/login',
         name: 'Login',
         component: Login
+      },
+      {
+        path: '/sign-up',
+        name: 'Sign Up',
+        component: SignUp
       },
       {
         path: '/logout',

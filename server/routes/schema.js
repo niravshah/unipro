@@ -1,8 +1,9 @@
 var express = require('express');
-var schemas = require('../utils/schemas');
+// var schemas = require('../utils/schemas');
 
 var router = express.Router();
 
+/*
 router.get('/location', function (req, res) {
     res.json(schemas.getSummarySchema(schemas.location_schema));
 });
@@ -70,5 +71,6 @@ router.get('/users', function (req, res) {
 router.get('/users/v-def', function (req, res) {
     res.json(schemas.user_schema_vdef);
 });
+*/
 
 module.exports = router;

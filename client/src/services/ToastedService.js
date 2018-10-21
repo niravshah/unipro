@@ -1,12 +1,19 @@
 import Vue from "vue";
 
 export default {
-  showInfo (message, time) {
-    Vue.toasted.show(message, {
+  showInfo (message, time, action) {
+
+    var params = {
       icon: "info",
       type: "info",
-      duration: 6000
-    });
+      duration: time
+    };
+
+    if (action) {
+      params['action'] = action;
+    }
+
+    Vue.toasted.show(message, params);
   },
   showError(message, time){
     Vue.toasted.show(message, {

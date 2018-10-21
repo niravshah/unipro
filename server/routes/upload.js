@@ -4,11 +4,12 @@ var multer = require('multer');
 var upload = multer({dest: 'uploads/'});
 var _ = require('underscore');
 
-var schemas = require('../utils/schemas');
+// var schemas = require('../utils/schemas');
 
 var convertExcel = require('excel-as-json').processFile;
 
 
+/*
 router.post('/locations', upload.single('file'), function (req, res) {
     convertExcel(req.file.path, null, null, function (err, data) {
         var schema = schemas.getExcelUploadHeaders(schemas.location_schema);
@@ -25,8 +26,9 @@ router.post('/locations', upload.single('file'), function (req, res) {
     });
 
 });
+*/
 
-
+/*
 router.post('/stock', upload.single('file'), function (req, res) {
     convertExcel(req.file.path, null, null, function (err, data) {
         var schema = schemas.getExcelUploadHeaders(schemas.stock_schema);
@@ -42,7 +44,7 @@ router.post('/stock', upload.single('file'), function (req, res) {
         }
     });
 
-});
+});*/
 
 
 var validateSchema = function (schema, data) {
